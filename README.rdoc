@@ -1,0 +1,38 @@
+Avidstarter
+===========
+
+This is a Rails3.2 application deployed to Heroku. It runs on Ruby 1.9.2
+
+Getting Started
+-----------------
+
+Make sure you are using at least Ruby 1.9.2. I recommend using RVM to manage your gems and versions, 
+especially if you're working on more than one project. Here's what I did:
+
+  rvm use 1.9.2 #this is switches my ruby 1.9.2 branch
+  rvm gemset create avidstarter
+  rvm use 1.9.2@avidstarter #now you're running a fresh blank gem set that won't interfere with your other
+                            #projects
+
+Ok, now clone the respository. Go to the avidstarter root folder in your terminal and run:
+  
+  bundle install
+
+Create the database
+
+  rake db:create
+
+Load the schema
+  
+  rake db:schema:load #THIS WILL CLEAR YOUR CURRENT DATABASE SO ONLY RUN IT THE FIRST TIME YOU LAUNCH
+                      
+For subsequent database updates, use rake db:migrate
+
+Launch your local host. Avidstarter uses thin (and we think you should, too)
+
+  thin start
+
+Navigate to localhost:3000 on your browser. Hopefully it worked.
+
+------------------
+
