@@ -13,6 +13,12 @@ class Account < ActiveRecord::Base
   validates_acceptance_of :terms_of_service
   before_create :set_profile_type
 
+  has_many :memberships
+  has_many :confirmed_memberships, :class_name => 'Membership', :conditions => {:pending => false}
+  has_many :pending_memberships, :class_name => 'Membership', :conditions => {:pending => true}
+  has_many :projects, :through => :confirmed_memberships
+  has_many :project_invitations, :through => :pending_memberships, :source => :project
+
   private
     
     def set_profile_type
