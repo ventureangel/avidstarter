@@ -4,9 +4,19 @@
   = devise_error_messages!
 
   %div
-    = f.label :name
+    = f.label :first_name
     %br
-    = f.text_field :name
+    = f.text_field :first_name
+
+  %div
+    = f.label :last_name
+    %br
+    = f.text_field :last_name
+
+  %div
+    = f.label :linked_in, 'LinkedIn'
+    %br
+    = f.text_field :linked_in
 
   %div
     = f.label :email

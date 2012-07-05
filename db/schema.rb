@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120703212741) do
+ActiveRecord::Schema.define(:version => 20120705150637) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(:version => 20120703212741) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "profile_type"
-    t.string   "name"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "linked_in"
   end
 
   add_index "accounts", ["confirmation_token"], :name => "index_accounts_on_confirmation_token", :unique => true

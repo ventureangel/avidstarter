@@ -1,0 +1,6 @@
+- if account_signed_in?
+  %p You are signed in as #{current_account.email}. Not you? #{link_to "Sign Out", destroy_account_session_path, :method => :delete}
+  %p= link_to "Edit", edit_account_registration_path
+- else
+  %p #{link_to "Join", new_account_registration_path} or #{link_to "Sign In", new_account_session_path}
+- 

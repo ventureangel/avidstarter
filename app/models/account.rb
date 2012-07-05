@@ -6,9 +6,11 @@ class Account < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :terms_of_service, :linked_in
   # attr_accessible :title, :body
-  validates :name, :presence => false, :allow_blank => false
+  validates_presence_of :first_name
+  validates_presence_of :last_name
+  validates_acceptance_of :terms_of_service
   before_create :set_profile_type
 
   private
