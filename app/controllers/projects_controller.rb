@@ -1,12 +1,12 @@
 class ProjectsController < ApplicationController
-  before_filter :check_if_contributor, :only => [:new, :create, :edit]
+  before_filter :check_if_contributor, :only => [:new, :create, :edit, :update]
   def new
     @project = Project.new
   end
   
   def create
     @project = Project.new(params[:project])
-    @project.memberships.build(:account_id => current_account.id, :pending => false)
+    @project.memberships.build(:account => current_account, :pending => false)
     
     if @project.save
       redirect_to :root
@@ -18,6 +18,33 @@ class ProjectsController < ApplicationController
   def edit
     @project = Project.find(params[:id])
   end
+
+  def update
+    @project = Project.find(params[:id])
+    if params[:project][:invite_member].present?
+      @project.invite_member(params[:project][:invite_member])
+    end
+    params[:project].delete(:invite_member)
+    if @project.update_attributes(params[:project])
+      flash[:notice] = "Project successfully updated"
+      render :action => 'edit'
+    else
+      flash[:warning] = "Project not saved. Try again."
+      render :action => 'edit'
+    end
+  end
+
+  def destroy
+    @project = Project.find(params[:id])
+    if @project.delete
+      flash[:notice] = "Project successfully deleted"
+      redirect_to :root
+    else
+      flash[:warning] = "Project not deleted"
+      redirect_to :root
+    end
+  end
+
 
   private
 

@@ -1,25 +1,54 @@
 = form_for @project do |f|
+  %section{ :id=>"tabs"}
+    %ul
+      %li
+        %a{:href => '#general'}
+          General Info
+      %li
+        %a{:href => '#team'}
+          Team Information
+      %li
+        %a{:href => '#hamburger'}
+          Hamburger
+    %div#general.default
+      = f.label :business_name
+      %br
+      = f.text_field :business_name
+      %br
+      = f.label :industry
+      %br
+      = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}
+      %br
+      = f.label :city
+      %br
+      = f.text_field :city
+      %br
+      = f.label :state
+      %br
+      = f.select :state, STATES, {:include_blank => 'No Selection'}
+      %br
+      = f.label :business_concept
+      %br
+      = f.text_area :business_concept
+    %div#team
+      Current Team Members
+      %br
+      - @project.members.each do |member|
+        = member.first_name
+        = member.last_name
+      %br
+      %br
+      Add New Team Member
+      %br
+      = f.fields_for :invite_member do |ff|
+        = ff.label :email
+        = ff.text_field :email
+        = ff.label :first_name
+        = ff.text_field :first_name
+        = ff.label :last_name
+        = ff.text_field :last_name
+        
+    %div#hamburger
+      Hamburger!
   %div
-    = f.label :business_name
-    %br
-    = f.text_field :business_name
-  %div
-    = f.label :industry
-    %br
-    = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}
-  %div
-    = f.label :city
-    %br
-    = f.text_field :city
-  %div
-    = f.label :state
-    %br
-    = f.select :state, STATES, {:include_blank => 'No Selection'}
-
-  %div
-    = f.label :business_concept
-    %br
-    = f.text_area :business_concept
-  
-  %div
-    = f.submit "Create Project"
+    = f.submit "Save Project"

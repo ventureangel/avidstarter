@@ -1,0 +1,4 @@
+%h1= @project.business_name
+- flash.keys.each do |type|
+    = flash[type]
+= render 'form'
