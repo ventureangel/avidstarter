@@ -10,45 +10,53 @@
       %li
         %a{:href => '#hamburger'}
           Hamburger
-    %div#general.default
-      = f.label :business_name
-      %br
-      = f.text_field :business_name
-      %br
-      = f.label :industry
-      %br
-      = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}
-      %br
-      = f.label :city
-      %br
-      = f.text_field :city
-      %br
-      = f.label :state
-      %br
-      = f.select :state, STATES, {:include_blank => 'No Selection'}
-      %br
-      = f.label :business_concept
-      %br
-      = f.text_area :business_concept
-    %div#team
-      Current Team Members
-      %br
-      - @project.members.each do |member|
-        = member.first_name
-        = member.last_name
-      %br
-      %br
-      Add New Team Member
-      %br
-      = f.fields_for :invite_member do |ff|
-        = ff.label :email
-        = ff.text_field :email
-        = ff.label :first_name
-        = ff.text_field :first_name
-        = ff.label :last_name
-        = ff.text_field :last_name
-        
-    %div#hamburger
-      Hamburger!
-  %div
+  %div#general.default
+    = f.label :business_name
+    %br
+    = f.text_field :business_name
+    %br
+    = f.label :industry
+    %br
+    = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}
+    %br
+    = f.label :city
+    %br
+    = f.text_field :city
+    %br
+    = f.label :state
+    %br
+    = f.select :state, STATES, {:include_blank => 'No Selection'}
+    %br
+    = f.label :business_concept
+    %br
+    = f.text_area :business_concept
+    %br
     = f.submit "Save Project"
+%div#team
+  Current Team Members
+  %br
+  - @project.members.each do |member|
+    = member.first_name
+    = member.last_name
+    %br
+  - @project.pending_memberships.each do |pmember|
+    = pmember.account.first_name
+    = pmember.account.last_name
+    %br
+  %br
+  %br
+  Add New Team Member
+  %br
+  = form_for :membership, url: memberships_path do |f|
+    = f.hidden_field :project, :value => @project.id
+    = f.label :email
+    = f.email_field :email
+    %br
+    = f.label :first_name
+    = f.text_field :first_name
+    = f.label :last_name
+    = f.text_field :last_name
+    = submit_tag "Add New Team Member"      
+%div#hamburger
+  Hamburger!
+

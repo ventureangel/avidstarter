@@ -21,16 +21,13 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
-    if params[:project][:invite_member].present?
-      @project.invite_member(params[:project][:invite_member])
-    end
-    params[:project].delete(:invite_member)
+    
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"
-      render :action => 'edit'
+      redirect_to :action => 'edit'
     else
       flash[:warning] = "Project not saved. Try again."
-      render :action => 'edit'
+      redirect_to :action => 'edit'
     end
   end
 

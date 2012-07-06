@@ -3,11 +3,11 @@ function showFields(activeDiv) {
 }
 
 $(document).ready(function(){
-  $("#tabs div").hide();
-  $("#tabs div.default").show();
+  $("div").hide();
+  $("div.default").show();
   $("#tabs li a").click(function(e){
     e.preventDefault();
-    $("#tabs div").hide();
+    $("div").hide();
     showFields($(this).attr("href"));
   });
 });

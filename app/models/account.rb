@@ -7,7 +7,7 @@ class Account < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :terms_of_service, :linked_in
-  # attr_accessible :title, :body
+  
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_acceptance_of :terms_of_service
@@ -21,6 +21,7 @@ class Account < ActiveRecord::Base
 
   private
     
+    # Sets your account type before create based on your e-mail using determine_email
     def set_profile_type
       if determine_email
         self.profile_type = "Contributor"
