@@ -2,8 +2,14 @@
   %p You are signed in as #{current_account.email}. Not you? #{link_to "Sign Out", destroy_account_session_path, :method => :delete}
   %p= link_to "Edit Your Profile", edit_account_registration_path
   
-  %p= link_to "Start New Project", new_project_path
-
+  %p= link_to "Start New Project", new_project_path unless current_account.profile_type == "Viewer"
+  %h2 Pending Memberships
+  - @invitations.each do |invitation|
+    %tr
+      %td= invitation.project.business_name
+      %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
+      %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
+    %br
   %h2 Your Projects:
   - @projects.each do |project|
     %tr

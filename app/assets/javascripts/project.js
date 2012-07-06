@@ -3,8 +3,7 @@ function showFields(activeDiv) {
 }
 
 $(document).ready(function(){
-  $("div").hide();
-  $("div.default").show();
+  $("div.inactive").hide();
   $("#tabs li a").click(function(e){
     e.preventDefault();
     $("div").hide();

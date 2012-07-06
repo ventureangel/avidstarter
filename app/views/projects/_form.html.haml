@@ -32,7 +32,7 @@
     = f.text_area :business_concept
     %br
     = f.submit "Save Project"
-%div#team
+%div#team.inactive
   Current Team Members
   %br
   - @project.members.each do |member|
@@ -57,6 +57,6 @@
     = f.label :last_name
     = f.text_field :last_name
     = submit_tag "Add New Team Member"      
-%div#hamburger
+%div#hamburger.inactive
   Hamburger!
 

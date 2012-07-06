@@ -11,6 +11,7 @@ class ProjectsController < ApplicationController
     if @project.save
       redirect_to :root
     else
+      flash[:warning] = "Project not created"
       render :action => 'new'
     end
   end
@@ -33,7 +34,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project = Project.find(params[:id])
-    if @project.delete
+    if @project.destroy
       flash[:notice] = "Project successfully deleted"
       redirect_to :root
     else

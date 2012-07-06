@@ -3,7 +3,10 @@ class Membership < ActiveRecord::Base
   belongs_to :project
   attr_accessible :account, :pending, :project
   
+  
   validates :account_id, :uniqueness => {:scope => :project_id}
+  after_create :notify_of_invitation
+
 # Invites member to project through project edit page
   def invite_member(params)
     
@@ -17,6 +20,15 @@ class Membership < ActiveRecord::Base
       invite_member(params)#create the account
     else
       return @account
+    end
+  end
+
+  def notify_of_invitation
+    # if self.user.account.present? and not self.user.account.invited?
+    if self.account.invited?
+      #invitation mailer
+    elsif self.pending
+      ProjectMembers.membership_invitation(self).deliver 
     end
   end
 

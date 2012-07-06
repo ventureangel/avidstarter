@@ -6,4 +6,5 @@ class Project < ActiveRecord::Base
   has_many :members, :through => :confirmed_memberships, :source => :account
   has_many :pending_memberships, :class_name => 'Membership', :conditions => {:pending => true}
   
+  
 end

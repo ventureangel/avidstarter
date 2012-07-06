@@ -19,6 +19,10 @@ class Account < ActiveRecord::Base
   has_many :projects, :through => :confirmed_memberships
   has_many :project_invitations, :through => :pending_memberships, :source => :project
 
+  def invited?
+   return invited_by_id.present?
+  end	
+  
   private
     
     # Sets your account type before create based on your e-mail using determine_email
