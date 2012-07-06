@@ -25,8 +25,8 @@ Avidstarter::Application.configure do
     :address              => "smtp.gmail.com",
     :port                 => 587,
     :domain               => "gmail.com",
-    :user_name            => "",
-    :password             => "",
+    :user_name            => "avidstarter",
+    :password             => "avidstarter123",
     :authentication       => "plain",
     :enable_starttls_auto => true
    }   
