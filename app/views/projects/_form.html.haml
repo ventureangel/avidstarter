@@ -9,9 +9,14 @@
     %li
       %a{:href => '#hamburger'}
         Hamburger
-= form_for @project do |f|
+= form_for @project, :html => {:multipart => true} do |f|
   %div#general.default
     = f.error_messages
+    = f.label :logo, "Upload a picture for your Avatar"
+    %br= f.file_field :logo
+    %br= f.label :remote_logo_url, "or use an image URL"
+    %br= f.text_field :remote_logo_url
+
     = f.label :business_name
     %br
     = f.text_field :business_name

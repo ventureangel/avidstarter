@@ -1,2 +1,3 @@
 %h1= @project.business_name
+= image_tag @project.logo_url(:thumb) if @project.logo?
 = render 'form'

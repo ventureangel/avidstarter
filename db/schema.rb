@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120706234441) do
+ActiveRecord::Schema.define(:version => 20120707212916) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(:version => 20120706234441) do
     t.string   "linked_in"
     t.integer  "invited_by_id"
     t.string   "invitation_token"
+    t.string   "avatar"
   end
 
   add_index "accounts", ["confirmation_token"], :name => "index_accounts_on_confirmation_token", :unique => true
@@ -67,6 +68,7 @@ ActiveRecord::Schema.define(:version => 20120706234441) do
     t.text     "business_concept"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
+    t.string   "logo"
   end
 
 end

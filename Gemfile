@@ -10,6 +10,9 @@ gem 'thin'
 gem 'haml', '~> 3.1.6'
 gem 'devise'
 gem 'dynamic_form'
+gem 'carrierwave'
+gem 'rmagick'
+gem 'fog'
 
 # Gems used only for assets and not required
 # in production environments by default.

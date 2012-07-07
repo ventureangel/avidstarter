@@ -23,6 +23,7 @@ class ProjectsController < ApplicationController
 
   def update
     @project = Project.find(params[:id])
+    @invitations = @project.invitations
     
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"

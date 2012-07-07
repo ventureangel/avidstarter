@@ -1,4 +1,5 @@
 - if account_signed_in?
+  %p= image_tag current_account.avatar_url(:thumb) if current_account.avatar?
   %p You are signed in as #{current_account.email}. Not you? #{link_to "Sign Out", destroy_account_session_path, :method => :delete}
   %p= link_to "Edit Your Profile", edit_account_registration_path
   
