@@ -3,6 +3,7 @@
 %h2 Login Information
 %p Please fill out the following fields to sign up. You will use the email address and password you provide to login.
 = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+  =  f.hidden_field :invitation_token, :value => params[:invitation_token]
   %div
     = f.label :email
     %br
@@ -25,7 +26,6 @@
     = f.label :first_name
     %br
     = f.text_field :first_name
-
   %div
     = f.label :last_name
     %br

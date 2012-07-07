@@ -49,14 +49,11 @@
   %br
   = form_for :membership, url: memberships_path do |f|
     = f.hidden_field :project, :value => @project.id
+    = f.label :recipient_name, "Name"
+    = f.text_field :recipient_name
     = f.label :email
     = f.email_field :email
-    %br
-    = f.label :first_name
-    = f.text_field :first_name
-    = f.label :last_name
-    = f.text_field :last_name
-    = submit_tag "Add New Team Member"      
+    = submit_tag "Add New Team Member"
 %div#hamburger.inactive
   Hamburger!
 

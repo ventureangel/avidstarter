@@ -2,13 +2,18 @@ class MembershipsController < ApplicationController
   def create
     @membership = Membership.new(:project => Project.find(params[:membership][:project]))
     @account = Membership.check_if_user(params[:membership])
-    @membership.account = @account
-    if @membership.save
-      flash[:notice] = "Member successfully added"
+    unless @account
+      invite_member(params[:membership])
       redirect_to :back
     else
-      flash[:warning] = "Member not added. Please try again."
-      redirect_to :back
+      @membership.account = @account
+      if @membership.save
+        flash[:notice] = "Member invited to project"
+        redirect_to :back
+      else
+        flash[:warning] = "Member not added. Please try again."
+        redirect_to :back
+      end
     end
   end
 
@@ -33,4 +38,17 @@ class MembershipsController < ApplicationController
       redirect_to :back
     end
   end
+
+  private
+  # Invites member to project through project edit page
+  def invite_member(params)
+    @invitation = Invitation.new(:recipient_email => params[:email], :recipient_name => params[:recipient_name], :project_id => params[:project])
+    if @invitation.save
+      ProjectMembers.new_user_membership_invitation(@invitation, sign_up_url(:invitation_token => @invitation.invitation_token)).deliver
+      flash[:notice] = "Invitation sent"
+    else
+      flash[:warning] = "Invitation not sent"
+    end
+  end
+
 end

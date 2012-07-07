@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705231039) do
+ActiveRecord::Schema.define(:version => 20120706234441) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -34,11 +34,22 @@ ActiveRecord::Schema.define(:version => 20120705231039) do
     t.string   "last_name"
     t.string   "linked_in"
     t.integer  "invited_by_id"
+    t.string   "invitation_token"
   end
 
   add_index "accounts", ["confirmation_token"], :name => "index_accounts_on_confirmation_token", :unique => true
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
   add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
+
+  create_table "invitations", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "recipient_email"
+    t.string   "invitation_token"
+    t.datetime "sent_at"
+    t.string   "recipient_name"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+  end
 
   create_table "memberships", :force => true do |t|
     t.integer  "account_id"

@@ -1,11 +1,14 @@
 Avidstarter::Application.routes.draw do
   devise_for :accounts
-
+  devise_scope :account do
+    get "/sign_in", :to => "devise/sessions#new"
+    get "/sign_up", :to => "devise/registrations#new"
+  end
   get "home/home"
   
   resources :projects
   resources :memberships
- 
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
