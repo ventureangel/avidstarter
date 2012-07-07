@@ -7,4 +7,6 @@ class Project < ActiveRecord::Base
   has_many :pending_memberships, :class_name => 'Membership', :conditions => {:pending => true}
   has_many :invitations
   
+  validates :business_name, :industry, :city, :state, :business_concept, :presence => true
+  
 end

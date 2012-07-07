@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = Project.find(params[:id])
+    @invitations = @project.invitations
   end
 
   def update
@@ -25,10 +26,10 @@ class ProjectsController < ApplicationController
     
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"
-      redirect_to :action => 'edit'
+      render :action => 'edit'
     else
       flash[:warning] = "Project not saved. Try again."
-      redirect_to :action => 'edit'
+      render :action => 'edit'
     end
   end
 

@@ -8,6 +8,7 @@ Avidstarter::Application.routes.draw do
   
   resources :projects
   resources :memberships
+  resources :invitations, :only => [:destroy]
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -23,6 +23,7 @@ class ProjectMembers < ActionMailer::Base
         format.text
         format.html
       end
+    @invitation.update_attribute(:sent_at, Time.now)
   end
 
 end

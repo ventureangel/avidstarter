@@ -1,8 +1,12 @@
 class Invitation < ActiveRecord::Base
   attr_accessible :invitation_token, :project_id, :recipient_email, :sent_at, :recipient_name
   belongs_to :project
-  validates_presence_of :recipient_email
+  validates :recipient_email, :project_id, :presence => true
   before_create :generate_token
+
+  def label
+    "#{recipient_name} (#{recipient_email})"
+  end
 
   private
     def generate_token
