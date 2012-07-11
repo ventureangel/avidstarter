@@ -1,47 +1,42 @@
 = devise_error_messages!
+.container
+  .row{:style => "margin-top:5%"}
+    .span1
+      %br
+    .span5
+      %center
+        %img{:src => "/images/uga2.png"}
+      %h2 Welcome to The University of Georgia's entrepreneur portal.
+      %br
+      %h3 By signing up you can start projects, collaborate with peers, request and comment on business plans. All while staying informed of the latest news and events scheduled on your campus.   
+      %br
+      %h3 Registering is as simple as filling out the form located on this page. 
+    .span5
+      .well
+        = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
+          =  f.hidden_field :invitation_token, :value => params[:invitation_token]
+      
+          %fieldset.account
+            %legend Login Information
+            %p Please fill out the following fields to sign up. You will use the email address and password you provide to login.
+            = f.label :email
+            = f.email_field :email
+            = f.label :password
+            = f.password_field :password
+            = f.label :password_confirmation
+            = f.password_field :password_confirmation
+          %fieldset.account
+            %legend User Information
+            %p Please fill out the following section to supplement your login credentials.
+            = f.label :first_name
+            = f.text_field :first_name
+            = f.label :last_name
+            = f.text_field :last_name
+            = f.label :linked_in, 'LinkedIn'
+            = f.text_field :linked_in
+            %div.checkbox.inline
+              = f.check_box :terms_of_service
+              = f.label :terms_of_service, "I agree to the Terms of Service and Privacy Policy"
+            %center
+              = f.submit 'Sign Up', :class => "btn btn-primary btn-danger"
 
-%h2 Login Information
-%p Please fill out the following fields to sign up. You will use the email address and password you provide to login.
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
-  =  f.hidden_field :invitation_token, :value => params[:invitation_token]
-  %div
-    = f.label :email
-    %br
-    = f.email_field :email
-
-  %div
-    = f.label :password
-    %br
-    = f.password_field :password
-
-  %div
-    = f.label :password_confirmation
-    %br
-    = f.password_field :password_confirmation
-
-  %h2 User Information
-  %p Please fill out the following section to supplement your login credentials.
-
-  %div
-    = f.label :first_name
-    %br
-    = f.text_field :first_name
-  %div
-    = f.label :last_name
-    %br
-    = f.text_field :last_name
-
-  %div
-    = f.label :linked_in, 'LinkedIn'
-    %br
-    = f.text_field :linked_in
-  %br
-  %div
-    = f.check_box :terms_of_service
-    = f.label :terms_of_service, "I agree to the Terms of Service and Privacy Policy"
-  = f.submit "Create Your Account"
-
-%br
-
-
-= render "devise/shared/links"
