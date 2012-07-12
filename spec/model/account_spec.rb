@@ -13,7 +13,7 @@ describe Account do
   it {should validate_presence_of :password}
 
   it {should respond_to(:profile_type)}
-  
+  it {should respond_to(:avatar)}
   it 'should return name' do 
     account.name.should == "#{account.first_name} #{account.last_name}"
   end
@@ -57,4 +57,20 @@ describe Account do
     account.should_receive(:create_memberships_from_invitations)
     account.confirm!
   end
+
+  it 'should create membership from invitation token' do
+    invitation = FactoryGirl.create(:invitation, :recipient_email => account.email, :recipient_name => account.name)
+    account.invitation_token = invitation.invitation_token
+    account.confirm! 
+    account.pending_memberships.should include invitation.project.pending_memberships.find_by_account_id(account.id)
+  end
+
+  it 'should create all other pending memberships from other invitations' do
+    clicked_invitation = FactoryGirl.create(:invitation, :recipient_email => account.email, :recipient_name => account.name)
+    4.times { FactoryGirl.create(:invitation, :recipient_email => account.email, :recipient_name => account.name) }
+    account.invitation_token = clicked_invitation.invitation_token
+    account.confirm!
+    account.pending_memberships.count.should == 5
+  end
+
 end

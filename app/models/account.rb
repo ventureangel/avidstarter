@@ -69,7 +69,7 @@ class Account < ActiveRecord::Base
           @membership.save
           invite.destroy
         end
-      end      
+      end     
     end
 
 
