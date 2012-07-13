@@ -5,7 +5,7 @@ describe Membership do
   it {should belong_to :project}
   it {should belong_to :account}
   it {should validate_presence_of :account}
-  it {should validate_presence_of :project}
+
 
   it 'should have a valid factory' do
     Membership.stub(:notify_of_invitation)

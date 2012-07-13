@@ -9,6 +9,7 @@ class ProjectsController < ApplicationController
     @project.memberships.build(:account => current_account, :pending => false)
     
     if @project.save
+      flash[:notice] = "Project successfully created"
       redirect_to :root
     else
       flash[:warning] = "Project not created"

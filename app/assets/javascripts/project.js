@@ -1,4 +1,4 @@
-function showFields(activeDiv) {
+/*function showFields(activeDiv) {
   $(activeDiv).show();
 }
 
@@ -10,5 +10,5 @@ $(document).ready(function(){
     showFields($(this).attr("href"));
   });
 });
-
+*/
 
