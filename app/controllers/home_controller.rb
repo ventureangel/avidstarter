@@ -5,5 +5,6 @@ class HomeController < ApplicationController
       @projects = current_account.projects 
       @invitations = current_account.pending_memberships
     end
+    
   end
 end

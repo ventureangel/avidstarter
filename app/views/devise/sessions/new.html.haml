@@ -1,42 +1,36 @@
-= devise_error_messages!
-
-.container
-  .row    
-    .span1
-      %br
-    .span5{:style => "margin-top:10%;"}
-      %center
-        %img{:src => "/images/uga2.png"}
-        %h2 Welcome to The University of Georgia's entrepreneur portal.
-    .span5{:style => "margin-top:10%;"}
-      .well
-        %center
-          %h2 Sign in & Connect to:
-          %h2 The University of Georgia
-          %br
-        = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => "form-horizontal"}) do |f|
-          .fieldset
-            .control-group
-              = f.label :email, :class => "control-label", :style => "width: 100px;"
-              .controls{:style => "margin-left: 110px;"}
-                = f.email_field :email
-            .control-group
-              = f.label :password, :class => "control-label", :style => "width: 100px;"
-              .controls{:style => "margin-left: 110px;"}
-                = f.password_field :password  
-
-            .submit{:style => "margin-bottom:10px;"}
-            %table
-              %tr
-                %td{:style => "width:100px;"}
-                  = f.submit "Sign In", :class => "btn btn-danger", :style => "float:right"
-                %td
-                  %label.checkbox{:style => "margin-left:8px;"}
-                    = f.check_box :remember_me
-                    Remember me
-        .other{:style => "background-color: #e1e1e1; padding:5px;"}
+.row-fluid
+  .span12
+    = devise_error_messages!
+.row-fluid
+  .span2
+    %br
+  .span4
+    %center
+      %img{:src => "/assets/uga2.png"}
+      %h2 Welcome to The University of Georgia's entrepreneur portal.
+  .span4
+    .well
+      .row-fluid
+        .span12
           %center
-            = render "devise/shared/links"
-      %img{:src => "/images/powered.png", :style => "opacity:1; filter:alpha(opacity=100);"}
+            %h2 Sign in & Connect to:
+            %h2 The University of Georgia
+            %br
+          = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+            .fieldset
+              = f.label :email
+              = f.email_field :email, :class => "span12-fluid"
+              = f.label :password
+              = f.password_field :password, :class => "span12-fluid"
+              %label.checkbox
+                Remember Me
+                = f.check_box :remember_me
+              %center
+                = f.submit "Sign In", :class => "btn btn-danger"
+              
+      .other{:style => "background-color: #e1e1e1; padding:5px;"}
+        %center
+          = render "devise/shared/links"
+    %img{:src => "/assets/powered.png", :style => "opacity:1; filter:alpha(opacity=100);"}
 
-    .span1
+  .span1
