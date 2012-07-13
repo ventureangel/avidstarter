@@ -35,10 +35,9 @@
             = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
 
         %h3 My Current Projects
-
         - @projects.each do |project|
-          = render :partial => "users/projects/project", :locals => {:project => project}
-
+          = render :partial => "my_projects", :locals => {:project => project}
+                      
     .span6
       .well
         .row-fluid
@@ -51,7 +50,8 @@
             
             %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
 
-            = render :partial => "projects/all_projects"
+            - @projects.each do |project|
+              = render :partial => "all_projects"
     .span3
       .well
         %h3{:style => "margin-bottom:10px;"} Notifications
