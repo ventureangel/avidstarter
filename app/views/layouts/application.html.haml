@@ -2,23 +2,22 @@
 %html
   %head
     %title Avidstarter
-    = stylesheet_link_tag    "avid", :media => "all"
+    = stylesheet_link_tag    "avid", "avidresponsive", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-        
+    %link{:href => "http://fonts.googleapis.com/css?family=Rokkitt:400,700", :rel => "stylesheet", :type => "text/css"}
+    
     
   %body
-  .container
-    .row
-      .span12
-        %center
-          = link_to "Home", root_path
-  .container
-    .row
-      .span12        
-        %center
-          - flash.keys.each do |type|
-            = flash[type]
+  = render :partial => "shared/topnavbar"
   
-  = yield
+  #flash
+    %center
+      - flash.keys.each do |type|
+        %div{ :id => type }
+          = flash[type]
+  
+  .container-fluid{:style => "padding-top:20px;"}   
+  
+    = yield
 
