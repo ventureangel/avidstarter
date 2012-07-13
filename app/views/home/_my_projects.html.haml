@@ -1,0 +1,25 @@
+.row-fluid
+  .span12
+    %ul.nav.nav-pills.nav-stacked
+      %li.dropdown
+        %a.dropdown-toggle{:data => ("toggle=dropdown"), :href => "#"}
+          .row-fluid
+            .span2
+              %center
+                = image_tag project.logo_url(:thumb)
+            .span10
+              %b.caret{:style => "float:right"}
+              %h4= project.business_name
+              %h7{:style => "color: #444444"}
+                = "project progress:" 
+              / = render :partial => "users/projects/project_progress", :locals => {:project => project}
+        %ul.dropdown-menu.pull-right
+          %li
+            %center
+              = image_tag project.logo_url(:thumb)
+          .divider
+          %li
+            Test
+          .divider
+          %li
+            Test
