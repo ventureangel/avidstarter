@@ -1,0 +1,26 @@
+#main{:role => "main"}
+  %ul#project_tiles
+    / These are our grid blocks
+    - @projects.each do |project|
+      %li          
+        %div{:class => "project#{project.id}_container"}
+          %center
+            =image_tag project.logo.url(:proj_logo), :class => "imageborder"
+            / %img{:src => "aimage/va.png", :class => "imageborder"}
+          %center
+            %h3= project.business_name
+          %h6 
+            %i.icon-pushpin
+            Business Concept
+          %p{:style => "text-align:justify; font-size:11px;"}= project.business_concept
+          .actions{:style => "padding-top: 10px; color: #666666"}
+            %span.badge
+              %i.icon-heart
+              Like
+            %span.badge
+              %i.icon-comments-alt
+              Comments
+            .floatright{:style => "float:right"}
+              %span.badge
+                %i.icon-zoom-in
+                Details
