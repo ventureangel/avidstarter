@@ -1,0 +1,67 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+    
+      %a.btn.btn-navbar{"data-toggle" => "collapse", "data-target" => ".nav_collapse"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      
+        %a.brand.avidfontthick{:style => "font-weight:700; color: #f24438; font-size: 22px; text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125)", :href => "#{root_url}"}
+          The University of Georgia
+    
+      .nav_collapse.nav-collapse.collapse.in
+        - if account_signed_in?
+          %ul.nav
+            %li
+              %a{:href => "#{root_url}"} 
+                %i.icon-beaker
+                Projects
+          %ul.nav
+            %li
+              %a{:href => "#{root_url}"} 
+                %i.icon-bullhorn
+                Recruiting
+          %ul.nav
+            %li
+              %a{:href => "#{root_url}"} 
+                %i.icon-group
+                People
+          %ul.nav.pull-right
+            %li.divider-vertical
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %i.icon-user
+                = current_account.name
+                %b.caret
+              %ul.dropdown-menu
+                %li.nav-header Profile Settings
+                %li
+                  %a{:href => "#{edit_account_registration_path}"} 
+                    %i.icon-pencil
+                    Edit Profile
+                %li
+                  =link_to "#{raw('<i class="icon-off"></i>')} Sign Out".html_safe, destroy_account_session_path, :method => :delete
+        - else
+          %ul.nav
+            %li
+              %a{:href => "#{root_url}"} 
+                %i.icon-beaker
+                Projects
+          %ul.nav.pull-right
+            %li.divider-vertical
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                %i.icon-user
+                Login / Sign Up
+                %b.caret
+              %ul.dropdown-menu
+                %li.nav-header Profile Settings
+                %li
+                  %a{:href => "#{sign_in_url}"} 
+                    %i.icon-lock
+                    Login
+                %li
+                  %a{:href => "#{sign_up_url}"}
+                    %i.icon-edit
+                    Sign Up
