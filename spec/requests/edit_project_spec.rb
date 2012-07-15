@@ -36,8 +36,22 @@ describe "Edit Project" do
     
     fill_in "Name", :with => "Current User"
     find("input[name='membership[email]']").set(existing_account.email)
-    #ProjectMembers.should_receive(:membership_invitation).and_return(mail)
     click_button "Add New Team Member"
     ActionMailer::Base.deliveries.should_not be []
+  end
+
+  it 'should be able to upload a logo' do #CHANGE THIS. IT ACTUALLY LOADS TO AWS
+    #find("input[name='project[logo]']").set("/home/squizzleflip/Pictures/glados.jpg")
+    #click_button "Save Project" 
+    #@project.logo.to_s.should be "glados.jpg"
+    pending
+  end
+
+  it 'should be able to upload a business plan' do
+    pending
+  end
+
+  it 'should be able to upload attachments' do
+    pending
   end
 end
