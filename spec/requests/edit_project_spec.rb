@@ -40,4 +40,16 @@ describe "Edit Project" do
     click_button "Add New Team Member"
     ActionMailer::Base.deliveries.should_not be []
   end
+
+  it 'should be able to upload a logo' do
+    pending
+  end
+
+  it 'should be able to upload a business plan' do
+    pending
+  end
+
+  it 'should be able to upload attachments' do
+    pending
+  end
 end
