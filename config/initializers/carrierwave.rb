@@ -4,8 +4,10 @@ CarrierWave.configure do |config|
     :aws_access_key_id      => ENV['S3_KEY'],
     :aws_secret_access_key  => ENV['S3_SECRET']
   }
-  config.fog_directory  = 'avidstarter-dev'
-  config.cache_dir = "#{Rails.root}/tmp/uploads"
+  if Rails.env.development?
+   config.fog_directory = 'avidstarter-dev'
+  else
+   config.fog_directory = 'avidstarter-#{Rails.env}'
 end
 class MyUploader < CarrierWave::Uploader::Base
   storage :fog
