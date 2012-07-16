@@ -8,7 +8,9 @@ CarrierWave.configure do |config|
    config.fog_directory = 'avidstarter-dev'
   else
    config.fog_directory = 'avidstarter-#{Rails.env}'
+  end
 end
+
 class MyUploader < CarrierWave::Uploader::Base
   storage :fog
 end
