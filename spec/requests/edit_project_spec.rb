@@ -42,7 +42,7 @@ describe "Edit Project" do
   it 'should be able to upload a logo' do #CHANGE THIS. IT ACTUALLY LOADS TO AWS
     #find("input[name='project[logo]']").set("/home/squizzleflip/Pictures/glados.jpg")
     #click_button "Save Project" 
-    #@project.logo.to_s.should be "glados.jpg"
+    #page.should have_content "Project successfully updated"
     pending
   end
 
