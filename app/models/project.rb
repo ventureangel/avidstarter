@@ -1,7 +1,8 @@
 class Project < ActiveRecord::Base
-  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url
+  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url, :business_plan
   
   mount_uploader :logo, LogoUploader
+  mount_uploader :business_plan, BusinessPlanUploader
   
   has_many :memberships, :dependent => :destroy
   has_many :confirmed_memberships, :class_name => 'Membership', :conditions => {:pending => false}

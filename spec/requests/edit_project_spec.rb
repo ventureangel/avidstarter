@@ -48,7 +48,15 @@ describe "Edit Project" do
   end
 
   it 'should be able to upload a business plan' do
-    pending
+    attach_file :business_plan, "/home/squizzleflip/Downloads/f1120sg.pdf"
+    click_button "Save Project"
+    page.should have_content "Project successfully updated"
+  end
+
+  it 'should only allow pdf, docx and doc business plans' do 
+    attach_file :business_plan, "/home/squizzleflip/Pictures/glados.jpg"
+    click_button "Save Project"
+    page.should have_content
   end
 
   it 'should be able to upload attachments' do

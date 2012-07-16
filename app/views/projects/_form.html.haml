@@ -37,6 +37,10 @@
     %br
     = f.text_area :business_concept
     %br
+    = f.label :business_plan, "Upload a business plan"
+    %br
+    = f.file_field :business_plan
+    %br
     = f.submit "Save Project"
 %div#team.inactive
   %h3 Current Team Members
