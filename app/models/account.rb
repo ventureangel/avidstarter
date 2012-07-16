@@ -5,7 +5,7 @@ class Account < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
  
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, ImageUploader
   
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :terms_of_service, :linked_in, :invitation_token, :avatar, :remote_avatar_url 

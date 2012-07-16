@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class LogoUploader < CarrierWave::Uploader::Base
+class ImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -11,7 +11,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   # include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
-  #storage :file
+  # storage :file
   storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -19,7 +19,7 @@ class LogoUploader < CarrierWave::Uploader::Base
   def store_dir
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
-
+  
   # Provide a default URL as a default if there hasn't been a file uploaded:
   # def default_url
   #   # For Rails 3.1+ asset pipeline compatibility:
@@ -37,7 +37,7 @@ class LogoUploader < CarrierWave::Uploader::Base
 
   # Create different versions of your uploaded files:
   version :thumb do
-    process :resize_to_limit => [50, 50]
+    process :resize_to_limit => [100, 100]
   end
 
   # Add a white list of extensions which are allowed to be uploaded.

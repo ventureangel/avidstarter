@@ -7,9 +7,9 @@ Avidstarter::Application.routes.draw do
   get "home/home"
   
   resources :projects
-  resources :memberships
+  resources :memberships, :only => [:create, :destroy]
   resources :invitations, :only => [:destroy]
-  
+  resources :attachments, :only => [:create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

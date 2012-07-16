@@ -18,12 +18,14 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations])
     @invitations = @project.invitations
+    rescue ActiveRecord::RecordNotFound
+      return redirect_to root_url, :alert => 'You cannot edit this project.'   
   end
 
   def update
-    @project = Project.find(params[:id])
+    @project = current_account.projects.find(params[:id])
     @invitations = @project.invitations
     
     if @project.update_attributes(params[:project])
@@ -33,10 +35,12 @@ class ProjectsController < ApplicationController
       flash[:warning] = "Project not saved. Try again."
       render :action => 'edit'
     end
+    rescue ActiveRecord::RecordNotFound
+      return redirect_to root_url, :alert => 'You cannot edit this project.'   
   end
 
   def destroy
-    @project = Project.find(params[:id])
+    @project = current_account.projects.find(params[:id])
     if @project.destroy
       flash[:notice] = "Project successfully deleted"
       redirect_to :root
@@ -44,6 +48,8 @@ class ProjectsController < ApplicationController
       flash[:warning] = "Project not deleted"
       redirect_to :root
     end
+    rescue ActiveRecord::RecordNotFound
+      return redirect_to root_url, :alert => 'You cannot delete this project'
   end
 
 

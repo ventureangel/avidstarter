@@ -15,6 +15,7 @@ describe Project do
   it {should respond_to :invitations}
 
   it {should have_many(:members).through(:confirmed_memberships)}
+  it {should have_many(:attachments)}
   
   let(:project) {FactoryGirl.create(:project)}
 

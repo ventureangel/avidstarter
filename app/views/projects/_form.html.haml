@@ -7,8 +7,8 @@
       %a{:href => '#team'}
         Team Information
     %li
-      %a{:href => '#hamburger'}
-        Hamburger
+      %a{:href => '#media'}
+        Media
 = form_for @project, :html => {:multipart => true} do |f|
   %div#general.default
     = f.error_messages
@@ -71,6 +71,14 @@
     = f.label :email
     = f.email_field :email
     = submit_tag "Add New Team Member"
-%div#hamburger.inactive
-  Hamburger!
-
+%div#media.inactive
+  - @project.attachments.each do |attachment|
+    = image_tag attachment.file_url(:thumb)
+  = form_for :attachment, url: attachments_path do |f|
+    = f.error_messages
+    = f.hidden_field :project_id, :value => @project.id
+    = f.label :file, "Upload a picture attachment"
+    %br= f.file_field :file
+    %br= f.label :remote_file_url, "or use an image URL"
+    %br= f.text_field :remote_file_url
+    %br= submit_tag "Upload Attachment"
