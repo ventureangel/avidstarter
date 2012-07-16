@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707212916) do
+ActiveRecord::Schema.define(:version => 20120716205524) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -42,6 +42,13 @@ ActiveRecord::Schema.define(:version => 20120707212916) do
   add_index "accounts", ["email"], :name => "index_accounts_on_email", :unique => true
   add_index "accounts", ["reset_password_token"], :name => "index_accounts_on_reset_password_token", :unique => true
 
+  create_table "attachments", :force => true do |t|
+    t.integer  "project_id"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "invitations", :force => true do |t|
     t.integer  "project_id"
     t.string   "recipient_email"
@@ -69,6 +76,7 @@ ActiveRecord::Schema.define(:version => 20120707212916) do
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.string   "logo"
+    t.string   "business_plan"
   end
 
 end

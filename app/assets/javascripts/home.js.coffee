@@ -4,3 +4,5 @@
 
 $(document).ready ->
   $(".dropdown-toggle").dropdown()
+
+	$("#my-modal").modal keyboard: false

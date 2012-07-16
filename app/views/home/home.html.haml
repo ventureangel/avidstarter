@@ -121,6 +121,16 @@
           %li.next
             %a{:href => "#"}
               Newer &rarr;
+  
+  #my-modal.modal.hide
+    .modal-header
+      %a.close{"data-dismiss" => "modal"} ×
+      %h6 
+        %i.icon-share.icon-large
+        Recommend Project
+    .modal-body{:style => "max-height:400px; overflow-y: auto;"}
+      %p
+    .modal-footer
 - else  
   %p #{link_to "Join", sign_up_url} or #{link_to "Sign In", "/sign_in"}
   

@@ -1,0 +1,9 @@
+:plain
+  
+  $(".modal-body").html("#{escape_javascript(render('recommendations/recommendation'))}");
+  $(".modal-footer").html("#{escape_javascript(render('recommendations/recommendation_result_count'))}");
+
+  $('#my-modal').modal({
+    keyboard: true,
+    show: true
+  });

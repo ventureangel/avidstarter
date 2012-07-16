@@ -1,5 +1,5 @@
 Avidstarter::Application.routes.draw do
-  devise_for :accounts
+  devise_for :accounts, :controllers => {:registrations => 'accounts'}
   devise_scope :account do
     get "/sign_in", :to => "devise/sessions#new"
     get "/sign_up", :to => "devise/registrations#new"
@@ -7,9 +7,9 @@ Avidstarter::Application.routes.draw do
   get "home/home"
   
   resources :projects
-  resources :memberships
+  resources :memberships, :only => [:create, :destroy]
   resources :invitations, :only => [:destroy]
-  
+  resources :attachments, :only => [:create, :destroy]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
