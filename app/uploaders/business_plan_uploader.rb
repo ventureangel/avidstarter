@@ -36,19 +36,10 @@ class BusinessPlanUploader < CarrierWave::Uploader::Base
   # end
 
   # Create different versions of your uploaded files:
-<<<<<<< HEAD
-  version :thumb do
-    process :resize_to_fill => [100, 100]
-  end
-  
-  version :small_thumb, :from_version => :thumb do
-    process :resize_to_fill => [50, 50]
-  end
-=======
+
   # version :thumb do
   #   process :scale => [50, 50]
   # end
->>>>>>> master
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

@@ -26,10 +26,7 @@
                 %i.icon-zoom-in
                 =link_to 'Destroy', project, :confirm => 'Are you sure you want to delete this project?', :method => :delete
 
-/ Include the imagesLoaded plug-in
-%script{:src => "/javascripts/jquery.imagesloaded.js"}
-/ Include the plug-in
-%script{:src => "/javascripts/jquery.wookmark.min.js"}
+
 / Once the images are loaded, initalize the Wookmark plug-in.
 :javascript
   $('#project_tiles').imagesLoaded(function() {

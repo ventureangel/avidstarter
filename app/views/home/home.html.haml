@@ -1,136 +1,18 @@
 - if account_signed_in?
-  .row-fluid
-    .span3
-      .well
-        %h3= "Hey #{current_account.first_name}!"
-        .sidecontent_bar{:style => "margin-top:10px;"}
-          .row-fluid
-            .span3
-              = image_tag current_account.avatar_url(:thumb) if current_account.avatar?
-            .span9
-              %dl{:style => "margin-bottom:0px; margin-top:0px;"}
-                %dt Name:
-                %dd= current_account.name
-                %dt Social:
-                -if current_account.linked_in == nil
-                  %dd Please edit your profile to update
-                -else
-                  %dd
-                    = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-                    = link_to "#{raw('<i class="icon-twitter-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-                    = link_to "#{raw('<i class="icon-facebook-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-                    = link_to "#{raw('<i class="icon-github-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-                    = link_to "#{raw('<i class="icon-google-plus-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-        .sidecontent_bar{:style => "margin-top:10px;"}
-          .row-fluid
-            .span12{}
-              %center
-                %a.btn.btn-danger.btn-small{:href => "#{edit_account_registration_path}"}
-                  %i.icon-pencil
-                  Edit Profile
+  .well
+    #mainhub_content
+      .row-fluid
+        .span12            
+          - @invitations.each do |invitation|
+            %tr
+              %td= invitation.project.business_name
+              %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
+              %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
+        
+          %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
 
-      .well
-        %center
-          .jumbobutton
-            = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
-
-        %h3 My Current Projects
-        - @projects.each do |project|
-          = render :partial => "my_projects", :locals => {:project => project}
-                      
-    .span6
-      .well
-        .row-fluid
-          .span12            
-            - @invitations.each do |invitation|
-              %tr
-                %td= invitation.project.business_name
-                %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
-                %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
-            
-            %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
-
-            - @projects.each do |project|
-              = render :partial => "all_projects"
-    .span3
-      .well
-        %h3{:style => "margin-bottom:10px;"} Notifications
-        %center
-          %a.btn.btn-small{:href => "#", :style => "margin-bottom:18px;"}
-            %i.icon-warning-sign.icon-large
-            Priority
-          %a.btn.btn-small{:href => "#", :style => "margin-bottom:18px;"}
-            %i.icon-bullhorn.icon-large
-            Recruiting
-          %a.btn.btn-small{:href => "javascript:void(0)", :style => "margin-bottom:18px;"}
-            %i.icon-comments-alt.icon-large
-            Feedback
-          %a.btn.btn-small{:href => "javascript:void(0)", :style => "margin-bottom:18px;"}
-            %i.icon-beaker.icon-large
-            New Projects
-          %a.btn.btn-small{:href => "javascript:void(0)", :style => "margin-bottom:18px;"}
-            %i.icon-asterisk.icon-large
-            All Notifications
-        .alert.alert-error
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "Impromptu meet-up Today (#{Date.today.to_formatted_s(:long)})"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-error
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "Business Plan Submission ends Tomorrow! (#{Date.tomorrow.to_formatted_s(:long)})"
-          .minifont
-            Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-error
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "UGA's Next Top Entrepreneur meeting (#{Date.tomorrow.to_formatted_s(:long)})"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        .alert.alert-info
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "ventureangel's looking for a programmer (apply now!)"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-success
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
-          .minifont
-            Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-success
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        .alert.alert-info
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "Collegetraker is looking for a designer (apply now!)"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper.
-
-        %ul.pager
-          %li.previous
-            %a{:href => "#"}
-              &larr; Older
-          %li.next
-            %a{:href => "#"}
-              Newer &rarr;
-  
-  #my-modal.modal.hide
-    .modal-header
-      %a.close{"data-dismiss" => "modal"} ×
-      %h6 
-        %i.icon-share.icon-large
-        Recommend Project
-    .modal-body{:style => "max-height:400px; overflow-y: auto;"}
-      %p
-    .modal-footer
+          - @projects.each do |project|
+            = render :partial => "all_projects"
 - else  
   %p #{link_to "Join", sign_up_url} or #{link_to "Sign In", "/sign_in"}
   

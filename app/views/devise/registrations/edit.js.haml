@@ -1,7 +1,6 @@
 :plain
   
-  $(".modal-body").html("#{escape_javascript(render('recommendations/recommendation'))}");
-  $(".modal-footer").html("#{escape_javascript(render('recommendations/recommendation_result_count'))}");
+  $("#mainhub_content").html("#{escape_javascript(render('devise/registrations/form'))}");
 
   $('#my-modal').modal({
     keyboard: true,

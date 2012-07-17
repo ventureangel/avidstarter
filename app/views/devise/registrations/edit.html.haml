@@ -1,56 +1,42 @@
-%h2 Edit #{resource_name.to_s.humanize}
- 
-= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
-  = devise_error_messages!
+.well
+  #mainhub_content
+    %h3 Edit #{resource_name.to_s.humanize}
 
-  %div
-    = f.label :first_name
-    %br
-    = f.text_field :first_name
-
-  %div
-    = f.label :last_name
-    %br
-    = f.text_field :last_name
-
-  %div
-    = f.label :linked_in, 'LinkedIn'
-    %br
-    = f.text_field :linked_in
-
-  %div
-    = f.label :email
-    %br
-    = f.email_field :email
-
-  %div
-    = f.label :avatar, "Upload a picture for your Avatar"
-    %br= f.file_field :avatar
-  %div
-    = f.label :remote_avatar_url, "or use an image URL"
-    %br= f.text_field :remote_avatar_url
-  %div
-    = f.label :password
-    %i (leave blank if you don't want to change it)
-    %br
-    = f.password_field :password, :autocomplete => "off"
-
-  %div
-    = f.label :password_confirmation
-    %br
-    = f.password_field :password_confirmation
-
-  %div
-    = f.label :current_password
-    %i (we need your current password to confirm your changes)
-    %br
-    = f.password_field :current_password
-
-  %div
-    = f.submit "Update"
-
-%h3 Cancel my account
-
-%p Unhappy with your account? #{link_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete}
-
-= link_to "Back", :back
+    = form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :multipart => true }) do |f|
+      .row-fluid
+        .span12
+          = devise_error_messages!
+      .row-fluid
+        .span6
+          %h4{:style => "margin-bottom: 9px"} User Information      
+          = f.label :first_name
+          = f.text_field :first_name, :class => "span12"
+          = f.label :last_name
+          = f.text_field :last_name, :class => "span12"      
+          = f.label :linked_in, 'LinkedIn'
+          = f.text_field :linked_in, :class => "span12"
+          = f.label :avatar, "Profile Photo"
+          = f.file_field :avatar
+          / = f.label :remote_avatar_url, "or use an image URL"
+          / = f.text_field :remote_avatar_url, :class => "span12"  
+        .span6
+          %h4{:style => "margin-bottom: 9px"} Login Information
+          = f.label :email
+          = f.email_field :email, :class => "span12"
+          = f.label :password, "New Password"
+          = f.password_field :password, :autocomplete => "off", :class => "span12"
+          = f.label :password_confirmation, "New Password confirmation"
+          = f.password_field :password_confirmation, :class => "span12"
+          .alert.alert-error{:style => "margin-top: 18px"}
+            %h4 Unhappy with your account?
+            %p Click here to #{link_to "cancel your account.", registration_path(resource_name), :data => { :confirm => "Are you sure you want to cancel your account? We'd hate to lose you." }, :method => :delete}
+      .row-fluid
+        .span3
+          %br
+        .span6
+          .alert.alert-warning{:style => "margin-top: 18px; padding-right:14px;"}
+            %h4 Current Password
+            %p Please enter your current password to confirm the changes to your account.
+            = f.password_field :current_password, :class => "span12"
+          %center  
+            = f.submit "Update", :class => "btn btn-danger"
