@@ -1,84 +1,88 @@
-%section{ :id=>"tabs"}
-  %ul
-    %li
-      %a{:href => '#general'}
-        General Info
-    %li
-      %a{:href => '#team'}
-        Team Information
-    %li
-      %a{:href => '#media'}
-        Media
-= form_for @project, :html => {:multipart => true} do |f|
-  %div#general.default
-    = f.error_messages
-    = f.label :logo, "Upload a picture for your Avatar"
-    %br= f.file_field :logo
-    %br= f.label :remote_logo_url, "or use an image URL"
-    %br= f.text_field :remote_logo_url
+.row-fluid
+  .span12
+    %ul#projectnav.nav.nav-tabs
+      %li.active
+        %a{"data-toggle" => "tab", :href => '#general'}
+          General Info
+      %li
+        %a{"data-toggle" => "tab", :href => '#team'}
+          Team Information
+      %li
+        %a{"data-toggle" => "tab", :href => '#media'}
+          Media
 
-    = f.label :business_name
-    %br
-    = f.text_field :business_name
-    %br
-    = f.label :industry
-    %br
-    = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}
-    %br
-    = f.label :city
-    %br
-    = f.text_field :city
-    %br
-    = f.label :state
-    %br
-    = f.select :state, STATES, {:include_blank => 'No Selection'}
-    %br
-    = f.label :business_concept
-    %br
-    = f.text_area :business_concept
-    %br
-    = f.label :business_plan, "Upload a business plan"
-    %br
-    = f.file_field :business_plan
-    %br
-    = f.submit "Save Project"
-%div#team.inactive
-  %h3 Current Team Members
-  - @project.members.each do |member|
-    %tr
-      %td= member.name
-      %td= link_to "Remove Member", membership_path(member), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
-  %h3 Pending Team Members (These are only viewable while editing)
-  - @project.pending_memberships.each do |pmember|
-    %tr
-      %td= pmember.account.label
-      %td= link_to "Cancel invitation", membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
-    %br
-  - @invitations.each do |invite|
-    %tr
-      %td= invite.label
-      %td= link_to "Cancel invitation", invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
-    %br
-  %br
-  %br
-  Add New Team Member
-  %br
-  = form_for :membership, url: memberships_path do |f|
-    = f.error_messages
-    = f.hidden_field :project, :value => @project.id
-    = f.label :recipient_name, "Name"
-    = f.text_field :recipient_name
-    = f.label :email
-    = f.email_field :email
-    = submit_tag "Add New Team Member"
-%div#media.inactive
-  - @project.attachments.each do |attachment|
-    = image_tag attachment.file_url(:thumb)
-  = form_for :attachment, url: attachments_path do |f|
-    = f.error_messages
-    = f.hidden_field :project_id, :value => @project.id
-    = f.label :file, "Upload a picture attachment"
-    %br= f.file_field :file
-    %br= f.label :remote_file_url, "or use an image URL"
-    %br= f.text_field :remote_file_url
-    %br= submit_tag "Upload Attachment"
+= form_for @project, :html => {:multipart => true} do |f|
+  #projectcontent.tab-content
+    = f.error_messages  
+    #general.tab-pane.fade.in.active
+      %h3 General Information
+      .row-fluid
+        .span6
+          = f.label :business_name
+          = f.text_field :business_name, :class => "span12", :style => "width: 100%;"
+          = f.label :industry
+          = f.select :industry, INDUSTRIES, {:include_blank => 'No Selection'}, :class => "span12", :style => "width: 100%;"
+          = f.label :city
+          = f.text_field :city, :class => "span12", :style => "width: 100%;"
+          = f.label :state
+          = f.select :state, STATES, {:include_blank => 'No Selection'}, :class => "span12", :style => "width: 100%;"
+        .span6
+          = f.label :logo, "Business Logo"
+          = f.file_field :logo, :style => "padding-bottom: 10px;"
+          = f.label :business_plan, "Upload a business plan"
+          = f.file_field :business_plan, :style => "padding-bottom: 10px;"
+          = f.label :business_concept
+          = f.text_area :business_concept, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"
+      .row-fluid
+        .span12
+          %center
+            = f.submit "Save Project", :class => "btn btn-danger btn-project"
+    #team.tab-pane.fade
+      .row-fluid
+        .span6
+          %h3 Current Team Members
+          - @project.members.each do |member|
+            %tr
+              %td= member.name
+              %td= link_to "Remove Member", membership_path(member), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+          %h3 Pending Team Members 
+          %p (These members are only viewable during editing)
+          - @project.pending_memberships.each do |pmember|
+            %tr
+              %td= pmember.account.label
+              %td= link_to "Cancel invitation", membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+            %br
+          - @invitations.each do |invite|
+            %tr
+              %td= invite.label
+              %td= link_to "Cancel invitation", invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+        .span6
+          %h3 Add New Team Member
+          = form_for :membership, url: memberships_path do |f|
+            = f.error_messages
+            = f.hidden_field :project, :value => @project.id
+            = f.label :recipient_name, "Name"
+            = f.text_field :recipient_name, :class => "span12", :style => "width: 100%;"
+            = f.label :email
+            = f.email_field :email, :class => "span12", :style => "width: 100%;"
+            %center
+              = submit_tag "Add New Team Member", :class => "btn btn-danger"
+    #media.tab-pane.fade
+      .row-fluid
+        .span6
+          %h3 Existing Media
+          
+          - @project.attachments.each do |attachment|
+            = image_tag attachment.file_url(:thumb), :style => "padding-bottom:3px;"
+      
+        .span6
+          %h3 Attach Additional Media
+          = form_for :attachment, url: attachments_path do |f|
+            = f.error_messages
+            = f.hidden_field :project_id, :value => @project.id
+            = f.label :file, "Upload a picture attachment"
+            = f.file_field :file, :style => "padding-bottom: 10px;"
+            %br
+            = f.text_field :remote_file_url, :placeholder => "Or use an image URL", :class => "span12", :style => "width: 100%;"
+            %center
+              = submit_tag "Upload Attachment", :class => "btn btn-danger"

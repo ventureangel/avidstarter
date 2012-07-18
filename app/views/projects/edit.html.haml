@@ -1,3 +1,8 @@
-%h1= @project.business_name
-= image_tag @project.logo_url(:thumb) if @project.logo?
-= render 'form'
+.well
+  .row-fluid{:style => "margin-bottom:18px;"}
+    .span2
+      = image_tag @project.logo_url(:thumb) if @project.logo?
+    .span10
+      %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+  
+  = render 'form'

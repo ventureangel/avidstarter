@@ -1,5 +1,5 @@
 class AccountsController < Devise::RegistrationsController
-  def edit     
+  def edit 
     respond_to do |format|
       format.html
       format.js
