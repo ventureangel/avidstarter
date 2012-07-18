@@ -40,31 +40,46 @@ describe "Edit Project" do
   end
 
   it 'should be able to upload a logo' do #CHANGE THIS. IT ACTUALLY LOADS TO AWS
-    #find("input[name='project[logo]']").set("/home/squizzleflip/Pictures/glados.jpg")
-    #click_button "Save Project" 
-    #page.should have_content "Project successfully updated"
-    pending
+    find("input[name='project[logo]']").set("/home/squizzleflip/Pictures/glados1.jpg")
+    click_button "Save Project" 
+    page.should have_content "Project successfully updated"
+    
   end
 
   it 'should be able to upload a business plan' do
-    #find("input[name='project[business_plan]']").set("/home/squizzleflip/Downloads/f1120sg.pdf")
-    #click_button "Save Project"
-    #page.should have_content "Project successfully updated"
-    pending
+    find("input[name='project[business_plan]']").set("/home/squizzleflip/Downloads/f1120sg.pdf")
+    click_button "Save Project"
+    page.should have_content "Project successfully updated"
+    
   end
 
   it 'should only allow pdf, docx and doc business plans' do 
-    #find("input[name='project[business_plan]']").set("/home/squizzleflip/Pictures/glados.jpg")
-    #click_button "Save Project"
-    #page.should have_content "Business plan You are not allowed to upload \"jpg\" files, allowed types: [\"doc\", \"docx\", \"pdf\"]"
-    pending
+    find("input[name='project[business_plan]']").set("/home/squizzleflip/Pictures/glados1.jpg")
+    click_button "Save Project"
+    page.should have_content "Business plan You are not allowed to upload \"jpg\" files, allowed types: [\"doc\", \"docx\", \"pdf\"]"
+    
   end
 
   it 'should be able to upload attachments' do
-    #find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados.jpg")
-    #click_button "Upload Attachment"
-    #page.should have_content "Attachment successfully uploaded"
+    find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
+    click_button "Upload Attachment"
+    page.should have_content "Attachment successfully uploaded"
+    
+  end
+
+  it 'should be limited to 5 attachments' do
+    i = 1
+    while i < 6
+      find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados#{i}.jpg")
+      click_button "Upload Attachment"
+      i += 1
+    end
+    @project.attachments.count.should be 5
+  end
+  
+  it 'should be able to post recruitment notifications' do
     pending
   end
+  
 
 end
