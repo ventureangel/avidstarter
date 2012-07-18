@@ -39,7 +39,7 @@ describe "Edit Project" do
     ActionMailer::Base.deliveries.should_not be []
   end
 
-  it 'should be able to upload a logo' do #CHANGE THIS. IT ACTUALLY LOADS TO AWS
+  it 'should be able to upload a logo' do
     find("input[name='project[logo]']").set("/home/squizzleflip/Pictures/glados1.jpg")
     click_button "Save Project" 
     page.should have_content "Project successfully updated"
@@ -69,14 +69,23 @@ describe "Edit Project" do
 
   it 'should be limited to 5 attachments' do
     i = 1
-    while i < 6
+    while i < 7
       find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados#{i}.jpg")
       click_button "Upload Attachment"
       i += 1
     end
-    @project.attachments.count.should be 5
+    page.should have_content "Attachment not added. Please try again."
   end
   
+  it 'should be able to delete attachments' do #I can't get this to work, but it works on development
+    #find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
+    #click_button "Upload Attachment"
+    #click_link "Delete Attachment"
+    #click_button "OK"
+    #page.should have_content "Attachment successfully removed"
+    pending
+  end
+
   it 'should be able to post recruitment notifications' do
     pending
   end

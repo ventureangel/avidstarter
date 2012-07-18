@@ -4,7 +4,7 @@ class AttachmentsController < ApplicationController
     @attachment = Attachment.new(project_id: @project.id, file: params[:attachment][:file])
     if @attachment.save
       flash[:notice] = "Attachment successfully uploaded"
-      redirect_to :back
+      redirect_to edit_project_path(@project)
     else
       flash[:warning] = "Attachment not added. Please try again."
       redirect_to :back

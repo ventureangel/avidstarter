@@ -74,6 +74,7 @@
 %div#media.inactive
   - @project.attachments.each do |attachment|
     = image_tag attachment.file_url(:thumb)
+    = link_to "Delete Attachment", attachment_path(attachment), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
   = form_for :attachment, url: attachments_path do |f|
     = f.error_messages
     = f.hidden_field :project_id, :value => @project.id
