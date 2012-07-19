@@ -921,3 +921,20 @@ div.field_with_errors textarea{
 }
 
 .btn-project{margin-top: 10px;}
+
+
+.image_container{height:100px; width: 100px; margin-bottom: 2px; display: inline-block;}
+.imagelink_top, .imagelink_bottom{height:50px; width:100px; float: left; clear:both; vertical-align: middle;}
+.imagelink_bottom:hover{
+/* Fallback for web browsers that doesn't support RGBa */
+background: rgb(255, 255, 255) transparent;
+/* RGBa with 0.6 opacity */
+background: rgba(255, 255, 255, 0.8);
+/* For IE 5.5 - 7*/
+filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000);
+/* For IE 8*/
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+}
+
+.imagelink_bottom a, .imagelink_top a{visibility: hidden; text-align: center;  display: block; text-decoration: none; line-height: 25px;}
+.imagelink_top:hover a, .imagelink_bottom:hover a{visibility: visible;}

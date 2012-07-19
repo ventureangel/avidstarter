@@ -73,8 +73,13 @@
           %h3 Existing Media
           
           - @project.attachments.each do |attachment|
-            = image_tag attachment.file_url(:thumb), :style => "padding-bottom:3px;"
-            = link_to "Delete Attachment", attachment_path(attachment), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
+            .image_container{:style => "background-image: url(#{attachment.file_url(:thumb)})"}
+              .imagelink_top{:style => "height:50px; width:100px; float: left; clear:both;"}  
+                %a{:href => attachment.file_url(:pop_up), :rel => "lightbox-pictures"}
+                  = image_tag attachment.file_url(:thumb)
+                / = link_to "#{raw('<i class="icon-eye-open"></i>')} View Attachment".html_safe
+              .imagelink_bottom{:style => "height:50px; width:100px; float: left; clear:both;"}
+                = link_to "#{raw('<i class="icon-trash"></i>')} Delete Attachment".html_safe, attachment_path(attachment), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
       
         .span6
           %h3 Attach Additional Media
