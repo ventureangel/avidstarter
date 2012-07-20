@@ -4,6 +4,8 @@ class Project < ActiveRecord::Base
   mount_uploader :logo, ImageUploader
   mount_uploader :business_plan, BusinessPlanUploader
   
+  acts_as_commentable
+  
   has_many :memberships, :dependent => :destroy
   has_many :confirmed_memberships, :class_name => 'Membership', :conditions => {:pending => false}
   has_many :members, :through => :confirmed_memberships, :source => :account

@@ -1,0 +1,25 @@
+.row-fluid
+  .span6
+    %h3 Existing Media
+    
+    - @project.attachments.each do |attachment|
+      .image_container{:style => "background-image: url(#{attachment.file_url(:thumb)})"}
+        .imagelink_top{:style => "height:50px; width:100px; float: left; clear:both;"}  
+          %a{:href => attachment.file_url(:pop_up), :rel => "lightbox-pictures"}
+            = image_tag attachment.file_url(:thumb)
+          / = link_to "#{raw('<i class="icon-eye-open"></i>')} View Attachment".html_safe
+        .imagelink_bottom{:style => "height:50px; width:100px; float: left; clear:both;"}
+          = link_to "#{raw('<i class="icon-trash"></i>')} Delete Attachment".html_safe, attachment_path(attachment), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
+
+  .span6
+    %h3 Attach Additional Media
+    = form_for :attachment, url: attachments_path do |f|
+      = f.error_messages
+      = f.hidden_field :project_id, :value => @project.id
+      = f.label :file, "Upload a picture attachment"
+      = f.file_field :file, :style => "padding-bottom: 10px;"
+      %br
+      = f.text_field :remote_file_url, :placeholder => "Or use an image URL", :class => "span12", :style => "width: 100%;"
+      %center
+        = submit_tag "Upload Attachment", :class => "btn btn-danger"
+

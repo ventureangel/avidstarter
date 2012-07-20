@@ -18,8 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations])
-    @invitations = @project.invitations
+    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot edit this project.'   
   end

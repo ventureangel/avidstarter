@@ -22,6 +22,7 @@ class Account < ActiveRecord::Base
   has_many :pending_memberships, :class_name => 'Membership', :conditions => {:pending => true}
   has_many :projects, :through => :confirmed_memberships
   has_many :project_invitations, :through => :pending_memberships, :source => :project
+  has_many :comments, :foreign_key => :user_id
 
 
   def invited?

@@ -13,6 +13,7 @@ gem 'dynamic_form'
 gem 'carrierwave'
 gem 'rmagick'
 gem 'fog'
+gem 'acts_as_commentable_with_threading'
 
 # Gems used only for assets and not required
 # in production environments by default.

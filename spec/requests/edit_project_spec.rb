@@ -86,8 +86,10 @@ describe "Edit Project" do
     pending
   end
 
-  it 'should be able to post recruitment notifications' do
-    pending
+  it 'should be able to receive comments from accounts' do
+    find("input[name='comment[body]']").set("I'm making a comment!")
+    click_button "Post Comment"
+    page.should have_content "Comment successfully posted" 
   end
   
 
