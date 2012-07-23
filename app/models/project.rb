@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url, :business_plan
+  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url, :business_plan, :video_url
   
   mount_uploader :logo, ImageUploader
   mount_uploader :business_plan, BusinessPlanUploader

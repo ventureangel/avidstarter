@@ -22,4 +22,15 @@
       = f.text_field :remote_file_url, :placeholder => "Or use an image URL", :class => "span12", :style => "width: 100%;"
       %center
         = submit_tag "Upload Attachment", :class => "btn btn-danger"
-
+.row-fluid
+  .span12
+    %h3 Video URL
+    %center
+      = form_for @project do |f|
+        = f.error_messages
+        = f.text_field :video_url
+        = f.submit "Add Video", :class => "btn btn-danger btn-project"
+    %br
+      %center
+        -unless @project.video_url.blank?
+          = vid_embed_video(@project.video_url).html_safe
