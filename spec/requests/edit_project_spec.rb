@@ -91,6 +91,12 @@ describe "Edit Project" do
     click_button "Post Comment"
     page.should have_content "Comment successfully posted" 
   end
+
+  it 'should be able to upload a video url' do 
+    find("input[name='project[video_url]']").set("http://www.youtube.com/watch?v=J0SBcfC08yI&feature=plcp")
+    click_button "Add Video"
+    page.should have_content "Project successfully updated"
+  end
   
 
 end

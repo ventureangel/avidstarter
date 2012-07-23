@@ -1,6 +1,6 @@
 class MembershipsController < ApplicationController
   def create
-    @project = current_account.projects.find(params[:membership][:project_id].to_i)
+    @project = current_account.projects.find(params[:membership][:project].to_i)
     @membership = Membership.new(:project => Project.find(params[:membership][:project]))
     @account = Membership.check_if_user(params[:membership])
     unless @account
@@ -17,7 +17,7 @@ class MembershipsController < ApplicationController
       end
     end
     rescue ActiveRecord::RecordNotFound
-      return redirect_to root_url, :alert => 'You cannot upload attachments this project.'   
+      return redirect_to root_url, :alert => 'You cannot add memberships to this project'   
   end
 
   def update
