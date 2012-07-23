@@ -1,0 +1,53 @@
+#main{:role => "main"}
+  %ul#project_tiles
+    / These are our grid blocks
+    - all_projects.each do |project|
+      %li          
+        %div{:class => "project#{project.id}_container"}
+          %center
+            =image_tag project.logo_url(:thumb)
+            / %img{:src => "aimage/va.png", :class => "imageborder"}
+          %center
+            %h3= project.business_name
+          %h6 
+            %i.icon-pushpin
+            Business Concept
+          %p{:style => "text-align:justify; font-size:11px;"}= project.business_concept
+          .actions{:style => "padding-top: 10px; color: #666666"}
+            %span.badge
+              %i.icon-heart
+              Like
+            %span.badge
+              %i.icon-comments-alt
+              =link_to "View", edit_project_path(project)
+              
+            .floatright{:style => "float:right"}
+              %span.badge
+                %i.icon-zoom-in
+                =link_to 'Comment', project, :confirm => 'Are you sure you want to delete this project?', :method => :delete
+
+
+/ Once the images are loaded, initalize the Wookmark plug-in.
+:javascript
+  $('#project_tiles').imagesLoaded(function() {
+    // Prepare layout options.
+    var options = {
+      autoResize: true, // This will auto-update the layout when the browser window is resized.
+      container: $('#main'), // Optional, used for some extra CSS styling
+      offset: 18, // Optional, the distance between grid items
+    };
+
+    // Get a reference to your grid items.
+    var handler = $('#project_tiles li');
+
+    // Call the layout function.
+    handler.wookmark(options);
+
+    // Capture clicks on grid items.
+    handler.click(function(){
+
+
+      // Update the layout.
+      handler.wookmark();
+    });
+  });
