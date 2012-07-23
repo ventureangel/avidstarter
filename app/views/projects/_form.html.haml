@@ -13,11 +13,10 @@
       %li
         %a{"data-toggle" => "tab", :href => '#comments'}
           Comments
-
-= form_for @project, :html => {:multipart => true} do |f|
-  #projectcontent.tab-content
-    = f.error_messages  
-    #general.tab-pane.fade.in.active
+#projectcontent.tab-content
+  #general.tab-pane.fade.in.active
+    = form_for @project, :html => {:multipart => true} do |f|
+      = f.error_messages  
       %h3 General Information
       .row-fluid
         .span6
@@ -40,9 +39,9 @@
         .span12
           %center
             = f.submit "Save Project", :class => "btn btn-danger btn-project"
-    #team.tab-pane.fade
-      = render 'memberships'
-    #media.tab-pane.fade
-      = render 'attachments'
-    #comments.tab-pane.fade
-      = render 'comments'
+  #team.tab-pane.fade
+    = render 'memberships'
+  #media.tab-pane.fade
+    = render 'attachments'
+  #comments.tab-pane.fade
+    = render 'comments'
