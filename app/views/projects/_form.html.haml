@@ -45,6 +45,8 @@
             %tr
               %td= member.name
               %td= link_to "Remove Member", membership_path(member), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+          %br
+          %br
           %h3 Pending Team Members 
           %p (These members are only viewable during editing)
           - @project.pending_memberships.each do |pmember|

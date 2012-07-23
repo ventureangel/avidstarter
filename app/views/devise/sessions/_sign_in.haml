@@ -1,0 +1,21 @@
+.row-fluid
+  .span12
+    %center
+      %h2 Sign in & Connect to:
+      %h2 The University of Georgia
+      %br
+    = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+      .fieldset
+        = f.label :email
+        = f.email_field :email, :class => "span12-fluid"
+        = f.label :password
+        = f.password_field :password, :class => "span12-fluid"
+        %label.checkbox
+          Remember Me
+          = f.check_box :remember_me
+        %center
+          = f.submit "Sign In", :class => "btn btn-danger"
+        
+.other{:style => "background-color: #e1e1e1; padding:5px;"}
+  %center
+    = render "devise/shared/links"
