@@ -50,10 +50,15 @@ class ProjectsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot delete this project'
   end
-
-
+  
+  def show
+    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
+    rescue ActiveRecord::RecordNotFound
+      return redirect_to root_url, :alert => 'You cannot access this project.'   
+  end
+  
   private
-
+  
   def check_if_contributor
     redirect_to :root unless current_account.profile_type == "Contributor"
   end

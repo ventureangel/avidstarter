@@ -23,10 +23,8 @@
       .row-fluid
         .span3
           = render :partial => "home/profile"
-        #mainhub.span6
-          = yield
-        .span3
-          = render :partial => "home/notifications"
+        = yield
+    
     - else
       = yield
         

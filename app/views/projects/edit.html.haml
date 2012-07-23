@@ -1,8 +1,12 @@
-.well
-  .row-fluid{:style => "margin-bottom:18px;"}
-    .span2
-      = image_tag @project.logo_url(:thumb) if @project.logo?
-    .span10
-      %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+#mainhub.span6
+  .well
+    .row-fluid{:style => "margin-bottom:18px;"}
+      .span2
+        = image_tag @project.logo_url(:thumb) if @project.logo?
+      .span10
+        %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
   
-  = render 'form'
+    = render 'form'
+
+.span3
+  = render :partial => "home/notifications"
