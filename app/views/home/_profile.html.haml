@@ -28,6 +28,6 @@
   .jumbobutton
     = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
 .well
-  %h3 My Current Projects
+  %h4 My Current Projects
   - users_projects.each do |project|
     = render :partial => "home/my_projects", :locals => {:project => project}

@@ -11,11 +11,11 @@
 .span3
   .well
     -if @project.business_plan.present?
-      %h3= "#{@project.business_name}'s Business Plan"
+      %h4= "Business Plan"
       .sidecontent_bar
-        = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url, :class => "btn btn-danger"
+        = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url, :class => "btn btn-danger btn-small"
       .sidecontent_bar
-    %h3= "#{@project.business_name}'s Team"
+    %h4= "Team"
     .sidecontent_bar
       - @project.members.each do |member|
         .row-fluid
@@ -24,4 +24,25 @@
           .span10
             = member.name
             %br= link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, @project.business_plan.url
+    .sidecontent_bar
+      %h4= "Announcements"
+      .sidecontent_bar
     
+        .alert.alert-info
+          %button.close{:type => "button" }
+            ×
+          %strong.minifont= "ventureangel's looking for a programmer (apply now!)"
+          .minifont
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
+        .alert.alert-success
+          %button.close{:type => "button" }
+            ×
+          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
+          .minifont
+            Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
+        .alert.alert-success
+          %button.close{:type => "button" }
+            ×
+          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
+          .minifont
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.

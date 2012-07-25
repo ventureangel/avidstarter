@@ -17,7 +17,7 @@
   #general.tab-pane.fade.in.active
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages  
-      %h3 General Information
+      %h4 General Information
       .row-fluid
         .span6
           = f.label :business_name
@@ -38,7 +38,7 @@
       .row-fluid
         .span12
           %center
-            = f.submit "Save Project", :class => "btn btn-danger btn-project"
+            = f.submit "Save Project", :class => "btn btn-danger btn-small btn-project"
   #team.tab-pane.fade
     = render 'memberships'
   #media.tab-pane.fade
