@@ -24,18 +24,19 @@ describe "Edit Project" do
     page.should have_content "Project successfully updated"
   end
 
+
   it 'should send email when inviting new account' do
     fill_in "Name", :with => "Tester"
-    find("input[name='membership[email]']").set("test@test.com")
-    click_button "Add New Team Member"
+    find("input[name='project[invitee_attributes][email]']").set("test@test.com")
+    click_button "Save Memberships"
     ActionMailer::Base.deliveries.should_not be []
   end
 
   it 'should call membership invitation and send email when inviting current account' do
     
     fill_in "Name", :with => "Current User"
-    find("input[name='membership[email]']").set(existing_account.email)
-    click_button "Add New Team Member"
+    find("input[name='project[invitee_attributes][email]']").set(existing_account.email)
+    click_button "Save Memberships"
     ActionMailer::Base.deliveries.should_not be []
   end
 
@@ -61,22 +62,25 @@ describe "Edit Project" do
   end
 
   it 'should be able to upload attachments' do
-    find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
-    click_button "Upload Attachment"
-    page.should have_content "Attachment successfully uploaded"
+    find("input[name='project[attachments_attributes][0][file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
+    click_button "Save Media"
+    page.should have_content "Project successfully updated"
     
   end
 
   it 'should be limited to 5 attachments' do
     i = 1
-    while i < 7
-      find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados#{i}.jpg")
-      click_button "Upload Attachment"
+    while i < 6
+      field = "input[name='project[attachments_attributes][#{i-1}][file]']"  
+      find(field).set("/home/squizzleflip/Pictures/glados#{i}.jpg")
+      click_button "Save Media"
       i += 1
     end
-    page.should have_content "Attachment not added. Please try again."
+    page.should_not have_content "Attach Additional Media"
   end
-  
+
+
+
   it 'should be able to delete attachments' do #I can't get this to work, but it works on development
     #find("input[name='attachment[file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
     #click_button "Upload Attachment"
@@ -94,9 +98,16 @@ describe "Edit Project" do
 
   it 'should be able to upload a video url' do 
     find("input[name='project[video_url]']").set("http://www.youtube.com/watch?v=J0SBcfC08yI&feature=plcp")
-    click_button "Add Video"
+    click_button "Save Project"
     page.should have_content "Project successfully updated"
   end
   
+  it 'should be able to create a recruitment notification' do
+    find("input[name='notification[title]']").set("We need a hero!")
+    find("textarea[name='notification[description]']").set("We need a hero! Right now, please hero. It's getting pretty bad")
+    select("Recruiting", :from => "Type")
+    click_button  "Post Notification"
+    page.should have_content "Notification successfully posted"
+  end
 
 end

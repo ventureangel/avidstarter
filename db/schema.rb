@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723174934) do
+ActiveRecord::Schema.define(:version => 20120723192205) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -85,7 +85,7 @@ ActiveRecord::Schema.define(:version => 20120723174934) do
   end
 
   create_table "notifications", :force => true do |t|
-    t.string   "title"
+    t.text     "title"
     t.text     "description"
     t.datetime "date"
     t.boolean  "priority",      :default => false
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(:version => 20120723174934) do
     t.string   "notifier_type"
     t.datetime "created_at",                       :null => false
     t.datetime "updated_at",                       :null => false
+    t.string   "type"
   end
 
   create_table "projects", :force => true do |t|
