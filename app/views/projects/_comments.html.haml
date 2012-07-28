@@ -1,25 +1,33 @@
 .row-fluid
-  .span6
-    %h3 Comments
-    
-    - @project.root_comments.each do |c|
-      .well
-        .row-fluid
-          .span12
-            %h4= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
-            = c.body
-            - if c.has_children?
-              - c.children.each do |child|
-                .row-fluid
-                  .span1
-                    %p
-                  .span10
-                    %h5= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
-                    = child.body
-            = form_for :comment, url: comments_path do |f|
-              = f.hidden_field :parent_id, :value => c.id
-              = render 'comment_form', :f => f
-  .span6
+  .span12
     %h3 Leave a Comment
     = form_for :comment, url: comments_path do |f|
       = render 'comment_form', :f => f
+
+.row-fluid  
+  .span12
+    %h3 Comments
+    
+    - @project.root_comments.each do |c|
+      .row-fluid
+        .span12
+          .row-fluid{:style => "margin-bottom:10px"}
+            .span1
+              =image_tag c.user.avatar_url(:small_thumb)
+            .span11
+              %h5= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
+              = c.body            
+          - if c.has_children?
+            - c.children.each do |child|
+              .row-fluid{:style => "margin-bottom:10px"}
+                .span1
+                  %br
+                .span1
+                  =image_tag child.user.avatar_url(:small_thumb)
+                .span10
+                  %h5= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
+                  = child.body
+          = form_for :comment, url: comments_path do |f|
+            = f.hidden_field :parent_id, :value => c.id
+            = render 'comment_form', :f => f
+

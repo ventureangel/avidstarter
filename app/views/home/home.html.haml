@@ -1,17 +1,20 @@
 - if account_signed_in?
-  .well
-    #mainhub_content
-      .row-fluid
-        .span12            
-          - @invitations.each do |invitation|
-            %tr
-              %td= invitation.project.business_name
-              %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
-              %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
+  #mainhub.span6
+    .well
+      #mainhub_content
+        .row-fluid
+          .span12            
+            - @invitations.each do |invitation|
+              %tr
+                %td= invitation.project.business_name
+                %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
+                %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
         
-          %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
+            %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
 
-          = render :partial => "all_projects_collaborators"
+            = render :partial => "all_projects_collaborators"
+  .span3
+    = render :partial => "home/notifications"
 - else  
   .row-fluid
     .span3
