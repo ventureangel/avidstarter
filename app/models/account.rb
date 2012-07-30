@@ -23,7 +23,7 @@ class Account < ActiveRecord::Base
   has_many :projects, :through => :confirmed_memberships
   has_many :project_invitations, :through => :pending_memberships, :source => :project
   has_many :comments, :foreign_key => :user_id
-
+  has_many :notifications, :as => :notifier
 
   def invited?
     return self.invitation_token?

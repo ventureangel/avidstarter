@@ -11,9 +11,15 @@ describe Account do
   it {should validate_presence_of :first_name}
   it {should validate_presence_of :last_name}
   it {should validate_presence_of :password}
-
+  
   it {should respond_to(:profile_type)}
   it {should respond_to(:avatar)}
+
+  it {should respond_to(:projects)}
+
+  it {should respond_to(:notifications)}
+
+
   it 'should return name' do 
     account.name.should == "#{account.first_name} #{account.last_name}"
   end

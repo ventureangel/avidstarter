@@ -13,6 +13,8 @@ describe Project do
   it {should respond_to :confirmed_memberships}
   it {should respond_to :pending_memberships}
   it {should respond_to :invitations}
+ 
+  it {should respond_to(:notifications)}
 
   it {should have_many(:members).through(:confirmed_memberships)}
   it {should have_many(:attachments)}
