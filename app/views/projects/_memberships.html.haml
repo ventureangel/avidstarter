@@ -1,5 +1,6 @@
 .row-fluid
   .span6
+<<<<<<< HEAD
     %h4 Current Team Members
     - @project.members.each do |member|
       %tr
@@ -28,4 +29,37 @@
       = f.email_field :email, :class => "span12", :style => "width: 100%;"
       %center
         = f.submit "Add New Team Member", :class => "btn btn-danger btn-small btn-project"
+=======
+    %h3 Current Team Members
+    - @project.memberships.each do |membership|
+      %tr
+        %td= membership.account.name
+        %td= link_to "Remove Member", membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
+      %br
+    %h3 Pending Team Members 
+    %p (These members are only viewable during editing)
+    - @project.pending_memberships.each do |pmember|
+      %tr
+        %td= pmember.account.label
+        %td= link_to "Cancel invitation", membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+      %br
+    - @project.invitations.each do |invite|
+      %tr
+        %td= invite.label
+        %td= link_to "Cancel invitation", invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+      %br
+  .span6
+    %h3 Add New Team Member
+    = form_for @project, :html => {:multipart => true} do |f|
+      = f.error_messages
+      = f.fields_for :invitee_attributes do |ff| 
+        = ff.label :name, "Name"
+        = ff.text_field :name
+        = ff.label :email, "Email"
+        = ff.email_field :email, :class => "span12", :style => "width: 100%;"
+      .row-fluid
+        .span12
+          %center
+            = f.submit "Save Memberships", :class => "btn btn-danger btn-project"
+>>>>>>> 41d1b6e04244526560a1a744417746e83ee0b097
 

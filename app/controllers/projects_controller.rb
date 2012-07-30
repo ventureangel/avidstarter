@@ -19,6 +19,7 @@ class ProjectsController < ApplicationController
 
   def edit
     @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
+    @project.attachments.build
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot edit this project.'   
   end
@@ -29,7 +30,7 @@ class ProjectsController < ApplicationController
     
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"
-      render :action => 'edit'
+      redirect_to edit_project_path(@project)
     else
       flash[:warning] = "Project not saved. Try again."
       render :action => 'edit'

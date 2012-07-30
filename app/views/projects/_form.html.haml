@@ -13,11 +13,19 @@
       %li
         %a{"data-toggle" => "tab", :href => '#comments'}
           Comments
+      %li
+        %a{"data-toggle" => "tab", :href => '#notifications'}
+          Recruiting, Events and Announcements
 #projectcontent.tab-content
   #general.tab-pane.fade.in.active
     = form_for @project, :html => {:multipart => true} do |f|
+<<<<<<< HEAD
       = f.error_messages  
       %h4 General Information
+=======
+      = f.error_messages
+      %h3 General Information
+>>>>>>> 41d1b6e04244526560a1a744417746e83ee0b097
       .row-fluid
         .span6
           = f.label :business_name
@@ -38,10 +46,19 @@
       .row-fluid
         .span12
           %center
+<<<<<<< HEAD
             = f.submit "Save Project", :class => "btn btn-danger btn-small btn-project"
+=======
+            = f.submit "Save Project", :class => "btn btn-danger btn-project"
+
+>>>>>>> 41d1b6e04244526560a1a744417746e83ee0b097
   #team.tab-pane.fade
     = render 'memberships'
   #media.tab-pane.fade
     = render 'attachments'
+
   #comments.tab-pane.fade
     = render 'comments'
+  #notifications.tab-pane.fade
+    = render 'notifications'
+  
