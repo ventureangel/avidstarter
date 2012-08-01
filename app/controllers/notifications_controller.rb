@@ -1,4 +1,7 @@
 class NotificationsController < ApplicationController
+  def new
+    @notification = Notification.new
+  end
   def create
     notifier_type = params[:notification][:notifier_type]
     @notification = Notification.new(params[:notification])
@@ -13,7 +16,7 @@ class NotificationsController < ApplicationController
     @notification.notifier = @notifier
     
     if @notification.save
-      flash[:notice] = "Notification successfully posted"
+      flash[:notice] = "#{@notification.type} notification successfully posted"
       redirect_to :back
     else
       flash[:warning] = "Notification not posted" #@notification.errors.full_messages.to_sentence

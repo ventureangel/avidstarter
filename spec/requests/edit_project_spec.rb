@@ -107,7 +107,7 @@ describe "Edit Project" do
     find("textarea[name='notification[description]']").set("We need a hero! Right now, please hero. It's getting pretty bad")
     select("Recruiting", :from => "Type")
     click_button  "Post Notification"
-    page.should have_content "Notification successfully posted"
+    page.should have_content "Recruiting notification successfully posted"
   end
 
 end

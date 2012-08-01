@@ -1,6 +1,10 @@
 .well
   %h4{:style => "margin-bottom:10px;"} Notifications
   %center
+    .btn.btn-large{:style => "margin-bottom:18px;"}
+      %i.icon-pushpin
+      = link_to 'Post a Notification', new_notification_path
+  %center
     %a.btn.btn-small{:href => "#", :style => "margin-bottom:18px;"}
       %i.icon-warning-sign.icon-large
       Priority
@@ -43,13 +47,13 @@
   .alert.alert-success
     %button.close{:type => "button" }
       ×
-    %strong.minifont= "#{@current_account.name} has commented on your business Plan"
+    %strong.minifont= "#{current_account.name} has commented on your business Plan"
     .minifont
       Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
   .alert.alert-success
     %button.close{:type => "button" }
       ×
-    %strong.minifont= "#{@current_account.name} has commented on your business Plan"
+    %strong.minifont= "#{current_account.name} has commented on your business Plan"
     .minifont
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
   .alert.alert-info
