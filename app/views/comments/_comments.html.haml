@@ -1,0 +1,39 @@
+.well
+  .row-fluid
+    .span12
+      %h4 Leave a new Comment
+      = form_for :comment do |f|
+        = render 'comment_form', :f => f
+  
+  .row-fluid  
+    .span12
+      %h4 Comments
+      - @commentable.root_comments.each do |c|
+        .row-fluid
+          .span12
+            .row-fluid{:style => "margin-bottom:10px"}
+              .span1
+                =image_tag c.user.avatar_url(:small_thumb)
+              .span11
+                %h5= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
+                = c.body            
+            - if c.has_children?
+              - c.children.each do |child|
+                .row-fluid{:style => "margin-bottom:10px"}
+                  .span1
+                    %br
+                  .span1
+                    =image_tag child.user.avatar_url(:small_thumb)
+                  .span10
+                    %h5= "#{c.user.name} (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
+                    = child.body
+            .row-fluid{:style => "margin-bottom:10px"}
+              .span1
+                %br
+              .span1
+                = image_tag current_account.avatar_url(:small_thumb)
+              .span10
+                = form_for :comment do |f|
+                  = f.hidden_field :parent_id, :value => c.id
+                  = render 'comment_form', :f => f
+  

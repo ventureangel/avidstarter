@@ -16,9 +16,9 @@ describe 'New Notification' do
     ActionMailer::Base.deliveries = []
   }
   it 'should be createable by an account' do
-    visit new_notification_path
+    visit new_account_notification_path(account)
     find("input[name='notification[title]']").set("We need a hero!")
-    select("Recruiting", :from => "Type")
+    select("Recruiting", :from => :notification_type)
     find("textarea[name='notification[description]']").set("We need a hero immediately")
     click_button 'Post Notification'
 

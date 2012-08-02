@@ -91,6 +91,7 @@ describe "Edit Project" do
   end
 
   it 'should be able to receive comments from accounts' do
+    visit project_comments_path(@project)
     find("input[name='comment[body]']").set("I'm making a comment!")
     click_button "Post Comment"
     page.should have_content "Comment successfully posted" 
@@ -103,9 +104,10 @@ describe "Edit Project" do
   end
   
   it 'should be able to create a recruitment notification' do
+    visit new_project_notification_path(@project)
     find("input[name='notification[title]']").set("We need a hero!")
     find("textarea[name='notification[description]']").set("We need a hero! Right now, please hero. It's getting pretty bad")
-    select("Recruiting", :from => "Type")
+    select("Recruiting", :from => :notification_type)
     click_button  "Post Notification"
     page.should have_content "Recruiting notification successfully posted"
   end

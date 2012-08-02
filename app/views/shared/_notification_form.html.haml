@@ -3,8 +3,8 @@
     = n.error_messages
     = n.label :title
     = n.text_field :title
-    = n.label :type
-    = n.select :type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :class => "span12", :style => "width: 100%;"
+    = n.label :notification_type, 'Type'
+    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :class => "span12", :style => "width: 100%;"
   .span6
     = n.label :date, "Event Date and Time"
     = n.datetime_select :date, {:include_blank => true}
