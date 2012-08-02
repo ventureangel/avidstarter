@@ -4,4 +4,5 @@
       = n.hidden_field :notifier_id, :value => @notifier.id
       = n.hidden_field :notifier_type, :value => @notifier.class.to_s
       = render "shared/notification_form", :n => n 
-
+.span3
+  = render :partial => "home/notifications"
