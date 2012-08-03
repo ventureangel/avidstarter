@@ -53,7 +53,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
+    @project = Project.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot access this project.'   
   end

@@ -1,0 +1,61 @@
+
+
+
+.image_container_scroll::-webkit-scrollbar{
+    width: 10px;
+    height: 6px;
+}
+
+.image_container_scroll::-webkit-scrollbar-button:start:decrement,
+.image_container_scroll::-webkit-scrollbar-button:end:increment {
+    height: 30px;
+    display: block;
+    background-color: transparent;
+}
+
+.image_container_scroll::-webkit-scrollbar-track-piece {
+    background-color: #d3d3d3;
+    -webkit-border-radius: 6px;
+}
+
+.image_container_scroll::-webkit-scrollbar-thumb:vertical {
+    height: 50px;
+    background-color: #a3a3a3;
+    -webkit-border-radius: 6px;
+}
+
+.image_container_scroll::-webkit-scrollbar-thumb:horizontal {
+    width: 50px;
+    background-color: #a3a3a3;
+    -webkit-border-radius: 3px;
+}
+
+
+.inputbox_container textarea::-webkit-scrollbar{
+    width: 6px;
+    height: 10px;
+}
+
+.inputbox_container textarea::-webkit-scrollbar-button:start:decrement,
+.inputbox_container textarea::-webkit-scrollbar-button:end:increment {
+    height: 8px;
+    display: block;
+    background-color: transparent;
+}
+
+.inputbox_container textarea::-webkit-scrollbar-track-piece {
+    background-color: #d3d3d3;
+    -webkit-border-radius: 6px;
+}
+
+.inputbox_container textarea::-webkit-scrollbar-thumb:vertical {
+    height: 20px;
+    background-color: #a3a3a3;
+    -webkit-border-radius: 6px;
+}
+
+.inputbox_container textarea::-webkit-scrollbar-thumb:horizontal {
+    width: 20px;
+    background-color: #a3a3a3;
+    -webkit-border-radius: 3px;
+}
