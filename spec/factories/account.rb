@@ -12,5 +12,9 @@ FactoryGirl.define do
     factory :invited_contributor do
       invitation_token "token"
     end
+
+    factory :admin do
+      profile_type 'Admin'
+    end
   end
 end
