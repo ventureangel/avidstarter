@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
   
   accepts_nested_attributes_for :attachments, :reject_if => lambda { |a| a[:file].blank? && a[:remote_file_url].blank? }, :allow_destroy => true
 
-  has_many :notifications, :as => :notifier 
+  has_many :notifications, :as => :notifier, :dependent => :destroy
   validates :business_name, :industry, :city, :state, :business_concept, :presence => true
   validate :membership_already_exists?
 

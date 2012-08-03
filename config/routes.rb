@@ -6,12 +6,19 @@ Avidstarter::Application.routes.draw do
   end
   get "home/home"
   
-  resources :projects
+  resources :accounts do
+   resources :notifications
+   resources :comments, :only => [:index, :create, :destroy]
+  end
+  resources :projects do
+    resources :notifications
+    resources :comments, :only => [:index, :create, :destroy]
+  end
   resources :memberships, :only => [:update, :destroy]
   resources :invitations, :only => [:create, :destroy]
   resources :attachments, :only => [:create, :destroy]
-  resources :comments, :only => [:create, :destroy]
-  resources :notifications
+  #resources :comments, :only => [:create, :destroy]
+  resources :notifications, :only => [:show]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

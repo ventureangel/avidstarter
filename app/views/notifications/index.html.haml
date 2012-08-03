@@ -1,0 +1,9 @@
+#mainhub.span6 
+  .well
+    .row-fluid
+      - @notifications.each do |n|
+        %h4= link_to n.title, notification_path(n)
+        %p= "Type: " + n.notification_type
+        %p= "Description: " +  n.description
+.span3
+  = render :partial => "home/notifications"

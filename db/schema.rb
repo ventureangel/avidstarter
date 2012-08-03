@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120723192205) do
+ActiveRecord::Schema.define(:version => 20120801201053) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -88,12 +88,12 @@ ActiveRecord::Schema.define(:version => 20120723192205) do
     t.text     "title"
     t.text     "description"
     t.datetime "date"
-    t.boolean  "priority",      :default => false
+    t.boolean  "priority",          :default => false
     t.integer  "notifier_id"
     t.string   "notifier_type"
-    t.datetime "created_at",                       :null => false
-    t.datetime "updated_at",                       :null => false
-    t.string   "type"
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
+    t.string   "notification_type"
   end
 
   create_table "projects", :force => true do |t|

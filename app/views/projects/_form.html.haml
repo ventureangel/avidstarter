@@ -10,12 +10,6 @@
       %li
         %a{"data-toggle" => "tab", :href => '#media'}
           Media
-      %li
-        %a{"data-toggle" => "tab", :href => '#comments'}
-          Comments
-      %li
-        %a{"data-toggle" => "tab", :href => '#notifications'}
-          Recruiting, Events and Announcements
 #projectcontent.tab-content
   #general.tab-pane.fade.in.active
     = form_for @project, :html => {:multipart => true} do |f|
@@ -47,7 +41,6 @@
     = render 'memberships'
   #media.tab-pane.fade
     = render 'attachments'
-
   #comments.tab-pane.fade
     = render 'comments'
   #notifications.tab-pane.fade

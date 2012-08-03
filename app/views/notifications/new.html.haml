@@ -1,0 +1,8 @@
+#mainhub.span6
+  .well
+    = form_for [@notifier, @notification] do |n|
+      = n.hidden_field :notifier_id, :value => @notifier.id
+      = n.hidden_field :notifier_type, :value => @notifier.class.to_s
+      = render "shared/notification_form", :n => n 
+.span3
+  = render :partial => "home/notifications"

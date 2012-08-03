@@ -1,0 +1,16 @@
+= n.error_messages
+.row-fluid
+  .span6
+    = n.label :title
+    = n.text_field :title
+    = n.label :notification_type, 'Type'
+    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :class => "span12", :style => "width: 100%;"
+  .span6
+    = n.label :date, "Event Date and Time"
+    = n.datetime_select :date, {:include_blank => true}
+    = n.label :description
+    = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"
+.row-fluid
+  .span12
+    %center
+      = n.submit "Post Notification", :class => "btn btn-danger btn-project"
