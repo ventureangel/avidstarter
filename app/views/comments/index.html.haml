@@ -1,4 +1,11 @@
 #mainhub.span6
-  = render 'comments'
+  .well
+    .row-fluid{:style => "margin-bottom:18px;"}
+      .span2
+        = image_tag @commentable.logo_url(:thumb) if @commentable.logo?
+      .span10
+        %h1.projectnamefont{:style => "text-align: top;"}= @commentable.business_name
+        
+    = render 'comments'
 .span3
   = render :partial => "home/notifications"

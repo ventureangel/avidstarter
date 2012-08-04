@@ -10,6 +10,12 @@
       %li
         %a{"data-toggle" => "tab", :href => '#media'}
           Media
+      %li
+        %a{:href => "#{project_comments_path(@project)}"}
+          Comments
+      %li
+        %a{:href => "#{project_notifications_path(@project)}"}
+          Project's Notificantions
 #projectcontent.tab-content
   #general.tab-pane.fade.in.active
     = form_for @project, :html => {:multipart => true} do |f|
@@ -41,7 +47,3 @@
     = render 'memberships'
   #media.tab-pane.fade
     = render 'attachments'
-  #comments.tab-pane.fade
-    = render 'comments'
-  #notifications.tab-pane.fade
-    = render 'notifications'

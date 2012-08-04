@@ -1,5 +1,10 @@
 #mainhub.span6 
   .well
+    .row-fluid{:style => "margin-bottom:18px;"}
+      .span2
+        = image_tag @project.logo_url(:thumb) if @project.logo?
+      .span10
+        %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
     .row-fluid
       %h4= @notification.title
       %p= "Type: " + @notification.notification_type

@@ -3,14 +3,8 @@
     .row-fluid{:style => "margin-bottom:18px;"}
       .span2
         = image_tag @project.logo_url(:thumb) if @project.logo?
-      .span7
+      .span10
         %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
-      .span3
-        = link_to "Comments", project_comments_path(@project)
-      .span3
-        = link_to "This Project's Notifications", project_notifications_path(@project)
-      .span3
-        = link_to "Post a Notification for this Project", new_project_notification_path(@project)
     = render 'form'
 
 .span3
