@@ -19,7 +19,7 @@
         Business Plan
       %li
         = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url
-    %li.divider
+      %li.divider
     %li.nav-header
       Project Information
     %li
@@ -46,7 +46,7 @@
         Project Overview 
     %li.divider
     %li.nav-header Edit Project Menu
-    %li.active
+    %li
       %a{:href => edit_project_path(@project, :step => 'General')}
         %i.icon-book
         General Information

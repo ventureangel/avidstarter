@@ -4,10 +4,22 @@
     %span.divider /
   -if controller.action_name == "show"
     %li.active
-      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
+      %a{:href => project_path(@project)}= "#{@project.business_name}"
   -elsif controller.action_name == "edit"
+    %li
+      %a{:href => project_path(@project)}= "#{@project.business_name}"
+      %span.divider /
+    %li.active
+      %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name.capitalize}"
+  -elsif controller.controller_name == "comments"
     %li
       %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
       %span.divider /
     %li.active
-      %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name}"
+      %a{:href => project_comments_path(@project)}= "Comments"
+  -elsif controller.controller_name == "notifications"
+    %li
+      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
+      %span.divider /
+    %li.active
+      %a{:href => project_comments_path(@project)}= "Notifications"
