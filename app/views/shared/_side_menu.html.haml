@@ -15,7 +15,6 @@
       %li.divider
     -if @project.business_plan.present?
       %li.nav-header
-        %i.icon-file
         Business Plan
       %li
         = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url

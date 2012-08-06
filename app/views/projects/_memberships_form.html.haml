@@ -1,12 +1,12 @@
 .row-fluid
   .span6
-    %h3 Current Team Members
+    %h4 Current Team Members
     - @project.memberships.each do |membership|
       %tr
         %td= membership.account.name
         %td= link_to "Remove Member", membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
       %br
-    %h3 Pending Team Members 
+    %h4 Pending Team Members 
     %p (These members are only viewable during editing)
     - @project.pending_memberships.each do |pmember|
       %tr
@@ -19,7 +19,7 @@
         %td= link_to "Cancel invitation", invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
       %br
   .span6
-    %h3 Add New Team Member
+    %h4 Add New Team Member
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
       = f.fields_for :invitee_attributes do |ff| 
