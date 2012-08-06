@@ -5,8 +5,7 @@
         %a.dropdown-toggle{:data => ("toggle=dropdown"), :href => "#"}
           .row-fluid
             .span2
-              %center
-                = image_tag project.logo_url(:thumb)
+              = image_tag project.logo_url(:small_thumb)
             .span10
               %b.caret{:style => "float:right"}
               %h4= project.business_name

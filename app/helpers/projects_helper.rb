@@ -15,4 +15,20 @@ module ProjectsHelper
     end
   end
   
+  def vid_link(video_url)
+    if video_url[/(?:http\:\/\/)?(?:www\.)?(vimeo|youtube)\.com\/(?:watch\?v=)?(.*?)(?:\z|$|&)/]
+      video_server = $1
+      video_path = $2
+    else 
+      video_url[/(?:https\:\/\/)?(?:www\.)?youtu.be\/([^\?]*)/]
+      video_server = "tiny"
+      video_path = $1
+    end
+    if video_server == ("vimeo")
+      %Q{http://player.vimeo.com/video/#{ video_path }}
+    else
+      %Q{http://www.youtube.com/embed/#{ video_path }?wmode=transparent}
+    end
+  end
+  
 end

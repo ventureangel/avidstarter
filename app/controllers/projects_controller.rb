@@ -18,6 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
+    @breadcrumb_name = "Name of Step"
     @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations])
     @project.attachments.build
     rescue ActiveRecord::RecordNotFound
@@ -53,7 +54,7 @@ class ProjectsController < ApplicationController
   end
   
   def show
-    @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
+    @project = Project.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot access this project.'
   end

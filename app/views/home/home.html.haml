@@ -1,5 +1,5 @@
 - if account_signed_in?
-  #mainhub.span6
+  #mainhub.span9
     .well
       #mainhub_content
         .row-fluid
@@ -13,8 +13,8 @@
             %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
 
             = render :partial => "all_projects_collaborators"
-  .span3
-    = render :partial => "home/notifications"
+  / .span3
+  /   = render :partial => "home/notifications"
 - else  
   .row-fluid
     .span3

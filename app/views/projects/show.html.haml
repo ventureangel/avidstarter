@@ -7,42 +7,89 @@
         %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
   
     .row-fluid
+      .span12
+        %ul#projectnav.nav.nav-tabs
+          %li.active
+            %a{"data-toggle" => "tab", :href => '#media'}
+              Announcements & Media
+          %li
+            %a{"data-toggle" => "tab", :href => '#feedback'}
+              Leave Feedback
+          %li
+            %a{"data-toggle" => "tab", :href => '#recruiting'}
+              Recruiting
+      
+    #projectcontent.tab-content
+      #media.tab-pane.fade.in.active
+        .row-fuild
+          .span12
+            -if @project.video_url.present? || @project.attachments.count > 1
+              %h4= "#{raw('<i class="icon-picture"></i>')} Project Media".html_safe
+              #image_container.image_container_scroll
+                -if @project.video_url.present?
+                  %iframe.image_property{:width => "445", :height =>"250", :src => "#{vid_link(@project.video_url)}"}
+                - @project.attachments.each do |imageattachment|
+                  %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures"} 
+                    =image_tag imageattachment.file_url(:thumb), :class => "image_property"
+            
+            %h4= "#{raw('<i class="icon-bullhorn"></i>')} Announcements".html_safe
+            
+      #recruiting.tab-pane.fade
+        .row-fluid
+          .span6  
+            %h4 Business Concept
+            %p= @project.business_concept
+          .span6
+            %h4 Industry
+            %p= @project.industry
+            %h4 Location
+            %p= "#{@project.city}, #{@project.state}"
 
 .span3
   .well
     -if @project.business_plan.present?
-      %h4= "Business Plan"
+      %h4= "#{raw('<i class="icon-file"></i>')} Business Plan".html_safe
+      = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url, :class => "btn btn-danger btn-small"
       .sidecontent_bar
-        = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url, :class => "btn btn-danger btn-small"
-      .sidecontent_bar
-    %h4= "Team"
-    .sidecontent_bar
-      - @project.members.each do |member|
-        .row-fluid
-          .span2
-            =image_tag member.avatar_url(:thumb) if member.avatar?
-          .span10
-            = member.name
-            %br= link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, @project.business_plan.url
-    .sidecontent_bar
-      %h4= "Announcements"
-      .sidecontent_bar
+
+    %h4= "#{raw('<i class="icon-pushpin"></i>')} Business Concept".html_safe
+    %p= @project.business_concept
+
+    %h4= "#{raw('<i class="icon-briefcase"></i>')} Industry".html_safe
+    %p= @project.industry
     
-        .alert.alert-info
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "ventureangel's looking for a programmer (apply now!)"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-success
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
-          .minifont
-            Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
-        .alert.alert-success
-          %button.close{:type => "button" }
-            ×
-          %strong.minifont= "#{@current_account.name} has commented on your business Plan"
-          .minifont
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    %h4= "#{raw('<i class="icon-map-marker"></i>')} Location".html_safe
+    %p= "#{@project.city}, #{@project.state}"
+    
+    %h4= "#{raw('<i class="icon-group"></i>')} Team".html_safe
+    - @project.members.each do |member|
+      .row-fluid
+        .span2
+          =image_tag member.avatar_url(:thumb) if member.avatar?
+        .span10
+          = member.name
+          %br= link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, @project.business_plan.url
+    
+    
+    / .sidecontent_bar
+    /       %h4= "Announcements"
+    /       .sidecontent_bar
+    /     
+    /         .alert.alert-info
+    /           %button.close{:type => "button" }
+    /             ×
+    /           %strong.minifont= "ventureangel's looking for a programmer (apply now!)"
+    /           .minifont
+    /             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
+    /         .alert.alert-success
+    /           %button.close{:type => "button" }
+    /             ×
+    /           %strong.minifont= "Someone has commented on your business Plan"
+    /           .minifont
+    /             Donec ornare egestas enim, non auctor nisi ultrices eu. Mauris vulputate pellentesque ullamcorper. Praesent a sapien ultricies ipsum cras amet.
+    /         .alert.alert-success
+    /           %button.close{:type => "button" }
+    /             ×
+    /           %strong.minifont= "Someone has commented on your business Plan"
+    /           .minifont
+    /             Lorem ipsum dolor sit amet, consectetur adipiscing elit.

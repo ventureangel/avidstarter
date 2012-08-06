@@ -1,0 +1,9 @@
+%ul.breadcrumb
+  %li
+    %a{:href => "#{root_url}"} Projects 
+    %span.divider /
+  %li
+    %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
+    %span.divider /
+  %li.active
+    %a{:href => edit_project_path(@project)}= "#{@breadcrumb_name}"
