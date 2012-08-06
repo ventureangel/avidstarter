@@ -26,6 +26,7 @@ describe "Edit Project" do
 
 
   it 'should send email when inviting new account' do
+    visit edit_project_path(@project, :step => 'Memberships')
     fill_in "Name", :with => "Tester"
     find("input[name='project[invitee_attributes][email]']").set("test@test.com")
     click_button "Save Memberships"
@@ -33,7 +34,7 @@ describe "Edit Project" do
   end
 
   it 'should call membership invitation and send email when inviting current account' do
-    
+    visit edit_project_path(@project, :step => 'Memberships')
     fill_in "Name", :with => "Current User"
     find("input[name='project[invitee_attributes][email]']").set(existing_account.email)
     click_button "Save Memberships"
@@ -62,6 +63,7 @@ describe "Edit Project" do
   end
 
   it 'should be able to upload attachments' do
+    visit edit_project_path(@project, :step => 'Attachments')
     find("input[name='project[attachments_attributes][0][file]']").set("/home/squizzleflip/Pictures/glados1.jpg")
     click_button "Save Media"
     page.should have_content "Project successfully updated"
@@ -69,6 +71,7 @@ describe "Edit Project" do
   end
 
   it 'should be limited to 5 attachments' do
+    visit edit_project_path(@project, :step => 'Attachments')
     i = 1
     while i < 6
       field = "input[name='project[attachments_attributes][#{i-1}][file]']"  
@@ -98,8 +101,9 @@ describe "Edit Project" do
   end
 
   it 'should be able to upload a video url' do 
+    visit edit_project_path(@project, :step => 'Attachments')
     find("input[name='project[video_url]']").set("http://www.youtube.com/watch?v=J0SBcfC08yI&feature=plcp")
-    click_button "Save Project"
+    click_button "Save Media"
     page.should have_content "Project successfully updated"
   end
   

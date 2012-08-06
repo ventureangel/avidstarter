@@ -18,7 +18,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    step = 'general'
+    step = 'General'
     step = params[:step] if params[:step].present?
     @breadcrumb_name = step
     @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations])
@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"
-      redirect_to edit_project_path(@project)
+      redirect_to :back
     else
       flash[:warning] = "Project not saved. Try again."
       render :action => 'edit'
