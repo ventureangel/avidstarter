@@ -19,14 +19,14 @@ class AttachmentsController < ApplicationController
     if current_account.projects.include?(@project)
       if @attachment.destroy
         flash[:notice] = "Attachment successfully removed"
-        redirect_to edit_project_path(@project)
+        redirect_to :back
       else
         flash[:warning] = "Attachment not removed. Please try again."
-        redirect_to edit_project_path(@project)
+        redirect_to :back
       end
     else
       flash[:warning] = "You cannot remove attachments from this project."
-      redirect_to :root
+      redirect_to :back
     end
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot delete attachments from this project.'   

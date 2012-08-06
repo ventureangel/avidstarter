@@ -6,6 +6,6 @@ class Attachment < ActiveRecord::Base
   validate :attachment_count
 
   def attachment_count
-    errors.add(:project, "cannot have more than 5 attachments.") if self.project.attachments.count >= 5
+    errors.add(:project, "cannot have more than 6 attachments.") if self.project.attachments.count >= 6
   end
 end
