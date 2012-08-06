@@ -1,23 +1,5 @@
 .row-fluid
   .span12
-    %ul#projectnav.nav.nav-tabs
-      %li.active
-        %a{"data-toggle" => "tab", :href => '#general'}
-          General Info
-      %li
-        %a{"data-toggle" => "tab", :href => '#team'}
-          Team Information
-      %li
-        %a{"data-toggle" => "tab", :href => '#media'}
-          Media
-      %li
-        %a{:href => "#{project_comments_path(@project)}"}
-          Comments
-      %li
-        %a{:href => "#{project_notifications_path(@project)}"}
-          Project's Notificantions
-#projectcontent.tab-content
-  #general.tab-pane.fade.in.active
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
       %h3 General Information
@@ -43,7 +25,5 @@
           %center
             = f.submit "Save Project", :class => "btn btn-danger btn-project"
 
-  #team.tab-pane.fade
     = render 'memberships'
-  #media.tab-pane.fade
     = render 'attachments'

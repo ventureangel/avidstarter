@@ -18,4 +18,5 @@ module ApplicationHelper
   def all_projects
     @all_projects = Project.all 
   end
+  
 end

@@ -18,7 +18,7 @@ Avidstarter::Application.routes.draw do
   resources :invitations, :only => [:create, :destroy]
   resources :attachments, :only => [:create, :destroy]
   #resources :comments, :only => [:create, :destroy]
-  resources :notifications, :only => [:show]
+  resources :notifications, :only => [:index, :show]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

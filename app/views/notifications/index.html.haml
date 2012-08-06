@@ -1,18 +1,16 @@
-#mainhub.span6 
-  .well
-    .row-fluid{:style => "margin-bottom:18px;"}
-      .span2
-        = image_tag @notifier.logo_url(:thumb) if @notifier.logo?
-      .span10
-        %h1.projectnamefont{:style => "text-align: top;"}= @notifier.business_name
-        
-    .row-fluid
-      .span12
-        / = link_to "Post a Notification for this Project", new_project_notification_path(@project)
+#mainhub.span9
+  .row-fluid
+    .span9
+      .row-fluid
+        .span12
+          / =render 'shared/breadcrumbs'
+      .well
+        .row-fluid
+          .span12
       
-        - @notifications.each do |n|
-          %h4= link_to n.title, notification_path(n)
-          %p= "Type: " + n.notification_type
-          %p= "Description: " +  n.description
-.span3
-  = render :partial => "home/notifications"
+            - @notifications.each do |n|
+              %h4= link_to n.title, notification_path(n)
+              %p= "Type: " + n.notification_type
+              %p= "Description: " +  n.description
+    .span3
+      / =render 'shared/side_menu'

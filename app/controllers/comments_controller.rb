@@ -3,14 +3,18 @@ class CommentsController < ApplicationController
   def index
     if params[:project_id]
       @commentable = Project.find(params[:project_id], :include => [:comment_threads])
+      @project = @commentable
     else
       @commentable = Account.find(params[:account_id], :include => [:comment_threads])
+      @project = @commentable
     end
-  
+    
+    @breadcrumb_name = "Comments"
   end
 
   def create
     @commentable = params[:comment][:commentable_type].constantize.find(params[:comment][:commentable_id])
+    @project = @commentable
     @comment = Comment.build_from(@commentable, current_account.id, params[:comment][:body])
     
     if @comment.save

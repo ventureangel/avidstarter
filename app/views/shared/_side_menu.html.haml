@@ -1,0 +1,40 @@
+%ul.nav.nav-list
+  %center
+    = image_tag @project.logo_url(:thumb) if @project.logo?
+    %h3= @project.business_name
+  
+  %li.divider
+  %li.nav-header
+    Project Overview
+  %li
+    %a{:href => project_path(@project)}
+      %i.icon-eye-open
+      Project Overview 
+  %li.divider
+  %li.nav-header Edit Project Menu
+  %li.active
+    %a{:href =>"#"}
+      %i.icon-book
+      General Information
+  %li
+    %a{:href =>"edit#team"}
+      %i.icon-group
+      Team Information
+  %li
+    %a{:href =>"#"}
+      %i.icon-camera
+      Attach Media
+  %li
+    %a{:href => project_comments_path(@project)}
+      %i.icon-comments-alt
+      Comments
+  %li.divider
+  %li.nav-header Project Notifications
+  %li
+    %a{:href => new_project_notification_path(@project)}
+      %i.icon-bullhorn
+      Post New Notification
+  %li
+    %a{:href => project_notifications_path(@project)}
+      %i.icon-bullhorn
+      View Existing Notifications

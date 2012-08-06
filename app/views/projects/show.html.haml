@@ -31,10 +31,9 @@
                 - @project.attachments.each do |imageattachment|
                   %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures"} 
                     =image_tag imageattachment.file_url(:thumb), :class => "image_property"
-      #feedback.tab-pane.fade
-        .row-fluid
-          .span12  
-            =render "comments"
+            
+            %h4= "#{raw('<i class="icon-bullhorn"></i>')} Announcements".html_safe
+            
       #recruiting.tab-pane.fade
         .row-fluid
           .span6  

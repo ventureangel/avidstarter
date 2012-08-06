@@ -1,11 +1,18 @@
-#mainhub.span6
-  .well
-    .row-fluid{:style => "margin-bottom:18px;"}
-      .span2
-        = image_tag @project.logo_url(:thumb) if @project.logo?
-      .span10
-        %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
-    = render 'form'
-
-.span3
-  = render :partial => "home/notifications"
+#mainhub.span9
+  .row-fluid
+    .span9
+      .row-fluid
+        .span12
+          = render 'shared/breadcrumbs'
+      
+      .well     
+        .row-fluid
+          .span12
+            .row-fluid{:style => "margin-bottom:18px;"}
+              / .span2
+              /                 = image_tag @project.logo_url(:thumb) if @project.logo?
+              .span12
+                %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+            = render 'form'
+    .span3
+      = render 'shared/side_menu' 

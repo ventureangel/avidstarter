@@ -3,12 +3,18 @@ class NotificationsController < ApplicationController
   def index
     if params[:project_id]
       @notifier = current_account.projects.find(params[:project_id])
+      @project = @notifier
+      @notifications =  @notifier.notifications    
     elsif params[:account_id]
-      @notifier = Account.find(params[:account_id])
-    end
+      @notifier = Account.find(params[:account_id]) 
+      @project = @notifier 
+      @notifications =  @notifier.notifications       
+    elsif
+      @notifications = Notification.all
+      @project = @notifier     
+    end  
     
-    @notifications =  @notifier.notifications
-
+    @breadcrumb_name = "View Notifications"  
   end
 
   def new
