@@ -14,6 +14,7 @@
   .span6
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
+      = hidden_field_tag :step, @breadcrumb_name
       = f.fields_for :attachments do |ff|
         %b
         - if @project.attachments.count < 5

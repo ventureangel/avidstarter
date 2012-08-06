@@ -22,6 +22,7 @@
     %h3 Add New Team Member
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
+      = hidden_field_tag :step, @breadcrumb_name
       = f.fields_for :invitee_attributes do |ff| 
         = ff.label :name, "Name"
         = ff.text_field :name
