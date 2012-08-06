@@ -1,10 +1,11 @@
 .row-fluid
   .span6
-    %h4 Current Team Members
+    %h4{:style => "padding-bottom: 10px;"} Current Team Members
     - @project.memberships.each do |membership|
-      %tr
-        %td= membership.account.name
-        %td= link_to "Remove Member", membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
+      .well_two
+        %tr
+          %td= membership.account.name
+          %td= link_to "Remove Member", membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
       %br
     %h4 Pending Team Members 
     %p (These members are only viewable during editing)
@@ -25,7 +26,7 @@
       = hidden_field_tag :step, @breadcrumb_name
       = f.fields_for :invitee_attributes do |ff| 
         = ff.label :name, "Name"
-        = ff.text_field :name
+        = ff.text_field :name, :class => "span12", :style => "width: 100%;"
         = ff.label :email, "Email"
         = ff.email_field :email, :class => "span12", :style => "width: 100%;"
       .row-fluid

@@ -1,7 +1,6 @@
 .row-fluid
   .span6
-    %h3 Existing Media
-    
+    %h4 Existing Media
     - @project.attachments.each do |attachment|
       - unless attachment.new_record?
         .image_container{:style => "background-image: url(#{attachment.file_url(:thumb)})"}
@@ -11,29 +10,28 @@
             / = link_to "#{raw('<i class="icon-eye-open"></i>')} View Attachment".html_safe
           .imagelink_bottom{:style => "height:50px; width:100px; float: left; clear:both;"}
             = link_to "#{raw('<i class="icon-trash"></i>')} Delete Attachment".html_safe, attachment_path(attachment), :confirm => "Are you sure you want to delete this attachment?", :method => :delete
+    -unless @project.video_url.blank?
+      = editpage_embed_video(@project.video_url).html_safe
+
   .span6
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
       = hidden_field_tag :step, @breadcrumb_name
       = f.fields_for :attachments do |ff|
         %b
-        - if @project.attachments.count < 5
+        - if @project.attachments.count < 6
           - if ff.object.new_record?
-            %h3 Attach Additional Media
+            %h4 Attach Additional Media
             = ff.label :file, "Upload a picture attachment"
             = ff.file_field :file, :style => "padding-bottom: 10px;"
             %br
             = ff.text_field :remote_file_url, :placeholder => "Or use an image URL", :class => "span12", :style => "width: 100%;"
       .row-fluid
         .span12
-          %h3 Video URL
-          = f.text_field :video_url
+          %h4 Video URL
+          = f.label :video_url, "Add a link to a short video about your project"
+          = f.text_field :video_url, :placeholder => "Only Youtube or Vimeo links are supported at this time", :class => "span12", :style => "width: 100%;"
       .row-fluid
         .span12
           %center
             = f.submit "Save Media", :class => "btn btn-danger btn-project"
-
-%br
-  %center
-    -unless @project.video_url.blank?
-      = vid_embed_video(@project.video_url).html_safe
