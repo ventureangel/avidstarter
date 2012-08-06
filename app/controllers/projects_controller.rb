@@ -30,7 +30,7 @@ class ProjectsController < ApplicationController
   def update
     @project = current_account.projects.find(params[:id])
     @invitations = @project.invitations
-    
+    @breadcrumb_name = params[:step]
     if @project.update_attributes(params[:project])
       flash[:notice] = "Project successfully updated"
       redirect_to :back

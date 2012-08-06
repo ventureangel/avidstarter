@@ -5,7 +5,7 @@
   -if controller.action_name == "show"
     %li.active
       %a{:href => project_path(@project)}= "#{@project.business_name}"
-  -elsif controller.action_name == "edit"
+  -elsif controller.action_name == "edit" || "update"
     %li
       %a{:href => project_path(@project)}= "#{@project.business_name}"
       %span.divider /
