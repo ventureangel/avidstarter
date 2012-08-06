@@ -24,4 +24,14 @@ describe Project do
   it 'should have a valid factory' do
     project.should be_valid
   end 
+
+  it 'should not be publishable if it is incomplete' do
+    project.publish!
+    project.published.should be false
+  end
+
+  it 'should be publishable' do
+    project.publish!
+    project.published.should be true 
+  end
 end
