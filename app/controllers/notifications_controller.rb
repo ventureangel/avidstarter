@@ -38,7 +38,6 @@ class NotificationsController < ApplicationController
       @notifier = current_account.projects.find(params[:notification][:notifier_id].to_i)
     elsif notifier_type == "Account"
       @notifier = current_account
-      @notification.priority = true if @notifier.profile_type == "Admin"
     end
  
     @notification.notifier = @notifier

@@ -4,71 +4,37 @@
     %h3= @project.business_name
   
   %li.divider
-  - if controller.action_name == "show"
-    - if active_member?(@project)
-      %li.nav-header
-        Edit Project 
-      %li
-        %a{:href => edit_project_path(@project)}
-          %i.icon-eye-open
-          Edit This Project 
-      %li.divider
-    -if @project.business_plan.present?
-      %li.nav-header
-        %i.icon-file
-        Business Plan
-      %li
-        = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, @project.business_plan.url
-    %li.divider
-    %li.nav-header
-      Project Information
-    %li
-      %i.icon-pushpin
-      Business Concept
-    %li.minifont= @project.business_concept
-    
-    %li
-      %i.icon-briefcase
-      Industry
-    %li.minifont= @project.industry
-
-    %li
-      %i.icon-map-marker
-      Location
-    %li.minifont= "#{@project.city}, #{@project.state}"
-
-  -else
-    %li.nav-header
-      Project Overview
-    %li
-      %a{:href => project_path(@project)}
-        %i.icon-eye-open
-        Project Overview 
-    %li.divider
-    %li.nav-header Edit Project Menu
-    %li.active
-      %a{:href =>"#"}
-        %i.icon-book
-        General Information
-    %li
-      %a{:href =>"edit#team"}
-        %i.icon-group
-        Team Information
-    %li
-      %a{:href =>"#"}
-        %i.icon-camera
-        Attach Media
-    %li
-      %a{:href => project_comments_path(@project)}
-        %i.icon-comments-alt
-        Comments
-    %li.divider
-    %li.nav-header Project Notifications
-    %li
-      %a{:href => new_project_notification_path(@project)}
-        %i.icon-bullhorn
-        Post New Notification
-    %li
-      %a{:href => project_notifications_path(@project)}
-        %i.icon-bullhorn
-        View Existing Notifications
+  %li.nav-header
+    Project Overview
+  %li
+    %a{:href => project_path(@project)}
+      %i.icon-eye-open
+      Project Overview 
+  %li.divider
+  %li.nav-header Edit Project Menu
+  %li.active
+    %a{:href => edit_project_path(@project, :step => 'General')}
+      %i.icon-book
+      General Information
+  %li
+    %a{:href => edit_project_path(@project, :step => 'Memberships')}
+      %i.icon-group
+      Team Information
+  %li
+    %a{:href => edit_project_path(@project, :step => 'Attachments')}
+      %i.icon-camera
+      Attach Media
+  %li
+    %a{:href => project_comments_path(@project)}
+      %i.icon-comments-alt
+      Comments
+  %li.divider
+  %li.nav-header Project Notifications
+  %li
+    %a{:href => new_project_notification_path(@project)}
+      %i.icon-bullhorn
+      Post New Notification
+  %li
+    %a{:href => project_notifications_path(@project)}
+      %i.icon-bullhorn
+      View Existing Notifications

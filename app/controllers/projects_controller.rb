@@ -18,7 +18,9 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @breadcrumb_name = "Name of Step"
+    step = 'general'
+    step = params[:step] if params[:step].present?
+    @breadcrumb_name = step
     @project = current_account.projects.find(params[:id], :include => [:attachments, :invitations])
     @project.attachments.build
     rescue ActiveRecord::RecordNotFound
