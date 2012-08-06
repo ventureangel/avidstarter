@@ -11,7 +11,6 @@ class NotificationsController < ApplicationController
       @notifications =  @notifier.notifications       
     elsif
       @notifications = Notification.all
-      @project = @notifier     
     end  
     
     @breadcrumb_name = "View Notifications"  

@@ -19,4 +19,7 @@ module ApplicationHelper
     @all_projects = Project.all 
   end
   
+  def active_member?(project)
+    current_account.projects.include?(project)
+  end
 end
