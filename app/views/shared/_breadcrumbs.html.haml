@@ -6,4 +6,4 @@
     %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
     %span.divider /
   %li.active
-    %a{:href => edit_project_path(@project)}= "#{@breadcrumb_name}"
+    %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name}"
