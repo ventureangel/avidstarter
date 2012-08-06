@@ -2,8 +2,12 @@
   %li
     %a{:href => "#{root_url}"} Projects 
     %span.divider /
-  %li
-    %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
-    %span.divider /
-  %li.active
-    %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name}"
+  -if controller.action_name == "show"
+    %li.active
+      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
+  -elsif controller.action_name == "edit"
+    %li
+      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
+      %span.divider /
+    %li.active
+      %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name}"
