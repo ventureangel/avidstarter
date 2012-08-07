@@ -19,8 +19,11 @@ class NotificationsController < ApplicationController
   end
 
   def new
+    @is_project = false
     if params[:project_id]
+      @is_project = true
       @notifier = current_account.projects.find(params[:project_id])
+      @project = @notifier
     elsif params[:account_id]
       if current_account.id != params[:account_id].to_i
         flash[:warning] = "You can only post notifications for your own account"
@@ -30,6 +33,9 @@ class NotificationsController < ApplicationController
       end
     end
     @notification = Notification.new
+    
+    @breadcrumb_name = "New Notification"  
+    
   end
   
   def create

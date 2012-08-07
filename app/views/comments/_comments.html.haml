@@ -6,45 +6,51 @@
 
 .row-fluid  
   .span12
-    %h4.edit_header Comments
-    - @commentable.root_comments.each do |c|
-      .well_two{:style => "padding:10px;"}
-        .row-fluid
-          .span12
-            .row-fluid{:style => "margin-bottom:10px"}
-              .span1
-                =image_tag c.user.avatar_url(:small_thumb)
-              .span11
-                .row-fluid
-                  .span11
-                    %h5= "#{c.user.name} • (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
-                  .span1
-                    %h5 Reply
-                = simple_format h (c.body)                 
-            .comment_reply_link
-              .row-fluid
-                .span12
-                  %a{:href => "javascript:void(0)", :style => "float: right;"} 
-                    %i.icon-edit
-                    Reply to this post...
-            .child_reply_container
+    -if @commentable.root_comments.count == 0
+      #letterpress
+        %br
+        %center
+          %h1 Be The First To Leave A Comment
+    -else
+      %h4.edit_header Comments
+      - @commentable.root_comments.each do |c|
+        .well_two{:style => "padding:10px;"}
+          .row-fluid
+            .span12
               .row-fluid{:style => "margin-bottom:10px"}
                 .span1
-                  %br
-                .span1
-                  = image_tag current_account.avatar_url(:small_thumb)
-                .span10
-                  = form_for :comment do |f|
-                    = f.hidden_field :parent_id, :value => c.id
-                    = render 'comment_form', :f => f
-            - if c.has_children?
-              - c.children.each do |child|
+                  =image_tag c.user.avatar_url(:small_thumb)
+                .span11
+                  .row-fluid
+                    .span11
+                      %h5= "#{c.user.name} • (#{c.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(c.created_at)} ago)"
+                    .span1
+                      %h5 Reply
+                  = simple_format h (c.body)                 
+              .comment_reply_link
+                .row-fluid
+                  .span12
+                    %a{:href => "javascript:void(0)", :style => "float: right;"} 
+                      %i.icon-edit
+                      Reply to this post...
+              .child_reply_container
                 .row-fluid{:style => "margin-bottom:10px"}
                   .span1
                     %br
                   .span1
-                    =image_tag child.user.avatar_url(:small_thumb)
+                    = image_tag current_account.avatar_url(:small_thumb)
                   .span10
-                    %h5= "#{c.user.name} • (#{child.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(child.created_at)} ago)"
-                    = child.body
+                    = form_for :comment do |f|
+                      = f.hidden_field :parent_id, :value => c.id
+                      = render 'comment_form', :f => f
+              - if c.has_children?
+                - c.children.each do |child|
+                  .row-fluid{:style => "margin-bottom:10px"}
+                    .span1
+                      %br
+                    .span1
+                      =image_tag child.user.avatar_url(:small_thumb)
+                    .span10
+                      %h5= "#{c.user.name} • (#{child.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(child.created_at)} ago)"
+                      = child.body
       

@@ -1,8 +1,29 @@
-#mainhub.span6
-  .well
-    = form_for [@notifier, @notification] do |n|
-      = n.hidden_field :notifier_id, :value => @notifier.id
-      = n.hidden_field :notifier_type, :value => @notifier.class.to_s
-      = render "shared/notification_form", :n => n 
-.span3
-  = render :partial => "home/notifications"
+-if @is_project
+  #mainhub.span9
+    .row-fluid
+      .span9
+        .row-fluid
+          .span12
+            =render 'shared/breadcrumbs'
+        .well
+          .row-fluid{:style => "margin-bottom:18px;"}
+            .span12
+              %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+
+          = form_for [@notifier, @notification] do |n|
+            = n.hidden_field :notifier_id, :value => @notifier.id
+            = n.hidden_field :notifier_type, :value => @notifier.class.to_s
+            = render "shared/notification_form", :n => n 
+      .span3
+        = render :partial => "home/notifications"
+-else
+  #mainhub.span9
+    .row-fluid
+      .span9  
+        .well
+          = form_for [@notifier, @notification] do |n|
+            = n.hidden_field :notifier_id, :value => @notifier.id
+            = n.hidden_field :notifier_type, :value => @notifier.class.to_s
+            = render "shared/notification_form", :n => n
+      .span3
+        %p poop
