@@ -1,14 +1,4 @@
-#mainhub.span9
-  .row-fluid
-    .span9
-      .row-fluid
-        .span12
-      .well
-        .row-fluid
-          .span12
-      
-            - @notifications.each do |n|
-              %h4= link_to n.title, notification_path(n)
-              %p= "Type: " + n.notification_type
-              %p= "Description: " +  n.description
-    .span3
+-if @is_project
+  =render 'project_notifications'
+-else
+  =render 'all_notifications'

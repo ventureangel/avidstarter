@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
     if @comment.save
       @comment.move_to_child_of(Comment.find(params[:comment][:parent_id])) if params[:comment][:parent_id].present?
       flash[:notice] = "Comment successfully posted"
-      redirect_to edit_project_path(@commentable)
+      redirect_to :back
     else
       flash[:warning] = "Comment not posted"
       redirect_to :back

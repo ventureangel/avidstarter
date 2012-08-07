@@ -20,6 +20,6 @@ module ApplicationHelper
   end
   
   def active_member?(project)
-    current_account.projects.include?(project)
+    current_account.projects.include?(project) if account_signed_in?
   end
 end

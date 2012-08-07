@@ -1,0 +1,50 @@
+#mainhub.span9
+  .row-fluid
+    .span4
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span12
+            %h4
+              %i.icon-asterisk
+              Events
+            
+            - @notifications.each do |n|
+              -if n.notification_type == "Events"
+                -if n.priority?
+                  .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n
+                -else
+                  .alert.alert-warning{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n
+    .span4
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span12
+            %h4 
+              %i.icon-bullhorn
+              Recruiting
+              
+            - @notifications.each do |n|
+              -if n.notification_type == "Recruiting"
+                -if n.priority?
+                  .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n
+                -else
+                  .alert.alert-success{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n
+    .span4
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span12
+            %h4 
+              %i.icon-globe
+              Announcements
+            
+            - @notifications.each do |n|
+              -if n.notification_type == "Announcement"
+                -if n.priority?
+                  .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n
+                -else
+                  .alert.alert-info{:style => "margin-top:18px; margin-bottom:0px;"}
+                    =render 'notification_layout', :n => n

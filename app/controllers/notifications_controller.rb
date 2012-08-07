@@ -1,7 +1,9 @@
 class NotificationsController < ApplicationController
 
   def index
+    @is_project = false
     if params[:project_id]
+      @is_project = true
       @notifier = current_account.projects.find(params[:project_id])
       @project = @notifier
       @notifications =  @notifier.notifications    

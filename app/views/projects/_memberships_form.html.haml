@@ -1,26 +1,39 @@
 .row-fluid
   .span6
-    %h4{:style => "padding-bottom: 10px;"} Current Team Members
+    %h4.edit_header Current Team Members
     - @project.memberships.each do |membership|
-      .well_two
-        %tr
-          %td= membership.account.name
-          %td= link_to "Remove Member", membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
+      .well_two{:style => "padding:10px; margin-bottom: 0px;"}
+        .row-fluid
+          .span2
+            = image_tag membership.account.avatar_url(:small_thumb) if membership.account.avatar?
+          .span10
+            = membership.account.name
+            .minifont= "Joined: #{(membership.created_at).strftime("%m/%d/%Y")}"
+            .minifont
+              = link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, membership.account.linked_in, :target => "_blank"
+              = "  /  "
+              = link_to "#{raw('<i class="icon-remove-sign"></i>')} Remove Member".html_safe, membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
       %br
     %h4 Pending Team Members 
     %p (These members are only viewable during editing)
     - @project.pending_memberships.each do |pmember|
-      %tr
-        %td= pmember.account.label
-        %td= link_to "Cancel invitation", membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+      .well_two{:style => "padding:10px; margin-bottom: 0px;"}
+        .row-fluid
+          .span12
+            = pmember.account.label
+            .minifont= "Invited: #{(pmember.created_at).strftime("%m/%d/%Y")}"
+            .minifont= link_to "#{raw('<i class="icon-trash"></i>')} Cancel Invitation".html_safe, membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
       %br
     - @project.invitations.each do |invite|
-      %tr
-        %td= invite.label
-        %td= link_to "Cancel invitation", invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
+      .well_two{:style => "padding:10px; margin-bottom: 0px;"}
+        .row-fluid
+          .span12
+            = invite.label
+            .minifont= "Invited: #{(invite.created_at).strftime("%m/%d/%Y")}"
+            .minifont= link_to "#{raw('<i class="icon-trash"></i>')} Cancel Invitation".html_safe, invitation_path(invite), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
       %br
   .span6
-    %h4 Add New Team Member
+    %h4.edit_header Add New Team Member
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
       = hidden_field_tag :step, @breadcrumb_name

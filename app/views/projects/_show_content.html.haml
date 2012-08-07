@@ -1,0 +1,54 @@
+#mainhub.span9
+  .row-fluid
+    .span9
+      .row-fluid
+        .span12
+          =render 'shared/breadcrumbs'
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span2
+            = image_tag @project.logo_url(:thumb) if @project.logo?
+          .span10
+            %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+
+        .row-fluid
+          .span12
+            %ul#projectnav.nav.nav-tabs
+              %li.active
+                %a{"data-toggle" => "tab", :href => '#media'}
+                  Announcements & Media
+              %li
+                %a{"data-toggle" => "tab", :href => '#feedback'}
+                  Leave Feedback
+              %li
+                %a{"data-toggle" => "tab", :href => '#recruiting'}
+                  Recruiting
+
+        #projectcontent.tab-content
+          #media.tab-pane.fade.in.active
+            .row-fuild
+              .span12
+                -if @project.video_url.present? || @project.attachments.count > 1
+                  %h4= "#{raw('<i class="icon-picture"></i>')} Project Media".html_safe
+                  #image_container.image_container_scroll
+                    -if @project.video_url.present?
+                      %iframe.image_property{:width => "445", :height =>"250", :src => "#{vid_link(@project.video_url)}"}
+                    - @project.attachments.each do |imageattachment|
+                      %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures"} 
+                        =image_tag imageattachment.file_url(:thumb), :class => "image_property"
+
+                %h4= "#{raw('<i class="icon-bullhorn"></i>')} Announcements".html_safe
+
+          #recruiting.tab-pane.fade
+            .row-fluid
+              .span6  
+                %h4 Business Concept
+                %p= @project.business_concept
+              .span6
+                %h4 Industry
+                %p= @project.industry
+                %h4 Location
+                %p= "#{@project.city}, #{@project.state}"
+
+    .span3
+      =render 'shared/side_menu'
