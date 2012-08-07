@@ -1,16 +1,31 @@
 = n.error_messages
 .row-fluid
   .span6
-    = n.label :title
-    = n.text_field :title
-    = n.label :notification_type, 'Type'
-    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :class => "span12", :style => "width: 100%;"
+    = n.label :title, "Notification Title"
+    = n.text_field :title, :class => "span12", :style => "width: 100%; max-width: 100%;"
+    = n.label :notification_type, 'Notification Type'
+    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :onchange => "showDiv(this)", :prompt => true, :class => "span12", :style => "width: 100%;"
+    #notification_dateandtime{:style => "display:none;"}
+      = n.label :date, "Event Date and Time"
+      = n.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "" }
   .span6
-    = n.label :date, "Event Date and Time"
-    = n.datetime_select :date, {:include_blank => true}
     = n.label :description
-    = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"
+    = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"    
+   
 .row-fluid
   .span12
     %center
       = n.submit "Post Notification", :class => "btn btn-danger btn-project"
+
+:javascript
+  function showDiv(obj)
+  {
+      if(obj[obj.selectedIndex].value == 'Event')
+      {
+          document.getElementById('notification_dateandtime').style.display = 'block';
+      }
+      else
+      {
+          document.getElementById('notification_dateandtime').style.display = 'none';
+      }
+  }
