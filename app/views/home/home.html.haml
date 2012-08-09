@@ -15,15 +15,10 @@
             = render :partial => "all_projects_viewers"
 
 - else  
-  .row-fluid
-    .span3
-      %img{:src => "/assets/uga2.png"}
-      .well{:style => "margin-top:18px;"}
-        = render :partial => "devise/sessions/sign_in"
-    #mainhub.span9
-      .well
-        #mainhub_content
-          .row-fluid
-            .span12
-              = render :partial => "all_projects_viewers"
+  #mainhub.span9
+    .well
+      #mainhub_content
+        .row-fluid
+          .span12
+            = render :partial => "all_projects_viewers"
   

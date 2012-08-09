@@ -2,17 +2,7 @@
   .span6
     %h4.edit_header Current Team Members
     - @project.memberships.each do |membership|
-      .well_two{:style => "padding:10px; margin-bottom: 0px;"}
-        .row-fluid
-          .span2
-            = image_tag membership.account.avatar_url(:small_thumb) if membership.account.avatar?
-          .span10
-            = membership.account.name
-            .minifont= "Joined: #{(membership.created_at).strftime("%m/%d/%Y")}"
-            .minifont
-              = link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, membership.account.linked_in, :target => "_blank"
-              = "  /  "
-              = link_to "#{raw('<i class="icon-remove-sign"></i>')} Remove Member".html_safe, membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
+      = render 'existing_members', :membership => membership
       %br
     %h4 Pending Team Members 
     %p (These members are only viewable during editing)

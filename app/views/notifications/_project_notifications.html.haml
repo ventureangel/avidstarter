@@ -9,7 +9,8 @@
           .span12
             %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
         
-      
+        .row-fluid
+          .span12
             - @notifications.each do |n|
               %h4= link_to n.title, notification_path(n)
               %p= "Type: " + n.notification_type

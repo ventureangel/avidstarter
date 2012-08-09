@@ -51,6 +51,6 @@
                     .span1
                       =image_tag child.user.avatar_url(:small_thumb)
                     .span10
-                      %h5= "#{c.user.name} • (#{child.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(child.created_at)} ago)"
+                      %h5= "#{child.user.name} • (#{child.created_at.strftime("%m/%d/%Y")} | #{time_ago_in_words(child.created_at)} ago)"
                       = child.body
       

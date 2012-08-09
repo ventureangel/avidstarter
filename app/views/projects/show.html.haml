@@ -1,10 +1,37 @@
--if account_signed_in?
-  =render 'show_content'
--else
+#mainhub.span9
   .row-fluid
+    .span9
+      .row-fluid
+        .span12
+          =render 'shared/breadcrumbs'
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span12
+            %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+        
+        .row-fluid
+          .span12
+            -if @project.video_url.present? || @project.attachments.count > 1
+              %h4.edit_header= "#{raw('<i class="icon-picture"></i>')} Project Media".html_safe
+              #image_container.image_container_scroll
+                -if @project.video_url.present?
+                  %iframe.image_property{:width => "445", :height =>"250", :src => "#{vid_link(@project.video_url)}"}
+                - @project.attachments.each do |imageattachment|
+                  %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures"} 
+                    =image_tag imageattachment.file_url(:big_thumb), :class => "image_property"
+        .row-fluid
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-bullhorn"></i>')} Announcement Summary".html_safe
+            - @project.notifications.each do |n|
+              .well_two
+                %h4= link_to n.title, notification_path(n)
+                %p.minifont= "Type: " + n.notification_type
+                %p.minifont= "Description: " +  n.description
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Team Members".html_safe
+            - @project.memberships.each do |membership|
+              = render 'existing_members', :membership => membership
+              %br
+            
     .span3
-      %img{:src => "/assets/uga2.png"}
-      .well{:style => "margin-top:18px;"}
-        = render :partial => "devise/sessions/sign_in"
-  
-    =render 'show_content'
+      =render 'shared/side_menu'

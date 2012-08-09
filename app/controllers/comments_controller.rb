@@ -1,14 +1,17 @@
 class CommentsController < ApplicationController
   
   def index
-    if params[:project_id]
-      @commentable = Project.find(params[:project_id], :include => [:comment_threads])
-      @project = @commentable
+    if account_signed_in?
+      if params[:project_id]
+        @commentable = Project.find(params[:project_id], :include => [:comment_threads])
+        @project = @commentable
+      else
+        @commentable = Account.find(params[:account_id], :include => [:comment_threads])
+        @project = @commentable
+      end
     else
-      @commentable = Account.find(params[:account_id], :include => [:comment_threads])
-      @project = @commentable
+      return redirect_to root_url, :alert => 'You cannot access this feature'
     end
-    
     @breadcrumb_name = "Comments"
   end
 
