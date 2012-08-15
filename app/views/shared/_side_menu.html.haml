@@ -27,7 +27,7 @@
         %i.icon-eye-open
         Project Overview
     %li
-      %a{:href => project_comments_path(@project)}
+      %a{:href => "mailto: #{@project.contact_emails}"}
         %i.icon-envelope
         Email Team
     %li

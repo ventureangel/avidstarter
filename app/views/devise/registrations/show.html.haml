@@ -52,7 +52,7 @@
                   = project.created_at.strftime("%d/%m/%Y")
                 %td
                   %center
-                    = project.memberships.count
+                    = project.memberships.where(:pending => "false").count
                 %td
                   %center
                     - if project.notifications.where(:notification_type => "Recruiting").count > 0

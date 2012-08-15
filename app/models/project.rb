@@ -46,7 +46,13 @@ class Project < ActiveRecord::Base
       end
     end
   end
+  
+  # Returns all the member email addresses if they have valid accounts
 
+  def contact_emails
+    self.memberships.where(:pending => "false").map {|m| m.account ? m.account.email : nil }.compact.join(",")
+  end
+  
   private
     def membership_already_exists?
       errors.add(:member, "already added to project") if @membership_exists
