@@ -1,7 +1,7 @@
 #mainhub.span9
   .well
     .row-fluid
-      .span4
+      .span3
         %h4.edit_header= "#{@account.first_name}'s Information"
         .row_fluid
           .span3
@@ -13,7 +13,7 @@
               %dt Social:
               -if @account.linked_in == "" or nil
                 %dd 
-                  = "No LinkedIn account"
+                  = "No LinkedIn"
                   = " / "
                   %a{:href => "mailto:#{@account.email}"}
                     %i.icon-envelope
@@ -25,9 +25,37 @@
                   %a{:href => "mailto:#{@account.email}"}
                     %i.icon-envelope
                     Email
-      .span8
+      .span9
         %h4.edit_header= "#{@account.first_name}'s Projects"
-        - @account.projects.each do |project|
-          %p= project.business_name
-        %p= @account.projects.count  
+        
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                Project Name
+              %th
+                Date Started
+              %th
+                %center
+                  Team Members
+              %th
+                %center
+                  Recruiting?
+          %tbody
+            - @account.projects.each do |project|
+              %tr
+                %td
+                  = image_tag project.logo_url(:tiny_thumb)
+                  %a{:href => project_path(project.id)}
+                    = project.business_name
+                %td
+                  = project.created_at.strftime("%d/%m/%Y")
+                %td
+                  %center
+                    = project.memberships.count
+                %td
+                  %center
+                    - if project.notifications.where(:notification_type => "Recruiting").count > 0
+                      = link_to "Yes", project_notifications_path(project)
+
         

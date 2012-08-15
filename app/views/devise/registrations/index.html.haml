@@ -17,6 +17,9 @@
               %th
                 Linkedin
               %th
+                %center
+                  Project Count
+              %th
                 Status
           %tbody
             - Account.all.each do |account|
@@ -24,12 +27,22 @@
                 %td
                   = image_tag account.avatar_url(:tiny_thumb)
                 %td
-                  %p= account.first_name
+                  %a{:href => account_path(account.id)}
+                    = account.first_name
                 %td
-                  %p= account.last_name
+                  %a{:href => account_path(account.id)}
+                    = account.last_name
                 %td
-                  %p= account.email
+                  %a{:href => "mailto:#{account.email}"}
+                    = account.email
                 %td
-                  %p= account.linked_in
+                  %a{:href => "#{linkedinurl(account.linked_in)}", :target => "_blank"}
+                    = account.linked_in
                 %td
-                  %p Alumni
+                  %center
+                    %p= account.projects.count
+                %td
+                  -if account.profile_type == "Viewer"
+                    %p Alumni
+                  -else
+                    %p Student
