@@ -814,6 +814,10 @@ display: none; /** Hide items initially to avoid a flicker effect **/
 padding: 10px;
 }
 
+#project_tiles li:hover{
+border: 1px solid #c5c5c5;
+}
+
 #project_tiles li img {
 display: block;
 }

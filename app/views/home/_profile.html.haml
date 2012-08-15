@@ -3,7 +3,7 @@
   .sidecontent_bar{:style => "margin-top:10px;"}
     .row-fluid
       .span3
-        = image_tag current_account.avatar_url(:thumb) if current_account.avatar?
+        = image_tag current_account.avatar_url(:thumb)
       .span9
         %dl{:style => "margin-bottom:0px; margin-top:0px;"}
           %dt Name:
@@ -22,7 +22,7 @@
     .row-fluid
       .span12{}
         %center
-          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, :remote => true, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
+          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
 
 %center
   .jumbobutton

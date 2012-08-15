@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
         @project = @commentable
       end
     else
-      return redirect_to root_url, :alert => 'You cannot access this feature'
+      return redirect_to :sign_in, :alert => 'You must sign-in to leave a comment'
     end
     @breadcrumb_name = "Comments"
   end

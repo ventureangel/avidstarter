@@ -8,6 +8,7 @@
     #notification_dateandtime{:style => "display:none;"}
       = n.label :date, "Event Date and Time"
       = n.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "" }
+      = n.time_select :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "" }
   .span6
     = n.label :description
     = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"    

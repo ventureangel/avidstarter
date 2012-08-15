@@ -4,7 +4,8 @@
     %h3= @project.business_name
   
   %li.divider
-  - if (controller.controller_name == "comments" && active_member?(@project) == false || account_signed_in? == false) or controller.action_name == "show" or active_member?(@project) == false
+  / (controller.controller_name == "comments" && active_member?(@project) == false || account_signed_in? == false) or
+  - if controller.action_name == "show" or active_member?(@project) == false or controller.controller_name == "comments" && active_member?(@project) or (controller.controller_name == "notifications" && controller.action_name != "new")
     - if active_member?(@project)
       %li.nav-header
         Edit Project 
@@ -29,32 +30,32 @@
       %a{:href => project_comments_path(@project)}
         %i.icon-envelope
         Email Team
-    -if account_signed_in?
-      %li
-        %a{:href => project_comments_path(@project)}
-          %i.icon-comments-alt
-          View Comments
+    %li
+      %a{:href => project_comments_path(@project)}
+        %i.icon-comments-alt
+        Comments
     %li
       %a{:href => project_notifications_path(@project)}
         %i.icon-bullhorn
-        View Notifications
-    %li.divider
-    %li.nav-header
-      Project Information
-    %li
-      %i.icon-pushpin
-      Business Concept
-    %li.minifont= @project.business_concept
+        Notifications
+    -unless controller.controller_name == "projects" && controller.action_name == "show"
+      %li.divider
+      %li.nav-header
+        Project Information
+      %li
+        %i.icon-pushpin
+        Business Concept
+      %li.minifont= @project.business_concept
     
-    %li
-      %i.icon-briefcase
-      Industry
-    %li.minifont= @project.industry
+      %li
+        %i.icon-briefcase
+        Industry
+      %li.minifont= @project.industry
 
-    %li
-      %i.icon-map-marker
-      Location
-    %li.minifont= "#{@project.city}, #{@project.state}"
+      %li
+        %i.icon-map-marker
+        Location
+      %li.minifont= "#{@project.city}, #{@project.state}"
     
   -else
     %li.nav-header
@@ -78,16 +79,6 @@
         %i.icon-camera
         Attach Media
     %li
-      %a{:href => project_comments_path(@project)}
-        %i.icon-comments-alt
-        Comments
-    %li.divider
-    %li.nav-header Project Notifications
-    %li
       %a{:href => new_project_notification_path(@project)}
         %i.icon-bullhorn
         Post New Notification
-    %li
-      %a{:href => project_notifications_path(@project)}
-        %i.icon-bullhorn
-        View Existing Notifications

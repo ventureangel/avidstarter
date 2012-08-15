@@ -3,6 +3,8 @@ Avidstarter::Application.routes.draw do
   devise_scope :account do
     get "/sign_in", :to => "devise/sessions#new"
     get "/sign_up", :to => "devise/registrations#new"
+    get "/accounts", :to => "devise/accounts#index"
+    get "/accounts/:id", :to => "devise/accounts#show"
   end
   get "home/home"
   

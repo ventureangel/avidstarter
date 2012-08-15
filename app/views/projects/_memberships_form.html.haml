@@ -2,8 +2,7 @@
   .span6
     %h4.edit_header Current Team Members
     - @project.memberships.each do |membership|
-      = render 'existing_members', :membership => membership
-      %br
+      = render 'existing_members', :membership => membership unless membership.pending?
     %h4 Pending Team Members 
     %p (These members are only viewable during editing)
     - @project.pending_memberships.each do |pmember|
@@ -14,6 +13,7 @@
             .minifont= "Invited: #{(pmember.created_at).strftime("%m/%d/%Y")}"
             .minifont= link_to "#{raw('<i class="icon-trash"></i>')} Cancel Invitation".html_safe, membership_path(pmember), :confirm => "Are you sure you want to delete this invitation?", :method => :delete
       %br
+    %h4.edit_header Invited Team Members
     - @project.invitations.each do |invite|
       .well_two{:style => "padding:10px; margin-bottom: 0px;"}
         .row-fluid

@@ -1,0 +1,35 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h4.edit_header The Entrepreneur Community at The University of Georgia
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+          
+              %th
+                First Name
+              %th
+                Last Name
+              %th
+                Email Address
+              %th
+                Linkedin
+              %th
+                Status
+          %tbody
+            - Account.all.each do |account|
+              %tr
+                %td
+                  = image_tag account.avatar_url(:tiny_thumb)
+                %td
+                  %p= account.first_name
+                %td
+                  %p= account.last_name
+                %td
+                  %p= account.email
+                %td
+                  %p= account.linked_in
+                %td
+                  %p Alumni

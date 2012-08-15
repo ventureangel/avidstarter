@@ -8,17 +8,35 @@
               = image_tag project.logo_url(:small_thumb)
             .span10
               %b.caret{:style => "float:right"}
+              %p
               %h4= project.business_name
-              %h7{:style => "color: #444444"}
-                = "project progress:" 
-              / = render :partial => "users/projects/project_progress", :locals => {:project => project}
+              / %h7{:style => "color: #444444"}
+              /   = "project progress:" 
+              /   = render :partial => "users/projects/project_progress", :locals => {:project => project}
         %ul.dropdown-menu.pull-right
           %li
             %center
-              = image_tag project.logo_url(:thumb)
+              %a{:href => "#{edit_project_path(project)}", :style => "border-style: none;"}
+                = image_tag project.logo_url(:thumb)
           .divider
           %li
-            Test
+            %a{:href => "#{edit_project_path(project, :step => 'General')}"}
+              %i.icon-book
+              General Information
+          %li
+            %a{:href => "#{edit_project_path(project, :step => 'Memberships')}"}
+              %i.icon-group
+              Team Information
+          %li
+            %a{:href => "#{edit_project_path(project, :step => 'Attachments')}"}
+              %i.icon-camera
+              Attach Media
+          %li
+            %a{:href => "#{new_project_notification_path(project)}"}
+              %i.icon-bullhorn
+              Post New Notification
           .divider
           %li
-            Test
+            %a{:href => "#{project_path(project)}"}
+              %i.icon-eye-open
+              Project Overview

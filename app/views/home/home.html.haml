@@ -5,10 +5,19 @@
         .row-fluid
           .span12            
             - @invitations.each do |invitation|
-              %tr
-                %td= invitation.project.business_name
-                %td= link_to "Accept Invitation", membership_path(invitation, :membership => { :pending => false}), :method => :put
-                %td= link_to "Decline Invitation", membership_path(invitation), :method => :delete
+              .well_two{:style => "padding:10px;"}
+                .row-fluid
+                  .span10                  
+                    = "You've been invited to join: "
+                    %a{:href => "#{project_path(invitation.project.id)}"}
+                      = invitation.project.business_name
+                  .span2
+                    %div{:style => "float:right"}
+                      = "Invited on: " + invitation.created_at.strftime("%m/%d/%Y")
+                .minifont
+                  = link_to "#{raw('<i class = "icon icon-plus-sign"></i>')} Accept Invitation".html_safe, membership_path(invitation, :membership => { :pending => false}), :method => :put
+                  = "/"
+                  = link_to "#{raw('<i class = "icon icon-minus-sign"></i>')} Decline Invitation".html_safe, membership_path(invitation), :method => :delete
         
             %h3{:style => "margin-bottom:10px;"} Latest Projects at The University of Georgia
 
