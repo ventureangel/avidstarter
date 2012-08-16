@@ -1,7 +1,8 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :date, :description, :priority, :title, :notifier_id, :notifier_type, :notification_type
+  attr_accessible :date, :description, :priority, :title, :notifier_id, :notifier_type, :notification_type, :time
   validates :title, :description, :notifier_id, :notifier_type, :notification_type, :presence => true
   validates :date, :presence => true, :if => :event?
+  validates :time, :presence => true, :if => :event?
   validate :should_have_date?
 
   before_create :set_priority, :if => :admin?

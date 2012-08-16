@@ -3,5 +3,6 @@
     .row-fluid
       %h4= @notification.title
       %p= "Type: " + @notification.notification_type
-      %p= "Date & Time: " + @notification.date.strftime("%m/%d/%Y") unless @notification.date == nil
+      -unless @notification.date == nil && @notification.time == nil
+        %p= "Date & Time: " + @notification.date.strftime("%m/%d/%Y") + " (" + @notification.time.strftime('%I:%M %p') + ")"
       %p= "Description: " +  @notification.description

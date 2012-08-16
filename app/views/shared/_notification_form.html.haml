@@ -7,8 +7,11 @@
     = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :onchange => "showDiv(this)", :prompt => true, :class => "span12", :style => "width: 100%;"
     #notification_dateandtime{:style => "display:none;"}
       = n.label :date, "Event Date and Time"
-      = n.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "" }
-      = n.time_select :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "" }
+      .row-fluid
+        .span8
+          = n.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "", :class => "span12", :style => "width: 100%; display: inline-block;" }
+        .span4
+          = n.text_field :time, {:include_blank => true, :class => "timepicker1 span12", :value => "", :style => "width: 100%; display: inline-block;" }
   .span6
     = n.label :description
     = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"    
@@ -29,4 +32,12 @@
       {
           document.getElementById('notification_dateandtime').style.display = 'none';
       }
-  }
+  } 
+  
+  $(document).ready(function () { 
+    $('.timepicker1').timepicker({
+        minuteStep: 5,
+        showInputs: false,
+        disableFocus: true
+    });
+  });
