@@ -56,6 +56,5 @@
                 %td
                   %center
                     - if project.notifications.where(:notification_type => "Recruiting").count > 0
-                      = link_to "Yes", project_notifications_path(project)
-
+                      = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
         

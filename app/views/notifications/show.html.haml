@@ -3,7 +3,7 @@
     .row-fluid
       %h4= @notification.title
       %p= "Type: " + @notification.notification_type
-      %p= "Date & Time: " + @notification.date.strftime("%m/%d/%Y")
+      %p= "Date & Time: " + @notification.date.strftime("%m/%d/%Y") unless @notification.date == nil
       %p= "Description: " +  @notification.description
 .span3
   = render :partial => "home/notifications"

@@ -8,7 +8,9 @@ class Notification < ActiveRecord::Base
 
   belongs_to :notifier, :polymorphic => true
 
-
+  #this allows us to find norrow down notifications with a Recruiting notification type.
+  scope :recruitment, where(:notification_type => "Recruiting")
+  
   def admin?
     if notifier_type == 'Account'
       return self.notifier.profile_type == 'Admin'

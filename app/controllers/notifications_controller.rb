@@ -6,7 +6,11 @@ class NotificationsController < ApplicationController
       @is_project = true
       @notifier = Project.find(params[:project_id])
       @project = @notifier
-      @notifications =  @notifier.notifications    
+      if params[:notification_type].present?
+        @notifications = @notifier.notifications.recruitment.all
+      else
+        @notifications =  @notifier.notifications
+      end
     elsif params[:account_id]
       @notifier = Account.find(params[:account_id]) 
       @project = @notifier 
@@ -91,4 +95,5 @@ class NotificationsController < ApplicationController
         return false
       end
     end
+    
 end
