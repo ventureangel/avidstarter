@@ -10,7 +10,7 @@ class CreateCompetitions < ActiveRecord::Migration
       
       t.boolean :accepting_business_plans, :default => false
       t.string :prize
-      t.text :competiton_details
+      t.text :competition_details
       t.text :requirements
       
       t.timestamps

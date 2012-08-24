@@ -75,7 +75,7 @@ ActiveRecord::Schema.define(:version => 20120824175559) do
     t.string   "location"
     t.boolean  "accepting_business_plans", :default => false
     t.string   "prize"
-    t.text     "competiton_details"
+    t.text     "competition_details"
     t.text     "requirements"
     t.datetime "created_at",                                  :null => false
     t.datetime "updated_at",                                  :null => false
