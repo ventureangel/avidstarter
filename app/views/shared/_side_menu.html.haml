@@ -34,10 +34,11 @@
       %a{:href => project_comments_path(@project)}
         %i.icon-comments-alt
         Comments
-    %li
-      %a{:href => project_notifications_path(@project)}
-        %i.icon-bullhorn
-        Notifications
+    - unless @project.notifications.count == 0 or nil
+      %li
+        %a{:href => project_notifications_path(@project)}
+          %i.icon-bullhorn
+          Notifications
     -unless controller.controller_name == "projects" && controller.action_name == "show"
       %li.divider
       %li.nav-header
