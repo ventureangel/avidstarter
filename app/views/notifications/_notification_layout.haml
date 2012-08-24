@@ -3,5 +3,5 @@
   %strong.minifont= "Time/Date: "
   .minifont{:style => "display: inline-block;"}="#{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
   %br
-%strong.minifont= "Description:"
-%p.minifont= n.description
+/ %strong.minifont= "Description:"
+= simple_format(n.description, :class => 'minifont')

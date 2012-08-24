@@ -13,8 +13,27 @@
           .span12
             - @notifications.each do |n|
               .well_two{:style => "padding:10px;"}
-                %h4= link_to n.title, notification_path(n)
-                %p= "Type: " + n.notification_type
-                %p= "Description: " +  n.description
+                -if n.notification_type == "Event"
+                  .row-fluid
+                    .span11
+                      %h4= link_to n.title, notification_path(n)
+                      %p= "Type: " + n.notification_type
+                      -if n.date == nil || n.time == nil
+                        %br
+                      -else
+                        %p= "Time: #{n.time.strftime("%I:%M %p")}"
+                    .span1
+                      .cal-container
+                        .date
+                          %p
+                            ="#{n.date.strftime("%d")}"
+                            %span= "#{n.date.strftime("%b")}"
+                  .row-fluid
+                    .span12
+                      = simple_format(n.description)
+                -else
+                  %h4= link_to n.title, notification_path(n)
+                  %p= "Type: " + n.notification_type
+                  = simple_format(n.description)
     .span3
       =render 'shared/side_menu'

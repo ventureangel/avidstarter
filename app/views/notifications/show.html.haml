@@ -5,4 +5,4 @@
       %p= "Type: " + @notification.notification_type
       -unless @notification.date == nil && @notification.time == nil
         %p= "Date & Time: " + @notification.date.strftime("%m/%d/%Y") + " (" + @notification.time.strftime('%I:%M %p') + ")"
-      %p= "Description: " +  @notification.description
+      = simple_format h (@notification.description)
