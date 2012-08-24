@@ -17,6 +17,7 @@ class NotificationsController < ApplicationController
       @notifications =  @notifier.notifications       
     elsif
       @notifications = Notification.all
+      @notification_date = Notification.count(:order => 'DATE(created_at) DESC', :group => ["DATE(created_at)"])
     end  
     
     @breadcrumb_name = "View Notifications"  

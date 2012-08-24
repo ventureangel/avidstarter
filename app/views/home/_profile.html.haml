@@ -9,15 +9,11 @@
           %dt Name:
           %dd= current_account.name
           %dt Social:
-          -if current_account.linked_in == nil
-            %dd Please edit your profile to update
+          -if current_account.linked_in? == false
+            %dd Please edit your profile to add your LinkedIn account
           -else
             %dd
-              = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-twitter-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-facebook-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-github-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-google-plus-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
+              = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')} LinkedIn".html_safe, linkedinurl(current_account.linked_in), :target => "_blank"
   .sidecontent_bar{:style => "margin-top:10px;"}
     .row-fluid
       .span12{}

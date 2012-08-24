@@ -6,12 +6,13 @@
       = membership.account.name
       .minifont= "Joined: #{(membership.created_at).strftime("%m/%d/%Y")}"
       .minifont
-        = link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, linkedinurl(membership.account.linked_in), :target => "_blank"
+        -if membership.account.linked_in? 
+          = link_to "#{raw('<i class="icon-linkedin-sign"></i>')} Linked In".html_safe, linkedinurl(membership.account.linked_in), :target => "_blank"
+          = "  /  "
         -if active_member?(@project)
           = "  /  "
           = link_to "#{raw('<i class="icon-remove-sign"></i>')} Remove Member".html_safe, membership_path(membership), :confirm => "Are you sure you want to delete this membership?", :method => :delete
         -else
-          = "  /  "
           %a{:href => "mailto:#{membership.account.email}"}
             %i.icon-envelope
             Email User

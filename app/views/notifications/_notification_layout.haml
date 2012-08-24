@@ -1,7 +1,7 @@
-%h4= link_to n.title, notification_path(n)
-%strong.minifont= "( #{n.notification_type} )"
-%br
+%h5= link_to n.title, notification_path(n)
 -unless n.date == nil || n.time == nil
-  %strong.minifont= "Time/Date: #{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
-%strong.minifont= "Description"
+  %strong.minifont= "Time/Date: "
+  .minifont{:style => "display: inline-block;"}="#{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
+  %br
+%strong.minifont= "Description:"
 %p.minifont= n.description
