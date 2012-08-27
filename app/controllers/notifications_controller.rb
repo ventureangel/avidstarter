@@ -46,7 +46,23 @@ class NotificationsController < ApplicationController
   def create
     notifier_type = params[:notification][:notifier_type]
     @notification = Notification.new(params[:notification])
-   
+    @breadcrumb_name = "New Notification"
+    
+    @is_project = false
+    if params[:project_id]
+      @is_project = true
+      @notifier = current_account.projects.find(params[:project_id])
+      @project = @notifier
+    elsif params[:account_id]
+      if current_account.id != params[:account_id].to_i
+        flash[:warning] = "You can only post notifications for your own account"
+        redirect_to :root
+      else
+        @notifier = current_account
+      end
+    end
+    
+    
     if notifier_type == "Project"
       @notifier = current_account.projects.find(params[:notification][:notifier_id].to_i)
     elsif notifier_type == "Account"
@@ -79,7 +95,7 @@ class NotificationsController < ApplicationController
   end
 
   def show
-    @notification = Notification.find(params[:id])
+    @notification = Notification.find(params[:id])    
   end
 
   def destroy

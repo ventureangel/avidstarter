@@ -6,8 +6,10 @@
         %a{:href => "#{project_path(project)}", :style => "text-decoration:none; color: #222222"}
           %div{:class => "project#{project.id}_container"}
             %center
-              =image_tag project.logo_url(:thumb)
-              / %img{:src => "aimage/va.png", :class => "imageborder"}
+              - if project.logo?
+                = image_tag project.logo_url(:thumb)
+              - else
+                %img{:src => "/assets/project_default.png"}
             %center
               %h3= project.business_name
             %h6 
