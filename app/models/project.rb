@@ -47,6 +47,18 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def complete?
+    return id.present? && logo.present?
+  end
+
+  def publish!
+    self.published = true if self.complete?
+  end
+
+  def unpublish!
+    self.published = false
+  end
+
   private
     def membership_already_exists?
       errors.add(:member, "already added to project") if @membership_exists

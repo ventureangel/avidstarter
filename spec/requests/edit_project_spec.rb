@@ -70,10 +70,10 @@ describe "Edit Project" do
     
   end
 
-  it 'should be limited to 5 attachments' do
+  it 'should be limited to 6 attachments' do
     visit edit_project_path(@project, :step => 'Attachments')
     i = 1
-    while i < 6
+    while i < 7
       field = "input[name='project[attachments_attributes][#{i-1}][file]']"  
       find(field).set("/home/squizzleflip/Pictures/glados#{i}.jpg")
       click_button "Save Media"
@@ -116,4 +116,13 @@ describe "Edit Project" do
     page.should have_content "Recruiting notification successfully posted"
   end
 
+  it 'should be publishable if complete' do
+    click_link 'Publish'
+    page.should have_content 'Your project has been published.'
+  end
+
+  it 'should be unpublishable' do
+    click_link 'Unpublish'
+    page.should have_content 'Your project has been un-published.'
+  end
 end

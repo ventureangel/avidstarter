@@ -11,6 +11,10 @@ Avidstarter::Application.routes.draw do
    resources :comments, :only => [:index, :create, :destroy]
   end
   resources :projects do
+    member do
+      post :publish
+      post :unpublish
+    end
     resources :notifications
     resources :comments, :only => [:index, :create, :destroy]
   end

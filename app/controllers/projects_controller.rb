@@ -60,7 +60,29 @@ class ProjectsController < ApplicationController
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot access this project.'
   end
-  
+
+  # Publishes a project.
+  def publish
+    @project = current_account.projects.find(params[:id])
+    if @project.publish!
+      flash[:notice] = 'Your project has been published.'
+    else
+      flash[:warning] = 'Your project was not published. It must be completed to be published.'
+    end
+    redirect_to root_url
+  end
+
+  # Un-Publishes a project.
+  def unpublish
+    @project = current_account.projects.find(params[:id])
+    if @project.unpublish!
+      flash[:notice] = 'Your project has been un-published.'
+    else
+      flash[:warning] = 'Your project was not un-published.'
+    end
+    redirect_to root_url
+  end
+
   private
   
   def check_if_contributor

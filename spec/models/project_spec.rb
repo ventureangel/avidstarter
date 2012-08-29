@@ -30,7 +30,14 @@ describe Project do
     project.published.should be false
   end
 
-  it 'should be publishable' do
+  it 'should be complete if it has an id and a logo' do
+    project.stub(:id).and_return(true)
+    project.stub(:logo).and_return(true)
+    project.complete?.should be true
+  end
+
+  it 'should be publishable if complete' do
+    project.stub(:complete?).and_return(true)
     project.publish!
     project.published.should be true 
   end
