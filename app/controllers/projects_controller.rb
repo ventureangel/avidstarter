@@ -61,6 +61,10 @@ class ProjectsController < ApplicationController
       return redirect_to root_url, :alert => 'You cannot access this project.'
   end
   
+  def index
+    @projects = Project.all
+  end
+  
   private
   
   def check_if_contributor

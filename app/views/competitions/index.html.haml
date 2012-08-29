@@ -1,0 +1,51 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h4.edit_header All Published Projects at The University of Georgia
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                Competition
+              %th
+                Competition Date
+              %th
+                Location
+              %th
+                %center
+                  Collecting Business Plans?
+              %th
+                %center
+                  No. of Submissions
+              %th
+                %center
+                  Prize
+          %tbody
+            - @competitions.each do |competition|
+              %tr
+                %td
+                  = image_tag competition.logo_url(:tiny_thumb)
+                  %a{:href => competition_path(competition)}
+                    = competition.competition_name
+                %td
+                  = competition.date.strftime("%m/%d/%Y")
+                %td
+                  %address
+                    = competition.location
+                    %br
+                    = competition.city + ", "
+                    = competition.state
+                     
+                %td
+                  %center
+                    - if competition.accepting_business_plans? == true
+                      Yes
+                    - else
+                      No
+                %td
+                  %center
+                    = ""
+                %td
+                  %center
+                    = competition.prize

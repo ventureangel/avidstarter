@@ -1,0 +1,31 @@
+#mainhub.span9
+  .row-fluid
+    .span9
+      .well
+        .row-fluid{:style => "margin-bottom:18px;"}
+          .span12
+            %h1.projectnamefont{:style => "text-align: top;"}= @competition.competition_name
+        
+        .row-fluid
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-info-sign"></i>')} Competition Information".html_safe
+            %h5
+              %i.icon-pushpin
+              Details
+            %p
+
+            %h5
+              %i.icon-briefcase
+              Requirements
+            %p
+
+            %h5
+              %i.icon-map-marker
+              
+            %p
+              
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Team Members".html_safe
+            
+    .span3
+      
