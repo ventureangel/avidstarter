@@ -5,7 +5,7 @@
       %p= "Type: " + @notification.notification_type
       -unless @notification.date == nil || @notification.time == nil
         %p= "Date & Time of Event: " + @notification.date.strftime("%m/%d/%Y") + " (" + @notification.time.strftime('%I:%M %p') + ")"
-      -if @notification.notifier_type = "Project"
+      -if @notification.notifier_type == "Project"
         %p= "Posted By: " + @notification.notifier.business_name
       -else
         %p= "Posted By: " + @notification.notifier.name
