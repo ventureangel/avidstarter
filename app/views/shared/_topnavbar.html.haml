@@ -12,11 +12,29 @@
     
       .nav_collapse.nav-collapse.collapse.in
         - if account_signed_in?
-          %ul.nav
-            %li
-              %a{:href => "#{root_url}"} 
-                %i.icon-beaker
-                Projects
+          -if current_account.profile_type == "Admin"
+            %ul.nav
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  %i.icon-beaker
+                  Projects
+                  %b.caret
+                %ul.dropdown-menu
+                  %li.nav-header Project Options
+                  %li
+                    %a{:href => "#{projects_path}"} 
+                      %i.icon-beaker
+                      View All Projects
+                  %li
+                    %a{:href => "#{root_url}"} 
+                      %i.icon-beaker
+                      View Published Projects
+          -else
+            %ul.nav
+              %li
+                %a{:href => "#{root_url}"} 
+                  %i.icon-beaker
+                  Projects
           %ul.nav
             %li
               %a{:href => "#{notifications_path}"} 

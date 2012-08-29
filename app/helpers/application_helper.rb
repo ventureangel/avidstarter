@@ -16,7 +16,7 @@ module ApplicationHelper
   end
   
   def all_projects
-    @all_projects = Project.all 
+    @all_projects = Project.where(:published => true)
   end
   
   def active_member?(project)
@@ -26,4 +26,5 @@ module ApplicationHelper
   def linkedinurl(linkedin)
     "http://www.linkedin.com/in/#{linkedin}"
   end
+  
 end

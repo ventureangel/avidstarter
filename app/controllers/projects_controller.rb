@@ -57,8 +57,9 @@ class ProjectsController < ApplicationController
   
   def show
     @project = Project.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
-    rescue ActiveRecord::RecordNotFound
+    unless @project.published || current_account.projects.include?(@project)
       return redirect_to root_url, :alert => 'You cannot access this project.'
+    end
   end
 
   # Publishes a project.
@@ -84,7 +85,12 @@ class ProjectsController < ApplicationController
   end
   
   def index
-    @projects = Project.all
+    if current_account.profile_type == "Admin"
+      @projects = Project.all
+    else
+      flash[:warning] = 'You cannot access this page.'
+      redirect_to root_url
+    end
   end
   
   private
