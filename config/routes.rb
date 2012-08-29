@@ -1,4 +1,6 @@
 Avidstarter::Application.routes.draw do
+  resources :submissions
+
   devise_for :accounts, :controllers => {:registrations => 'accounts'}
   devise_scope :account do
     get "/sign_in", :to => "devise/sessions#new"
