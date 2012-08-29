@@ -12,3 +12,7 @@ $(document).ready ->
   $(".child_reply_container").hide()
   $(".comment_reply_link").click ->
     $(this).next(".child_reply_container").slideToggle 300
+
+# this allows popups to be ready
+$(document).ready ->
+  $('.alert').tooltip()

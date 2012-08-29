@@ -10,26 +10,24 @@
               %i.icon-bullhorn
               Post New Notification
         .row-fluid
-          .span12
-            .alert.alert-error{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
-              %strong.minifont Alert Notification
-              .minifont{:style => "display: inline-block;"}
-                This notification type is reserved for priority messages issued by professors. It can be recognized by the red notification bubble.  
-            .alert.alert-warning{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
-              %strong.minifont Event Notification
-              .minifont{:style => "display: inline-block;"}
-                This notification type is reserved for messages informing users about time/date sensitive events. It can be recognized by the yellow notification bubble.
-            .alert.alert-success{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
-              %strong.minifont Recruiting Notification
-              .minifont{:style => "display: inline-block;"}
-                This notification type is reserved for project hiring notifications. If you are interested in working with a particular project, look for the green notification bubble.
-            .alert.alert-info{:style => "margin-top:10px; margin-bottom:10px; padding:5px;"}
-              %strong.minifont Announcement Notification
-              .minifont{:style => "display: inline-block;"}
-                This notification type is reserved for general announcements, milestones, landmarks. It can be recognized by the blue notification bubble.
+          .span3
+            .alert.alert-error{:style => "margin-top:10px; margin-bottom:0px; padding:5px;", :rel => "tooltip", "data-placement" => "bottom", "data-original-title" => "This notification type is reserved for priority messages issued by professors. It can be recognized by the red notification bubble."}
+              %center
+                %strong.minifont Alert Notification
+          .span3
+            .alert.alert-warning{:style => "margin-top:10px; margin-bottom:0px; padding:5px;", :rel => "tooltip", "data-placement" => "bottom", "data-original-title" => "This notification type is reserved for messages informing users about time/date sensitive events. It can be recognized by the yellow notification bubble."}
+              %center
+                %strong.minifont Event Notification
+          .span3  
+            .alert.alert-success{:style => "margin-top:10px; margin-bottom:0px; padding:5px;", :rel => "tooltip", "data-placement" => "bottom", "data-original-title" => "This notification type is reserved for project hiring notifications. If you are interested in working with a particular project, look for the green notification bubble."}
+              %center
+                %strong.minifont Recruiting Notification
+          .span3  
+            .alert.alert-info{:style => "margin-top:10px; margin-bottom:10px; padding:5px;", :rel => "tooltip", "data-placement" => "bottom", "data-original-title" => "This notification type is reserved for general announcements, milestones, landmarks. It can be recognized by the blue notification bubble."}
+              %center
+                %strong.minifont Announcement Notification                
         .row-fluid
-          .span12
-                        
+          .span12      
             - @notification_date.each do |u|
               %h4{:style => "margin-bottom: 10px"}= u[0]
               - @notifications.each do |n|

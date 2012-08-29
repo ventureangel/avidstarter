@@ -21,6 +21,10 @@
               %th
                 %center
                   Prize
+              -if current_account.profile_type == "Admin"
+                %th
+                  %center
+                    Admin
           %tbody
             - @competitions.each do |competition|
               %tr
@@ -35,8 +39,7 @@
                     = competition.location
                     %br
                     = competition.city + ", "
-                    = competition.state
-                     
+                    = competition.state 
                 %td
                   %center
                     - if competition.accepting_business_plans? == true
@@ -49,3 +52,7 @@
                 %td
                   %center
                     = competition.prize
+                -if current_account.profile_type == "Admin"
+                  %td
+                    %center
+                      = link_to "Edit", edit_competition_path(competition)
