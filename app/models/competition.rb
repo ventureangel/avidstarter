@@ -5,7 +5,7 @@ class Competition < ActiveRecord::Base
   
   has_many :submissions, :dependent => :destroy
   has_many :projects, :through => :submissions
-
+  has_many :judges
 
   mount_uploader :competition_logo, ImageUploader
 

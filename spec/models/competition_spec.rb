@@ -10,5 +10,7 @@ describe Competition do
   it {should validate_presence_of :competition_details}
   it {should validate_presence_of :requirements}
 
+  it {should respond_to :judges}
+
 end
 
