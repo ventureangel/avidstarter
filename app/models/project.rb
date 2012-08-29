@@ -1,5 +1,5 @@
 class Project < ActiveRecord::Base
-  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url, :business_plan, :video_url, :invitee_attributes, :attachments_attributes
+  attr_accessible :business_name, :industry, :city, :state, :business_concept, :logo, :remote_logo_url, :business_plan, :video_url, :invitee_attributes, :attachments_attributes, :published, :published_at
   
   mount_uploader :logo, ImageUploader
   mount_uploader :business_plan, BusinessPlanUploader
@@ -54,11 +54,12 @@ class Project < ActiveRecord::Base
   end
 
   def publish!
-    self.published = true if self.complete?
+    return false if !complete?
+    self.update_attributes(:published => true, :published_at => Time.now.utc)
   end
 
   def unpublish!
-    self.published = false
+    self.update_attributes(:published => false)
   end
 
   def contact_emails

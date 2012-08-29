@@ -95,7 +95,7 @@ describe "Edit Project" do
 
   it 'should be able to receive comments from accounts' do
     visit project_comments_path(@project)
-    find("input[name='comment[body]']").set("I'm making a comment!")
+    find("textarea[name='comment[body]']").set("I'm making a comment!")
     click_button "Post Comment"
     page.should have_content "Comment successfully posted" 
   end
@@ -117,12 +117,19 @@ describe "Edit Project" do
   end
 
   it 'should be publishable if complete' do
-    click_link 'Publish'
-    page.should have_content 'Your project has been published.'
+    @project.stub(:complete?).and_return(true)
+    @project.stub(:publish!).and_return(true)
+    click_button 'Publish Project'
+    page.should have_content 'Your project has been published.'   
+    pending
   end
 
   it 'should be unpublishable' do
-    click_link 'Unpublish'
+    @project.stub(:unpublish!).and_return(true)
+    @project.stub(:complete?).and_return(true)
+    @project.publish!
+    visit edit_project_path(@project)
+    click_button 'Unpublish Project'
     page.should have_content 'Your project has been un-published.'
   end
 end

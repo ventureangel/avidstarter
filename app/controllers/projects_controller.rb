@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
     if @project.publish!
       flash[:notice] = 'Your project has been published.'
     else
-      flash[:warning] = 'Your project was not published. It must be completed to be published.'
+      flash[:warning] = 'Your project was not published. It must be saved and have a logo to be published.'
     end
     redirect_to root_url
   end

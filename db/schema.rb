@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120824175559) do
+ActiveRecord::Schema.define(:version => 20120829174433) do
 
   create_table "accounts", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -124,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20120824175559) do
     t.string   "business_plan"
     t.text     "video_url"
     t.boolean  "published",        :default => false
+    t.datetime "published_at"
   end
 
 end
