@@ -12,12 +12,12 @@
             %h5
               %i.icon-pushpin
               Details
-            %p
+            %p= simple_format h (@competition.competition_details)
 
             %h5
               %i.icon-briefcase
               Requirements
-            %p
+            %p= simple_format h (@competition.requirements)
 
             %h5
               %i.icon-map-marker
@@ -25,7 +25,11 @@
             %p
               
           .span6
-            %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Team Members".html_safe
+            %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Competition Panel".html_safe
+            
+            - if @competition.accepting_business_plans?
+              %p poop
+            - else 
             
     .span3
       
