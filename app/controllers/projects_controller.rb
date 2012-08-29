@@ -57,7 +57,7 @@ class ProjectsController < ApplicationController
   
   def show
     @project = Project.find(params[:id], :include => [:attachments, :invitations, :comment_threads])
-    unless @project.published
+    unless @project.published || current_account.projects.include?(@project)
       return redirect_to root_url, :alert => 'You cannot access this project.'
     end
   end
