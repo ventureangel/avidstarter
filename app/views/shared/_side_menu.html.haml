@@ -40,7 +40,19 @@
           %a{:href => project_notifications_path(@project)}
             %i.icon-bullhorn
             Notifications
-      -unless controller.controller_name == "projects" && controller.action_name == "show"
+      -if controller.controller_name == "projects" && controller.action_name == "show"
+        -if active_member?(@project)
+          %li.divider
+          %li.nav-header
+            Project Publish Options
+          %center
+          -unless @project.published #I had to format it like this because I couldn't figure out how to put a :method => :post in %a{href 
+            %li
+              = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-danger", :method => :post
+          -else
+            %li
+              = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-danger", :method => :post
+      -else
         %li.divider
         %li.nav-header
           Project Information
@@ -58,7 +70,6 @@
           %i.icon-map-marker
           Location
         %li.minifont= "#{@project.city}, #{@project.state}"
-    
     -else
       %li.nav-header
         Project Overview
@@ -84,10 +95,14 @@
         %a{:href => new_project_notification_path(@project)}
           %i.icon-bullhorn
           Post New Notification
+      %li.divider
+      %li.nav-header
+        Project Publish Options
+      %center
       -unless @project.published #I had to format it like this because I couldn't figure out how to put a :method => :post in %a{href 
         %li
-          %i.icon-bullhorn= button_to "Publish Project", publish_project_path(@project), :method => :post
+          = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-danger", :method => :post
       -else
         %li
-          %i.icon-bullhorn= button_to "Unpublish Project", unpublish_project_path(@project), :method => :post
+          = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-danger", :method => :post
 
