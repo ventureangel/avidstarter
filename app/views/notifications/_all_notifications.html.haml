@@ -2,8 +2,13 @@
   .row-fluid
     .span12
       .well
-        %h3{:style => "margin-bottom:10px;"} Latest Notifications at The University of Georgia
-        
+        .row-fluid
+          .span9
+            %h3{:style => "margin-bottom:10px;"} Latest Notifications at The University of Georgia
+          .span3
+            %a.btn.btn-danger{:href => "#{new_account_notification_path(current_account.id)}", :style => "float:right;"}
+              %i.icon-bullhorn
+              Post New Notification
         .row-fluid
           .span12
             .alert.alert-error{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
@@ -50,52 +55,3 @@
                     -else
                       .alert.alert-info{:style => "margin-top:0px; margin-bottom:10px;"}
                         =render 'notification_layout', :n => n
-              
-    / .span4
-    /   .well
-    /     .row-fluid{:style => "margin-bottom:18px;"}
-    /       .span12
-    /         %h4
-    /           %i.icon-asterisk
-    /           Events
-    /         
-    /         - @notifications.each do |n|
-    /           -if n.notification_type == "Event"
-    /             -if n.priority?
-    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n
-    /             -else
-    /               .alert.alert-warning{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n
-    / .span4
-    /   .well
-    /     .row-fluid{:style => "margin-bottom:18px;"}
-    /       .span12
-    /         %h4 
-    /           %i.icon-bullhorn
-    /           Recruiting
-    /           
-    /         - @notifications.each do |n|
-    /           -if n.notification_type == "Recruiting"
-    /             -if n.priority?
-    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n
-    /             -else
-    /               .alert.alert-success{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n
-    / .span4
-    /   .well
-    /     .row-fluid{:style => "margin-bottom:18px;"}
-    /       .span12
-    /         %h4 
-    /           %i.icon-globe
-    /           Announcements
-    /         
-    /         - @notifications.each do |n|
-    /           -if n.notification_type == "Announcement"
-    /             -if n.priority?
-    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n
-    /             -else
-    /               .alert.alert-info{:style => "margin-top:18px; margin-bottom:0px;"}
-    /                 =render 'notification_layout', :n => n

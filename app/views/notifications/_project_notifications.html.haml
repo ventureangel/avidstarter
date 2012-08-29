@@ -21,7 +21,7 @@
                       -if n.date == nil || n.time == nil
                         %br
                       -else
-                        %p= "Time: #{n.time.strftime("%I:%M %p")}"
+                        %p= "Date & Time of Event: #{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
                     .span1
                       .cal-container
                         .date

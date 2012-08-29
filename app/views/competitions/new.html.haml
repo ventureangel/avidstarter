@@ -1,0 +1,55 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h1.projectnamefont New Competition
+    = form_for @competition do |f|
+      .row-fluid{:style => "margin-top:18px;"}
+        .span12
+          = f.error_messages        
+      .row-fluid
+        .span6
+          %h4.edit_header General Information
+          = f.label :competition_name
+          = f.text_field :competition_name, :class => "span12", :style => "width: 100%;"
+          = f.label :logo, "Competition Logo"
+          = f.file_field :logo, :style => "padding-bottom: 10px;"
+          %label.checkbox
+            = f.check_box :accepting_business_plans
+            = f.label :accepting_business_plans, "Accepting Business Plan Submissions?"
+          %h4.edit_header{:style => "margin-top:18px;"} Date, Time and Location
+          = f.label :date, "Event Date and Time"
+          .row-fluid
+            .span8
+              = f.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "", :class => "span12", :style => "width: 100%; display: inline-block;" }
+            .span4
+              = f.text_field :time, {:include_blank => true, :class => "timepicker1 span12", :value => "", :style => "width: 100%; display: inline-block;" }
+          = f.label :city
+          = f.text_field :city, :class => "span12", :style => "width: 100%;"
+          = f.label :state
+          = f.select :state, STATES, {:include_blank => 'No Selection'}, :class => "span12", :style => "width: 100%;"
+          = f.label :location, "Location (Building Name or Room Number)"
+          = f.text_field :location, :class => "span12", :style => "width: 100%;"
+        .span6
+          %h4.edit_header Additional Information
+          = f.label :business_plan, "Competition Attachment"
+          = f.file_field :business_plan, :style => "padding-bottom: 10px;"
+          = f.label :requirements, "Competition Requirements"
+          = f.text_area :requirements, :class => "comment span12", :style => "width: 100%; max-width: 100%;", :rows => "5"
+          = f.label :competition_details, "Competition Details"
+          = f.text_area :competition_details, :class => "comment span12", :style => "width: 100%; max-width: 100%;", :rows => "5"
+          = f.label :prize, "Grand Prize"
+          = f.text_field :prize, :class => "span12", :style => "width: 100%;"
+      .row-fluid
+        .span12
+          %center
+            = f.submit "Save Competition", :class => "btn btn-danger btn-small btn-project"
+
+:javascript
+  $(document).ready(function () { 
+    $('.timepicker1').timepicker({
+        minuteStep: 5,
+        showInputs: false,
+        disableFocus: true
+    });
+  });

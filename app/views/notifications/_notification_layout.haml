@@ -1,14 +1,18 @@
 %h5= link_to n.title, notification_path(n)
--if n.date == nil || n.time == nil
-  %strong.minifont= "Posted By: "
-  .minifont{:style => "display: inline-block;"}= n.notifier.name
--else
-  %strong.minifont= "Posted By: "
-  .minifont{:style => "display: inline-block;"}= n.notifier.business_name
-  %br
+-unless n.date == nil || n.time == nil
   %strong.minifont= "Date & Time of Event: "
   .minifont{:style => "display: inline-block;"}="#{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
   %br
+
+%strong.minifont= "Posted By: "
+- if n.notifier_type == "Project"
+  .minifont{:style => "display: inline-block;"}= n.notifier.business_name
+- elsif n.notifier_type == "Account"
+  .minifont{:style => "display: inline-block;"}= n.notifier.name
   
+%br
+
 / %strong.minifont= "Description:"
-= simple_format(n.description, :class => 'minifont')
+.minifont
+  = truncate_notification(n.description) + "... "
+  = link_to "#{raw('<i class="icon-zoom-in"></i>')} Read More".html_safe, notification_path(n)

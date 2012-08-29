@@ -8,6 +8,8 @@ Avidstarter::Application.routes.draw do
   end
   get "home/home"
   
+  resources :competitions
+  
   resources :accounts do
    resources :notifications
    resources :comments, :only => [:index, :create, :destroy]

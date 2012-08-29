@@ -82,7 +82,11 @@ class ProjectsController < ApplicationController
     end
     redirect_to root_url
   end
-
+  
+  def index
+    @projects = Project.all
+  end
+  
   private
   
   def check_if_contributor

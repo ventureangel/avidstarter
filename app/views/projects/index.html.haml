@@ -1,0 +1,40 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h4.edit_header All Published Projects at The University of Georgia
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                Project Name
+              %th
+                Date Started
+              %th
+                %center
+                  Team Members
+              %th
+                %center
+                  Recruiting?
+              %th
+                %center
+                  No. of Competitions Entered
+          %tbody
+            - @projects.each do |project|
+              %tr
+                %td
+                  = image_tag project.logo_url(:tiny_thumb)
+                  %a{:href => project_path(project.id)}
+                    = project.business_name
+                %td
+                  = project.created_at.strftime("%d/%m/%Y")
+                %td
+                  %center
+                    = project.memberships.where(:pending => "false").count
+                %td
+                  %center
+                    - if project.notifications.where(:notification_type => "Recruiting").count > 0
+                      = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
+                %td
+                  %center
+                    1

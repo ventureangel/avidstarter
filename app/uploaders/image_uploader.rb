@@ -62,7 +62,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   # Adding a default image
   def default_url
-    [version_name, "default.png"].compact.join('_')
+    [mounted_as, version_name, "default.png"].compact.join('_')
   end
   
   # Add a white list of extensions which are allowed to be uploaded.

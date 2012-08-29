@@ -3,9 +3,11 @@
     .row-fluid
       %h4= @notification.title
       %p= "Type: " + @notification.notification_type
-      -if @notification.date == nil || @notification.time == nil
-        %p= "Posted By: " + @notification.notifier.name
-      -else
-        %p= "Posted By: " + @notification.notifier.business_name
+      -unless @notification.date == nil || @notification.time == nil
         %p= "Date & Time of Event: " + @notification.date.strftime("%m/%d/%Y") + " (" + @notification.time.strftime('%I:%M %p') + ")"
+      -if @notification.notifier_type = "Project"
+        %p= "Posted By: " + @notification.notifier.business_name
+      -else
+        %p= "Posted By: " + @notification.notifier.name
+
       = simple_format h (@notification.description)
