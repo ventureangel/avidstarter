@@ -29,7 +29,7 @@
             - @competitions.each do |competition|
               %tr
                 %td
-                  = image_tag competition.logo_url(:tiny_thumb)
+                  = image_tag competition.competition_logo_url(:tiny_thumb)
                   %a{:href => competition_path(competition)}
                     = competition.competition_name
                 %td
