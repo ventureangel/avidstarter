@@ -42,7 +42,9 @@
                   %center
                     %p= account.projects.count
                 %td
-                  -if account.profile_type == "Viewer"
+                  -if account.profile_type == "Admin"
+                    %p Admin
+                  -elsif account.profile_type == "Viewer"
                     %p Alumni
                   -else
                     %p Student

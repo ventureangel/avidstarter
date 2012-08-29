@@ -27,29 +27,29 @@
               %a{:href => "#{accounts_path}"} 
                 %i.icon-group
                 People
-          / need to add if statement to make this render only is account is admin
-          %ul.nav
-            %li.dropdown
-              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
-                %i.icon-trophy
-                Competitions
-                %b.caret
-              %ul.dropdown-menu
-                %li.nav-header Competition Options
-                %li
-                  %a{:href => "#{competitions_path}"} 
-                    %i.icon-trophy
-                    View Ongoing Competitions
-                %li
-                  %a{:href => "#{new_competition_path}"} 
-                    %i.icon-plus-sign
-                    Post New Competition
-          /else
-          %ul.nav
-            %li
-              %a{:href => "#{accounts_path}"} 
-                %i.icon-trophy
-                Competitions
+          -if current_account.profile_type == "Admin"
+            %ul.nav
+              %li.dropdown
+                %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                  %i.icon-trophy
+                  Competitions
+                  %b.caret
+                %ul.dropdown-menu
+                  %li.nav-header Competition Options
+                  %li
+                    %a{:href => "#{competitions_path}"} 
+                      %i.icon-trophy
+                      View Ongoing Competitions
+                  %li
+                    %a{:href => "#{new_competition_path}"} 
+                      %i.icon-plus-sign
+                      Post New Competition
+          -else
+            %ul.nav
+              %li
+                %a{:href => "#{competitions_path}"} 
+                  %i.icon-trophy
+                  Competitions
           %ul.nav.pull-right
             %li.divider-vertical
             %li.dropdown
