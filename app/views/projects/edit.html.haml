@@ -9,8 +9,6 @@
         .row-fluid
           .span12
             .row-fluid{:style => "margin-bottom:18px;"}
-              / .span2
-              /                 = image_tag @project.logo_url(:thumb) if @project.logo?
               .span12
                 %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
             = render "#{@breadcrumb_name.downcase}_form"

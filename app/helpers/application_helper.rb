@@ -20,6 +20,10 @@ module ApplicationHelper
   end
   
   def active_member?(project)
-    current_account.projects.include?(project)
+    current_account.projects.include?(project) if account_signed_in?
+  end
+  
+  def linkedinurl(linkedin)
+    "http://www.linkedin.com/in/#{linkedin}"
   end
 end

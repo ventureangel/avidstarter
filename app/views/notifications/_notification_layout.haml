@@ -1,0 +1,14 @@
+%h5= link_to n.title, notification_path(n)
+-if n.date == nil || n.time == nil
+  %strong.minifont= "Posted By: "
+  .minifont{:style => "display: inline-block;"}= n.notifier.name
+-else
+  %strong.minifont= "Posted By: "
+  .minifont{:style => "display: inline-block;"}= n.notifier.business_name
+  %br
+  %strong.minifont= "Date & Time of Event: "
+  .minifont{:style => "display: inline-block;"}="#{n.date.strftime("%m/%d/%Y")} (#{n.time.strftime("%I:%M %p")})"
+  %br
+  
+/ %strong.minifont= "Description:"
+= simple_format(n.description, :class => 'minifont')

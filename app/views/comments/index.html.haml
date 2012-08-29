@@ -6,9 +6,7 @@
           = render 'shared/breadcrumbs'
       .well
         .row-fluid{:style => "margin-bottom:18px;"}
-          .span2
-            = image_tag @commentable.logo_url(:thumb) if @commentable.logo?
-          .span10
+          .span12
             %h1.projectnamefont{:style => "text-align: top;"}= @commentable.business_name
         
         = render 'comments'

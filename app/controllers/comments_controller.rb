@@ -1,14 +1,17 @@
 class CommentsController < ApplicationController
   
   def index
-    if params[:project_id]
-      @commentable = Project.find(params[:project_id], :include => [:comment_threads])
-      @project = @commentable
+    if account_signed_in?
+      if params[:project_id]
+        @commentable = Project.find(params[:project_id], :include => [:comment_threads])
+        @project = @commentable
+      else
+        @commentable = Account.find(params[:account_id], :include => [:comment_threads])
+        @project = @commentable
+      end
     else
-      @commentable = Account.find(params[:account_id], :include => [:comment_threads])
-      @project = @commentable
+      return redirect_to :sign_in, :alert => 'You must sign-in to leave a comment'
     end
-    
     @breadcrumb_name = "Comments"
   end
 
@@ -20,7 +23,7 @@ class CommentsController < ApplicationController
     if @comment.save
       @comment.move_to_child_of(Comment.find(params[:comment][:parent_id])) if params[:comment][:parent_id].present?
       flash[:notice] = "Comment successfully posted"
-      redirect_to edit_project_path(@commentable)
+      redirect_to :back
     else
       flash[:warning] = "Comment not posted"
       redirect_to :back

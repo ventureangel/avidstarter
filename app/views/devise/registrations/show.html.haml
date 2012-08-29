@@ -1,0 +1,61 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      -unless @account.id == current_account.id
+        .span3
+          %h4.edit_header= "#{@account.first_name}'s Information"
+          .row_fluid
+            .span3
+              =image_tag @account.avatar_url(:thumb)
+            .span9
+              %dl{:style => "margin-bottom:0px; margin-top:0px;"}
+                %dt Name:
+                %dd= @account.name
+                %dt Social:
+                -if @account.linked_in == "" or nil
+                  %dd 
+                    = "No LinkedIn"
+                    = " / "
+                    %a{:href => "mailto:#{@account.email}"}
+                      %i.icon-envelope
+                      Email
+                -else
+                  %dd
+                    = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')} LinkedIn".html_safe, linkedinurl(@account.linked_in), :target => "_blank"
+                    = " / "
+                    %a{:href => "mailto:#{@account.email}"}
+                      %i.icon-envelope
+                      Email
+      
+      %div{ :class => @account.id == current_account.id ? 'span12' : 'span9' }
+        %h4.edit_header= "#{@account.first_name}'s Projects" 
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+                Project Name
+              %th
+                Date Started
+              %th
+                %center
+                  Team Members
+              %th
+                %center
+                  Recruiting?
+          %tbody
+            - @account.projects.each do |project|
+              %tr
+                %td
+                  = image_tag project.logo_url(:tiny_thumb)
+                  %a{:href => project_path(project.id)}
+                    = project.business_name
+                %td
+                  = project.created_at.strftime("%d/%m/%Y")
+                %td
+                  %center
+                    = project.memberships.where(:pending => "false").count
+                %td
+                  %center
+                    - if project.notifications.where(:notification_type => "Recruiting").count > 0
+                      = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
+        

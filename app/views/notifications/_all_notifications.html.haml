@@ -1,0 +1,101 @@
+#mainhub.span9
+  .row-fluid
+    .span12
+      .well
+        %h3{:style => "margin-bottom:10px;"} Latest Notifications at The University of Georgia
+        
+        .row-fluid
+          .span12
+            .alert.alert-error{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
+              %strong.minifont Alert Notification
+              .minifont{:style => "display: inline-block;"}
+                This notification type is reserved for priority messages issued by professors. It can be recognized by the red notification bubble.  
+            .alert.alert-warning{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
+              %strong.minifont Event Notification
+              .minifont{:style => "display: inline-block;"}
+                This notification type is reserved for messages informing users about time/date sensitive events. It can be recognized by the yellow notification bubble.
+            .alert.alert-success{:style => "margin-top:10px; margin-bottom:0px; padding:5px;"}
+              %strong.minifont Recruiting Notification
+              .minifont{:style => "display: inline-block;"}
+                This notification type is reserved for project hiring notifications. If you are interested in working with a particular project, look for the green notification bubble.
+            .alert.alert-info{:style => "margin-top:10px; margin-bottom:10px; padding:5px;"}
+              %strong.minifont Announcement Notification
+              .minifont{:style => "display: inline-block;"}
+                This notification type is reserved for general announcements, milestones, landmarks. It can be recognized by the blue notification bubble.
+        .row-fluid
+          .span12
+                        
+            - @notification_date.each do |u|
+              %h4{:style => "margin-bottom: 10px"}= u[0]
+              - @notifications.each do |n|
+                - if n.created_at.strftime("%Y-%m-%d") == u[0]
+                  -if n.notification_type == "Event"
+                    -if n.priority?
+                      .alert.alert-error{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+                    -else
+                      .alert.alert-warning{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+                  -elsif n.notification_type == "Recruiting"
+                    -if n.priority?
+                      .alert.alert-error{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+                    -else
+                      .alert.alert-success{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+                  -else n.notification_type == "Announcement"
+                    -if n.priority?
+                      .alert.alert-error{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+                    -else
+                      .alert.alert-info{:style => "margin-top:0px; margin-bottom:10px;"}
+                        =render 'notification_layout', :n => n
+              
+    / .span4
+    /   .well
+    /     .row-fluid{:style => "margin-bottom:18px;"}
+    /       .span12
+    /         %h4
+    /           %i.icon-asterisk
+    /           Events
+    /         
+    /         - @notifications.each do |n|
+    /           -if n.notification_type == "Event"
+    /             -if n.priority?
+    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n
+    /             -else
+    /               .alert.alert-warning{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n
+    / .span4
+    /   .well
+    /     .row-fluid{:style => "margin-bottom:18px;"}
+    /       .span12
+    /         %h4 
+    /           %i.icon-bullhorn
+    /           Recruiting
+    /           
+    /         - @notifications.each do |n|
+    /           -if n.notification_type == "Recruiting"
+    /             -if n.priority?
+    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n
+    /             -else
+    /               .alert.alert-success{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n
+    / .span4
+    /   .well
+    /     .row-fluid{:style => "margin-bottom:18px;"}
+    /       .span12
+    /         %h4 
+    /           %i.icon-globe
+    /           Announcements
+    /         
+    /         - @notifications.each do |n|
+    /           -if n.notification_type == "Announcement"
+    /             -if n.priority?
+    /               .alert.alert-error{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n
+    /             -else
+    /               .alert.alert-info{:style => "margin-top:18px; margin-bottom:0px;"}
+    /                 =render 'notification_layout', :n => n

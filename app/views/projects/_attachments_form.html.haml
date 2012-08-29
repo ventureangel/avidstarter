@@ -1,6 +1,6 @@
 .row-fluid
   .span6
-    %h4 Existing Media
+    %h4.edit_header Existing Media
     - @project.attachments.each do |attachment|
       - unless attachment.new_record?
         .image_container{:style => "background-image: url(#{attachment.file_url(:thumb)})"}
@@ -21,14 +21,14 @@
         %b
         - if @project.attachments.count < 6
           - if ff.object.new_record?
-            %h4 Attach Additional Media
+            %h4.edit_header Attach Additional Media
             = ff.label :file, "Upload a picture attachment"
             = ff.file_field :file, :style => "padding-bottom: 10px;"
             %br
             = ff.text_field :remote_file_url, :placeholder => "Or use an image URL", :class => "span12", :style => "width: 100%;"
       .row-fluid
         .span12
-          %h4 Video URL
+          %h4.edit_header Video URL
           = f.label :video_url, "Add a link to a short video about your project"
           = f.text_field :video_url, :placeholder => "Only Youtube or Vimeo links are supported at this time", :class => "span12", :style => "width: 100%;"
       .row-fluid

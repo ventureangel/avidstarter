@@ -2,7 +2,7 @@
   .span12
     = form_for @project, :html => {:multipart => true} do |f|
       = f.error_messages
-      %h4 General Information
+      %h4.edit_header General Information
       = hidden_field_tag :step, @breadcrumb_name
       .row-fluid
         .span6

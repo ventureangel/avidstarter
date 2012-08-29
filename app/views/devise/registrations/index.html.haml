@@ -1,0 +1,48 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h4.edit_header The Entrepreneur Community at The University of Georgia
+        %table.table.table-striped
+          %thead
+            %tr
+              %th
+          
+              %th
+                First Name
+              %th
+                Last Name
+              %th
+                Email Address
+              %th
+                Linkedin
+              %th
+                %center
+                  Project Count
+              %th
+                Status
+          %tbody
+            - Account.all.each do |account|
+              %tr
+                %td
+                  = image_tag account.avatar_url(:tiny_thumb)
+                %td
+                  %a{:href => account_path(account.id)}
+                    = account.first_name
+                %td
+                  %a{:href => account_path(account.id)}
+                    = account.last_name
+                %td
+                  %a{:href => "mailto:#{account.email}"}
+                    = account.email
+                %td
+                  %a{:href => "#{linkedinurl(account.linked_in)}", :target => "_blank"}
+                    = account.linked_in
+                %td
+                  %center
+                    %p= account.projects.count
+                %td
+                  -if account.profile_type == "Viewer"
+                    %p Alumni
+                  -else
+                    %p Student

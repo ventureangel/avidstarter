@@ -9,17 +9,18 @@
     %li
       %a{:href => project_path(@project)}= "#{@project.business_name}"
       %span.divider /
+    -unless controller.controller_name == "comments" || (controller.controller_name == "notifications" && controller.action_name != "new")
+      -unless active_member?(@project) == false
+        %li
+          %a{:href => edit_project_path(@project)}= "Edit Project"
+          %span.divider /
     %li.active
-      %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name.capitalize}"
-  -elsif controller.controller_name == "comments"
-    %li
-      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
-      %span.divider /
-    %li.active
-      %a{:href => project_comments_path(@project)}= "Comments"
-  -elsif controller.controller_name == "notifications"
-    %li
-      %a{:href => edit_project_path(@project)}= "#{@project.business_name}"
-      %span.divider /
-    %li.active
-      %a{:href => project_comments_path(@project)}= "Notifications"
+      -if controller.controller_name == "comments"
+        %a{:href => project_comments_path(@project)}= "#{@breadcrumb_name.titleize}"
+      -elsif controller.controller_name == "notifications"
+        -if controller.action_name == "new"
+          %a{:href => new_project_notification_path}= "#{@breadcrumb_name.titleize}"
+        -else
+          %a{:href => project_notifications_path(@project)}= "#{@breadcrumb_name.titleize}"
+      -else 
+        %a{:href => edit_project_path(@project, :step => @breadcrumb_name)}= "#{@breadcrumb_name.titleize}"

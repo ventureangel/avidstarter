@@ -6,49 +6,47 @@
           =render 'shared/breadcrumbs'
       .well
         .row-fluid{:style => "margin-bottom:18px;"}
-          .span2
-            = image_tag @project.logo_url(:thumb) if @project.logo?
-          .span10
-            %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
-
-        .row-fluid
           .span12
-            %ul#projectnav.nav.nav-tabs
-              %li.active
-                %a{"data-toggle" => "tab", :href => '#media'}
-                  Announcements & Media
-              %li
-                %a{"data-toggle" => "tab", :href => '#feedback'}
-                  Leave Feedback
-              %li
-                %a{"data-toggle" => "tab", :href => '#recruiting'}
-                  Recruiting
-    
-        #projectcontent.tab-content
-          #media.tab-pane.fade.in.active
-            .row-fuild
-              .span12
-                -if @project.video_url.present? || @project.attachments.count > 1
-                  %h4= "#{raw('<i class="icon-picture"></i>')} Project Media".html_safe
-                  #image_container.image_container_scroll
-                    -if @project.video_url.present?
-                      %iframe.image_property{:width => "445", :height =>"250", :src => "#{vid_link(@project.video_url)}"}
-                    - @project.attachments.each do |imageattachment|
-                      %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures"} 
-                        =image_tag imageattachment.file_url(:thumb), :class => "image_property"
-          
-                %h4= "#{raw('<i class="icon-bullhorn"></i>')} Announcements".html_safe
-          
-          #recruiting.tab-pane.fade
-            .row-fluid
-              .span6  
-                %h4 Business Concept
-                %p= @project.business_concept
-              .span6
-                %h4 Industry
-                %p= @project.industry
-                %h4 Location
-                %p= "#{@project.city}, #{@project.state}"
+            %h1.projectnamefont{:style => "text-align: top;"}= @project.business_name
+        
+        -if @project.video_url.present? || @project.attachments.count > 1
+          .row-fluid
+            .span12
+              %h4.edit_header= "#{raw('<i class="icon-picture"></i>')} Project Media".html_safe
+              #image_container.image_container_scroll
+                -if @project.video_url.present?
+                  %iframe.image_property{:width => "445", :height =>"250", :src => "#{vid_link(@project.video_url)}"}
+                - @project.attachments.each do |imageattachment|
+                  %a{:href => imageattachment.file_url(:pop_up), :rel => "lightbox-pictures", :style => "text-decoration:none; border:0px;"} 
+                    =image_tag imageattachment.file_url(:big_thumb), :class => "image_property"
+        .row-fluid
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-info-sign"></i>')} Project Information".html_safe
+            %h5
+              %i.icon-pushpin
+              Business Concept
+            %p= @project.business_concept
 
+            %h5
+              %i.icon-briefcase
+              Industry
+            %p= @project.industry
+
+            %h5
+              %i.icon-map-marker
+              Location
+            %p= "#{@project.city}, #{@project.state}"
+              
+          .span6
+            %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Team Members".html_safe
+            - unless @project.notifications.count(:conditions => {:notification_type => "Recruiting"}) == 0 or nil
+              .alert.alert-success
+                %h4 We're Looking For People To Join Our Team!
+                %p.minifont Click the link below to view our recruiting notifications. You can read a description of what we're looking for and you can contact us if you're interested!
+                %p.minifont= link_to "Recruiting Notifications", project_notifications_path(@project, :notification_type => "Recruiting")
+            - @project.memberships.each do |membership|
+              = render 'existing_members', :membership => membership unless membership.pending?
+          
+                
     .span3
       =render 'shared/side_menu'

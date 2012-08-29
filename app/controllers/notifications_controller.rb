@@ -1,24 +1,34 @@
 class NotificationsController < ApplicationController
 
   def index
+    @is_project = false
     if params[:project_id]
-      @notifier = current_account.projects.find(params[:project_id])
+      @is_project = true
+      @notifier = Project.find(params[:project_id])
       @project = @notifier
-      @notifications =  @notifier.notifications    
+      if params[:notification_type].present?
+        @notifications = @notifier.notifications.recruitment.all
+      else
+        @notifications =  @notifier.notifications
+      end
     elsif params[:account_id]
       @notifier = Account.find(params[:account_id]) 
       @project = @notifier 
       @notifications =  @notifier.notifications       
     elsif
       @notifications = Notification.all
+      @notification_date = Notification.count(:order => 'DATE(created_at) DESC', :group => ["DATE(created_at)"])
     end  
     
     @breadcrumb_name = "View Notifications"  
   end
 
   def new
+    @is_project = false
     if params[:project_id]
+      @is_project = true
       @notifier = current_account.projects.find(params[:project_id])
+      @project = @notifier
     elsif params[:account_id]
       if current_account.id != params[:account_id].to_i
         flash[:warning] = "You can only post notifications for your own account"
@@ -28,6 +38,9 @@ class NotificationsController < ApplicationController
       end
     end
     @notification = Notification.new
+    
+    @breadcrumb_name = "New Notification"  
+    
   end
   
   def create
@@ -83,4 +96,5 @@ class NotificationsController < ApplicationController
         return false
       end
     end
+    
 end

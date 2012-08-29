@@ -1,14 +1,17 @@
 class Notification < ActiveRecord::Base
-  attr_accessible :date, :description, :priority, :title, :notifier_id, :notifier_type, :notification_type
+  attr_accessible :date, :description, :priority, :title, :notifier_id, :notifier_type, :notification_type, :time
   validates :title, :description, :notifier_id, :notifier_type, :notification_type, :presence => true
   validates :date, :presence => true, :if => :event?
+  validates :time, :presence => true, :if => :event?
   validate :should_have_date?
 
   before_create :set_priority, :if => :admin?
 
   belongs_to :notifier, :polymorphic => true
 
-
+  #this allows us to find norrow down notifications with a Recruiting notification type.
+  scope :recruitment, where(:notification_type => "Recruiting")
+  
   def admin?
     if notifier_type == 'Account'
       return self.notifier.profile_type == 'Admin'

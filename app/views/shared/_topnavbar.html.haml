@@ -19,12 +19,12 @@
                 Projects
           %ul.nav
             %li
-              %a{:href => "#{root_url}"} 
+              %a{:href => "#{notifications_path}"} 
                 %i.icon-bullhorn
-                Recruiting
+                Notifications
           %ul.nav
             %li
-              %a{:href => "#{root_url}"} 
+              %a{:href => "#{accounts_path}"} 
                 %i.icon-group
                 People
           %ul.nav.pull-right
@@ -35,11 +35,16 @@
                 = current_account.name
                 %b.caret
               %ul.dropdown-menu
-                %li.nav-header Profile Settings
+                %li.nav-header Profile Options
+                %li
+                  %a{:href => "#{account_path(current_account.id)}"} 
+                    %i.icon-beaker
+                    My Projects
                 %li
                   %a{:href => "#{edit_account_registration_path}"} 
                     %i.icon-pencil
                     Edit Profile
+                %li.divider
                 %li
                   =link_to "#{raw('<i class="icon-off"></i>')} Sign Out".html_safe, destroy_account_session_path, :method => :delete
         - else

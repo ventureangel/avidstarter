@@ -3,26 +3,22 @@
   .sidecontent_bar{:style => "margin-top:10px;"}
     .row-fluid
       .span3
-        = image_tag current_account.avatar_url(:thumb) if current_account.avatar?
+        = image_tag current_account.avatar_url(:thumb)
       .span9
         %dl{:style => "margin-bottom:0px; margin-top:0px;"}
           %dt Name:
           %dd= current_account.name
           %dt Social:
-          -if current_account.linked_in == nil
-            %dd Please edit your profile to update
+          -if current_account.linked_in? == false
+            %dd Please edit your profile to add your LinkedIn account
           -else
             %dd
-              = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-twitter-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-facebook-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-github-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
-              = link_to "#{raw('<i class="icon-google-plus-sign icon-large"></i>')}".html_safe, current_account.linked_in, :target => "_blank"
+              = link_to "#{raw('<i class="icon-linkedin-sign icon-large"></i>')} LinkedIn".html_safe, linkedinurl(current_account.linked_in), :target => "_blank"
   .sidecontent_bar{:style => "margin-top:10px;"}
     .row-fluid
       .span12{}
         %center
-          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, :remote => true, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
+          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
 
 %center
   .jumbobutton

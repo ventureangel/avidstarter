@@ -1,16 +1,43 @@
 = n.error_messages
 .row-fluid
   .span6
-    = n.label :title
-    = n.text_field :title
-    = n.label :notification_type, 'Type'
-    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :class => "span12", :style => "width: 100%;"
+    = n.label :title, "Notification Title"
+    = n.text_field :title, :class => "span12", :style => "width: 100%; max-width: 100%;"
+    = n.label :notification_type, 'Notification Type'
+    = n.select :notification_type, ["Recruiting", "Event", "Announcement"], {:include_blank => 'Choose Notification Type'}, :onchange => "showDiv(this)", :prompt => true, :class => "span12", :style => "width: 100%;"
+    #notification_dateandtime{:style => "display:none;"}
+      = n.label :date, "Event Date and Time"
+      .row-fluid
+        .span8
+          = n.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "", :class => "span12", :style => "width: 100%; display: inline-block;" }
+        .span4
+          = n.text_field :time, {:include_blank => true, :class => "timepicker1 span12", :value => "", :style => "width: 100%; display: inline-block;" }
   .span6
-    = n.label :date, "Event Date and Time"
-    = n.datetime_select :date, {:include_blank => true}
     = n.label :description
-    = n.text_area :description, :class => "span12", :style => "width: 100%; max-width: 100%; max-height: 87px;"
+    = n.text_area :description, :class => "comment span12", :style => "width: 100%; max-width: 100%; height: 87px; row: 3"    
+   
 .row-fluid
   .span12
     %center
       = n.submit "Post Notification", :class => "btn btn-danger btn-project"
+
+:javascript
+  function showDiv(obj)
+  {
+      if(obj[obj.selectedIndex].value == 'Event')
+      {
+          document.getElementById('notification_dateandtime').style.display = 'block';
+      }
+      else
+      {
+          document.getElementById('notification_dateandtime').style.display = 'none';
+      }
+  } 
+  
+  $(document).ready(function () { 
+    $('.timepicker1').timepicker({
+        minuteStep: 5,
+        showInputs: false,
+        disableFocus: true
+    });
+  });

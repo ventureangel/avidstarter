@@ -1,8 +1,11 @@
-#mainhub.span6 
+#mainhub.span9
   .well
     .row-fluid
       %h4= @notification.title
       %p= "Type: " + @notification.notification_type
-      %p= "Description: " +  @notification.description
-.span3
-  = render :partial => "home/notifications"
+      -if @notification.date == nil || @notification.time == nil
+        %p= "Posted By: " + @notification.notifier.name
+      -else
+        %p= "Posted By: " + @notification.notifier.business_name
+        %p= "Date & Time of Event: " + @notification.date.strftime("%m/%d/%Y") + " (" + @notification.time.strftime('%I:%M %p') + ")"
+      = simple_format h (@notification.description)

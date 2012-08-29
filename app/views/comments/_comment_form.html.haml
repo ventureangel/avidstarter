@@ -1,6 +1,6 @@
 = f.error_messages
 = f.hidden_field :commentable_id, :value => @commentable.id
 = f.hidden_field :commentable_type, :value => 'Project'
-= f.text_field :body, :class => "span12", :style => "width: 100%; max-width: 100%;"
-= submit_tag "Post Comment", :class => "btn btn-danger btn-small"
+= f.text_area :body, :class => "comment span12", :style => "width: 100%; max-width: 100%;", :rows => "1"
+= submit_tag "Post Comment", :class => "btn btn-danger btn-small", :style => "float:right;"
 

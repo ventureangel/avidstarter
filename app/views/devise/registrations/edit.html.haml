@@ -1,4 +1,4 @@
-#mainhub.span6
+#mainhub.span9
   .well
     #mainhub_content
       %h3 Edit #{resource_name.to_s.humanize}
@@ -41,6 +41,3 @@
               = f.password_field :current_password, :class => "span12"
             %center  
               = f.submit "Update", :class => "btn btn-danger"
-
-.span3
-  = render :partial => "home/notifications"

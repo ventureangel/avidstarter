@@ -25,11 +25,4 @@
         = yield
     
     - else
-      .row-fluid
-        .span3
-          %img{:src => "/assets/uga2.png"}
-          .well{:style => "margin-top:18px;"}
-            = render :partial => "devise/sessions/sign_in"
-        = yield
-        
-
+      = yield
