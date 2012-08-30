@@ -56,3 +56,4 @@
                   %td
                     %center
                       = link_to "Edit", edit_competition_path(competition)
+                      = link_to "Delete", competition_path(competition), :confirm => "Are you sure you want to delete this competition?", :method => :delete

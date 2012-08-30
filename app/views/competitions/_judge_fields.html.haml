@@ -1,0 +1,8 @@
+.fields
+  %p
+    = f.label :name
+    = f.text_field :name
+    = link_to_remove_fields "remove", f
+  %p
+    = f.label :avatar, "Upload the Judge\'s Picture"
+    = f.file_field :avatar, :style => "padding-bottom: 10px;"

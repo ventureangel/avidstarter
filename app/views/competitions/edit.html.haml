@@ -1,0 +1,15 @@
+#mainhub.span9
+  .well
+    .row-fluid
+      .span12
+        %h1.projectnamefont= @competition.competition_name
+    = render 'form'
+
+:javascript
+  $(document).ready(function () { 
+    $('.timepicker1').timepicker({
+        minuteStep: 5,
+        showInputs: false,
+        disableFocus: true
+    });
+  });

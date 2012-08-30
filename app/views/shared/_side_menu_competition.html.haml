@@ -36,4 +36,4 @@
     %li.divider
     %li.nav-header
       Additional Information
-    = link_to "#{raw('<i class="icon-paper-clip"></i>')} Download Information".html_safe, edit_competition_path(@competition), :class => "btn btn-danger"
+    = link_to "#{raw('<i class="icon-paper-clip"></i>')} Download Information".html_safe, @competition.additional_info.url, :class => "btn btn-danger"
