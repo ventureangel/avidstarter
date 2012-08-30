@@ -1,7 +1,7 @@
 #stickybox.sidemenu
   %ul.nav.nav-list
     %center
-      / = image_tag @project.logo_url(:thumb)
+      = image_tag @competition.competition_logo_url(:thumb)
       %h4= @competition.competition_name
     %li.divider
     - if @competition.accepting_business_plans?
