@@ -44,18 +44,38 @@
                   Recruiting?
           %tbody
             - @account.projects.each do |project|
-              %tr
-                %td
-                  = image_tag project.logo_url(:tiny_thumb)
-                  %a{:href => project_path(project.id)}
-                    = project.business_name
-                %td
-                  = project.created_at.strftime("%d/%m/%Y")
-                %td
-                  %center
-                    = project.memberships.where(:pending => "false").count
-                %td
-                  %center
-                    - if project.notifications.where(:notification_type => "Recruiting").count > 0
-                      = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
+              -if current_account.profile_type == "Admin"
+                %tr
+                  %td
+                    = image_tag project.logo_url(:tiny_thumb)
+                    -if project.published?
+                      %a{:href => project_path(project.id)}
+                        = project.business_name
+                    -else
+                      = project.business_name
+                  %td
+                    = project.created_at.strftime("%d/%m/%Y")
+                  %td
+                    %center
+                      = project.memberships.where(:pending => "false").count
+                  %td
+                    %center
+                      - if project.notifications.where(:notification_type => "Recruiting").count > 0
+                        = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
+              -else
+                -if project.published?
+                  %tr
+                    %td
+                      = image_tag project.logo_url(:tiny_thumb)
+                      %a{:href => project_path(project.id)}
+                        = project.business_name
+                    %td
+                      = project.created_at.strftime("%d/%m/%Y")
+                    %td
+                      %center
+                        = project.memberships.where(:pending => "false").count
+                    %td
+                      %center
+                        - if project.notifications.where(:notification_type => "Recruiting").count > 0
+                          = link_to "Yes", project_notifications_path(project, :notification_type => "Recruiting")
         
