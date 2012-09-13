@@ -22,9 +22,9 @@
           .span6
             %h4.edit_header= "#{raw('<i class="icon-group"></i>')} Competition Panel".html_safe
             - @competition.judges.each do |judge|
-              = image_tag judge.avatar_url(:tiny_thumb)
-              = judge.name
-              %br
-              
+              .well_two{:style => "padding: 10px;"}
+                = image_tag judge.avatar_url(:small_thumb)
+                .judge_name{:style => "margin-left:5px; display: inline-block;"}
+                  = judge.name              
     .span3
       = render 'shared/side_menu_competition'
