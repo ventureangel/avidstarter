@@ -16,7 +16,7 @@
       = f.label :date, "Event Date and Time"
       .row-fluid
         .span8
-          = f.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "", :class => "span12", :style => "width: 100%; display: inline-block;" }
+          = f.text_field :date, {:include_blank => true, "data-datepicker" => "datepicker", :value => "#{@competition.date.strftime("%Y-%m-%d") if @competition.date != nil}", :class => "span12", :style => "width: 100%; display: inline-block;" }
         .span4
           = f.text_field :time, {:include_blank => true, :class => "timepicker1 span12", :value => "", :style => "width: 100%; display: inline-block;" }
       = f.label :city
@@ -25,6 +25,13 @@
       = f.select :state, STATES, {:include_blank => 'No Selection'}, :class => "span12", :style => "width: 100%;"
       = f.label :location, "Location (Building Name or Room Number)"
       = f.text_field :location, :class => "span12", :style => "width: 100%;"
+      
+      .row-fluid
+        %h4.edit_header Judges
+        = f.fields_for :judges do |builder|
+          = render "judge_fields", :f => builder
+      .row-fluid  
+        = link_to_add_fields "Add a Judge", f, :judges, "btn btn-danger btn-small"
     .span6
       %h4.edit_header Additional Information
       = f.label :additional_info, "Competition Attachment"
@@ -35,17 +42,8 @@
       = f.text_area :competition_details, :class => "comment span12", :style => "width: 100%; max-width: 100%;", :rows => "5"
       = f.label :prize, "Grand Prize"
       = f.text_field :prize, :class => "span12", :style => "width: 100%;"
-  .row-fluid
-    %h4 Judges
-    - @competition.judges.each do |judge|
-      = image_tag judge.avatar_url(:tiny_thumb)
-      = judge.name
-  .row-fluid
-    .span6
-      = f.fields_for :judges do |builder|
-        = render "judge_fields", :f => builder
-      = link_to_add_fields "Add a Judge", f, :judges
+  
   .row-fluid
     .span12
       %center
-        = f.submit "Save Competition", :class => "btn btn-danger btn-small btn-project"
+        = f.submit "Save Competition & Judges", :class => "btn btn-danger btn-small btn-project"

@@ -1,8 +1,15 @@
 .fields
-  %p
-    = f.label :name
-    = f.text_field :name
-    = link_to_remove_fields "remove", f
-  %p
-    = f.label :avatar, "Upload the Judge\'s Picture"
-    = f.file_field :avatar, :style => "padding-bottom: 10px;"
+  .well_two
+    .row-fluid
+      .span6
+        %p
+          = f.label :name
+          = f.text_field :name
+      .span6
+        %p
+          = f.label :avatar, 'Upload the Judge\'s Picture'
+          = f.file_field :avatar, :style => "padding-bottom: 10px;"
+    .row-fluid
+      .span12
+        %center
+          = link_to_remove_fields "Remove Judge", f, "btn btn-danger btn-small" 

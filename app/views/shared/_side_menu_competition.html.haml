@@ -4,6 +4,14 @@
       = image_tag @competition.competition_logo_url(:thumb)
       %h4= @competition.competition_name
     %li.divider
+    - if current_account.profile_type == "Admin"
+      %li.nav-header
+        Edit Competition 
+      %li
+        %a{:href => edit_competition_path(@competition)}
+          %i.icon-pencil
+          Edit This Competition
+      %li.divider
     - if @competition.accepting_business_plans?
       %li.nav-header
         Accepting Business Plans
