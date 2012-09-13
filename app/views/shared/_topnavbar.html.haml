@@ -77,10 +77,11 @@
                 %b.caret
               %ul.dropdown-menu
                 %li.nav-header Profile Options
-                %li
-                  %a{:href => "#{account_path(current_account.id)}"} 
-                    %i.icon-beaker
-                    My Projects
+                -if current_account.projects.count > 0
+                  %li
+                    %a{:href => "#{account_path(current_account.id)}"} 
+                      %i.icon-beaker
+                      My Projects
                 %li
                   %a{:href => "#{edit_account_registration_path}"} 
                     %i.icon-pencil

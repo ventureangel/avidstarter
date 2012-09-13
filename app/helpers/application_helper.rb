@@ -38,4 +38,12 @@ module ApplicationHelper
   def link_to_remove_fields(name, f, c)
     f.hidden_field(:_destroy) + link_to_function(name, "remove_fields(this)", :class => c)
   end
+  
+  def business_plan_list 
+    #this creates an array of the user's completed projects with the project's name and its id.
+    #note: idea is you can submit a completed business plan, regardless of whether it's published
+    #if we want only published business plans we should use the code below:
+    # current_account.projects.where(:published => true).map {|project| [project.business_name, project.id]}  
+    current_account.projects.where("logo IS NOT NULL").map {|project| [project.business_name, project.id]}
+  end
 end

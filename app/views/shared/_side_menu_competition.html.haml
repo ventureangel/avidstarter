@@ -2,7 +2,7 @@
   %ul.nav.nav-list
     %center
       = image_tag @competition.competition_logo_url(:thumb)
-      %h4= @competition.competition_name
+      %h4= @competition.competition_name      
     %li.divider
     - if current_account.profile_type == "Admin"
       %li.nav-header
@@ -15,7 +15,16 @@
     - if @competition.accepting_business_plans?
       %li.nav-header
         Accepting Business Plans
-      = link_to "#{raw('<i class="icon-download-alt"></i>')} Submit Your Business Plan!".html_safe, edit_competition_path(@competition), :class => "btn btn-danger"
+      /= business_plan_list  
+
+      -if current_account.projects.count > 0
+        / %select{:name => 'projects', :style => "width:100%"}
+        /           - current_account.projects.each do |project|
+        /             %option{:value => project.id}
+        /               = project.business_name
+        /         = link_to "#{raw('<i class="icon-download-alt"></i>')} Submit Your Business Plan!".html_safe, edit_competition_path(@competition), :class => "btn btn-danger"
+      -else
+        = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger", :method => :get
       %li.divider
     %li.nav-header
       Competition Details
@@ -39,9 +48,8 @@
         Prize
         .minifont
           = @competition.prize
-    / -if @competition.flyer?
-    
-    %li.divider
-    %li.nav-header
-      Additional Information
-    = link_to "#{raw('<i class="icon-paper-clip"></i>')} Download Information".html_safe, @competition.additional_info.url, :class => "btn btn-danger"
+    -if @competition.additional_info?
+      %li.divider
+      %li.nav-header
+        Additional Information
+      = link_to "#{raw('<i class="icon-paper-clip"></i>')} Download Information".html_safe, @competition.additional_info.url, :class => "btn btn-danger"

@@ -28,6 +28,7 @@ class CompetitionsController < ApplicationController
   
   def show
     @competition = Competition.find(params[:id], :include => :judges)
+    
     rescue ActiveRecord::RecordNotFound
       return redirect_to root_url, :alert => 'You cannot access this competition.'
   end
