@@ -18,7 +18,7 @@
       -if current_account.projects.count > 0
         = form_for :submission, url: submissions_path do |n|
           = n.hidden_field :competition_id, :value => @competition.id
-          = n.select :project, {:projects => business_plan_list}, {}, :style => "width: 100%;"
+          = n.select :project_id, {:projects => business_plan_list}, {}, :style => "width: 100%;"
           = n.submit "Submit Your Business Plan!".html_safe, :class => "btn btn-danger"
       -else
         = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger", :method => :get
