@@ -15,14 +15,11 @@
     - if @competition.accepting_business_plans?
       %li.nav-header
         Accepting Business Plans
-      /= business_plan_list  
-
       -if current_account.projects.count > 0
-        / %select{:name => 'projects', :style => "width:100%"}
-        /           - current_account.projects.each do |project|
-        /             %option{:value => project.id}
-        /               = project.business_name
-        /         = link_to "#{raw('<i class="icon-download-alt"></i>')} Submit Your Business Plan!".html_safe, edit_competition_path(@competition), :class => "btn btn-danger"
+        = form_for :submission, url: submissions_path do |n|
+          = n.hidden_field :competition_id, :value => @competition.id
+          = n.select :project, {:projects => business_plan_list}, {}, :style => "width: 100%;"
+          = n.submit "Submit Your Business Plan!".html_safe, :class => "btn btn-danger"
       -else
         = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger", :method => :get
       %li.divider
