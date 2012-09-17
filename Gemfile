@@ -15,6 +15,7 @@ gem 'rmagick'
 gem 'fog'
 gem 'acts_as_commentable_with_threading'
 gem 'hirb'
+gem 'bootstrap-will_paginate'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,6 +36,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
+  gem 'faker'
 end
 
 # To use ActiveModel has_secure_password
