@@ -12,17 +12,23 @@
           %i.icon-pencil
           Edit This Competition
       %li.divider
-    - if @competition.accepting_business_plans?
+    - if @competition.accepting_business_plans? && current_account.profile_type != "Admin"
       %li.nav-header
         Accepting Business Plans
       -if current_account.projects.count > 0
         = form_for :submission, url: submissions_path do |n|
           = n.hidden_field :competition_id, :value => @competition.id
           = n.select :project_id, {:projects => business_plan_list}, {}, :style => "width: 100%;"
-          = n.submit "Submit Your Business Plan!".html_safe, :class => "btn btn-danger"
+          = n.submit "Submit Your Business Plan!".html_safe, :class => "btn btn-danger minifont"
       -else
-        = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger", :method => :get
+        %li
+          = link_to "#{raw('<i class="icon-beaker"></i>')} Start A New Project!".html_safe, new_project_path, :method => :get
       %li.divider
+    %li.nav-header
+      Current Submissions
+    %li
+      = link_to "#{raw('<i class="icon-eye-open"></i>')} View Submissions".html_safe, competition_submissions_path(@competition)
+    %li.divider
     %li.nav-header
       Competition Details
     %li

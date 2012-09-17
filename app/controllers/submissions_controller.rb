@@ -2,7 +2,8 @@ class SubmissionsController < ApplicationController
   # GET /submissions
   # GET /submissions.json
   def index
-    @submissions = Submission.all
+    @competition = Competition.find(params[:competition_id])
+    @submissions = @competition.submissions(:include => :projects)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,14 +43,12 @@ class SubmissionsController < ApplicationController
   def create
     @submission = Submission.new(params[:submission])
     
-    respond_to do |format|
-      if @submission.save
-        format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
-        format.json { render json: @submission, status: :created, location: @submission }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @submission.errors, status: :unprocessable_entity }
-      end
+    if @submission.save
+      redirect_to :back 
+      flash[:notice] = 'Submission was successfully created.'
+    else
+      redirect_to :back
+      flash[:warning] = "Submission was not saved. Possible duplicate submission."
     end
   end
 
@@ -76,7 +75,7 @@ class SubmissionsController < ApplicationController
     @submission.destroy
 
     respond_to do |format|
-      format.html { redirect_to submissions_url }
+      format.html { redirect_to :back }
       format.json { head :no_content }
     end
   end

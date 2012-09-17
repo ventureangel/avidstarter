@@ -1,5 +1,5 @@
 Avidstarter::Application.routes.draw do
-  resources :submissions
+  resources :submissions, :only => [:create, :destroy]
 
   devise_for :accounts, :controllers => {:registrations => 'accounts'}
   devise_scope :account do
@@ -10,7 +10,9 @@ Avidstarter::Application.routes.draw do
   end
   get "home/home"
   
-  resources :competitions
+  resources :competitions do
+    resources :submissions, :only => [:create, :destroy, :index]
+  end
   
   resources :accounts do
    resources :notifications
