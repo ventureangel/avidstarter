@@ -1,0 +1,65 @@
+%h4 
+  %i.icon-bolt
+  Quick Overview
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        = 'Projects'
+      %th
+        = 'Published Projects'
+      %th
+        = 'Users'
+      %th
+        = 'Competition Submissions'
+  %tbody
+    %tr
+      %td
+        %center
+          %a{:href => projects_path()}
+            = Project.count
+      %td
+        %center
+          %a{:href => root_url}
+            = all_projects.count
+      %td
+        %center
+          %a{:href => accounts_path()}
+            = Account.count 
+      %td
+        %center
+          %a{:href => competitions_path()}
+            = Submission.count
+
+%h4
+  %i.icon-bullhorn
+  Notification Overview
+%table.table.table-striped
+  %thead
+    %tr
+      %th
+        = 'Alerts'
+      %th
+        = 'Events'
+      %th
+        = 'Recruiting'
+      %th
+        = 'Announcement'
+  %tbody
+    %tr
+      %td
+        %center
+          %a{:href => notifications_path()}
+            = Notification.where(:notification_type => "Alert").count
+      %td
+        %center
+          %a{:href => notifications_path()}
+            = Notification.where(:notification_type => "Event").count
+      %td
+        %center
+          %a{:href => notifications_path()}
+            = Notification.where(:notification_type => "Recruiting").count 
+      %td
+        %center
+          %a{:href => notifications_path()}
+            = Notification.where(:notification_type => "Announcement").count

@@ -21,17 +21,20 @@
           = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
 
 -if current_account.profile_type == "Admin"
+  -if upcoming_comps
+    .well
+      %h4{:style => "margin-bottom:10px;"}
+        %i.icon-warning-sign
+        Competitions This Week
+      - upcoming_comps.each do |comp|
+        %a{:href => competition_path(comp)}
+          %p= "#{comp.competition_name}" + " (#{comp.date.strftime("%m/%d/%Y")})"
+          
+      
+        
+  
   .well
-    %h4 Quick Overview
-    %table.table.table-striped
-      %thead
-        %tr
-          %th
-            
-      %tbody
-        %tr
-          %td
-
+    = render :partial => "home/admin_tables"
 -else
   %center
     .jumbobutton

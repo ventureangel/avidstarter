@@ -6,7 +6,11 @@ module ApplicationHelper
   def resource_name
    :account
   end
-
+  
+  def upcoming_comps
+    Competition.where(:date => ((Time.now.utc)..(Time.now + 1.week)))
+  end
+  
   def resource
    @resource ||= Account.new
   end
