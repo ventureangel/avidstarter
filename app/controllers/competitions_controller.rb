@@ -1,5 +1,7 @@
 class CompetitionsController < ApplicationController
+  before_filter :check_if_loggedin 
   before_filter :check_if_admin, :only => [:new, :create, :update, :edit, :destroy]
+  
   def new
     @competition = Competition.new
     @competition.judges.build
@@ -7,7 +9,6 @@ class CompetitionsController < ApplicationController
   
   def index
     @competitions = Competition.all
-    
   end
   
   def edit
@@ -65,6 +66,10 @@ class CompetitionsController < ApplicationController
       flash[:warning] = "You must be an Admin to access that page"
       redirect_to :root 
     end
+  end
+  
+  def check_if_loggedin
+    redirect_to :root unless account_signed_in?
   end
 
 end

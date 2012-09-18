@@ -1,4 +1,5 @@
 class SubmissionsController < ApplicationController
+  before_filter :check_if_loggedin
   # GET /submissions
   # GET /submissions.json
   def index
@@ -78,5 +79,9 @@ class SubmissionsController < ApplicationController
       format.html { redirect_to :back }
       format.json { head :no_content }
     end
+  end
+  
+  def check_if_loggedin
+    redirect_to :root unless account_signed_in?
   end
 end

@@ -50,7 +50,7 @@
                   %center
                     = competition.submissions.count
                     / - if current_account.profile_type == "Admin" && competition.submissions.count > 0
-                    = link_to "(view)", competition_submissions_path(competition.id)
+                    = link_to "(view)", competition_submissions_path(competition.id) unless competition.submissions.count == 0
                 %td
                   %center
                     = competition.prize
