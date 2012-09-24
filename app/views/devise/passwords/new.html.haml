@@ -1,0 +1,26 @@
+.row-fluid
+  .span2
+    %br
+  .span8
+    = devise_error_messages!
+.row-fluid
+  .span2
+    %br
+  .span4
+    = render "/shared/school_info"
+  .span4
+    .well
+
+      %fieldset.account 
+        %legend Forgot your password?
+        %br
+        = form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+      
+          = f.label :email, "Enter your email address:"
+          = f.email_field :email, :class => "span12-fluid"
+          %center
+            = f.submit "Send me reset password instructions", :class => "btn btn-primary btn-danger"  
+            
+      .other{:style => "background-color: #e1e1e1; padding:5px;"}
+        %center
+          = render "devise/shared/links"

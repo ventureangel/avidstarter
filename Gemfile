@@ -36,7 +36,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'shoulda'
   gem 'capybara', :git => 'git://github.com/jnicklas/capybara.git'
-  gem 'faker'
 end
 
 # To use ActiveModel has_secure_password

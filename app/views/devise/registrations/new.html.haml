@@ -7,13 +7,7 @@
   .span2
     %br
   .span4
-    %center
-      %img{:src => "/assets/uga2.png"}
-    %h2 Welcome to The University of Georgia's entrepreneur portal.
-    %br
-    %h3 By signing up you can start projects, collaborate with peers, request and comment on business plans. All while staying informed of the latest news and events scheduled on your campus.   
-    %br
-    %h3 Registering is as simple as filling out the form located on this page. 
+    = render "/shared/school_info"
   .span4
     .well
       = form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|

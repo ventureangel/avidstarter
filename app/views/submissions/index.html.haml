@@ -16,6 +16,8 @@
               %th
                 Business Plan
               %th
+                Comments
+              %th
                 Submission Actions
           %tbody
             - @submissions.each do |submission|
@@ -32,6 +34,10 @@
                   = submission.created_at.strftime("%d/%m/%Y")
                 %td
                   = link_to "#{raw('<i class="icon-arrow-down"></i>')} Download Business Plan".html_safe, submission.project.business_plan.url unless submission.project.business_plan.url == nil
+                %td
+                  %a{:href => project_comments_path(submission.project.id)}
+                    %i.icon-comments-alt
+                    = "Leave Comment"
                 %td
                   -if current_account.profile_type == "Admin" || active_member?(submission.project)
                     = link_to "#{raw('<i class="icon-trash"></i>')} Remove Submission".html_safe, submission, :method => :delete, :data => { :confirm =>'Are you sure?' }
