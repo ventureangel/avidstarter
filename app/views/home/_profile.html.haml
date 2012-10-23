@@ -36,9 +36,10 @@
   .well
     = render :partial => "home/admin_tables"
 -else
-  %center
-    .jumbobutton
-      = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
+  -if current_account.profile_type == "Contributor"
+    %center
+      .jumbobutton
+        = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
 
   -if users_projects.count > 0
     .well
