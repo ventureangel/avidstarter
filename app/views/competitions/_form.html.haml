@@ -31,7 +31,7 @@
         = f.fields_for :judges do |builder|
           = render "judge_fields", :f => builder
       .row-fluid  
-        = link_to_add_fields "Add a Judge", f, :judges, "btn btn-danger btn-small"
+        = link_to_add_fields "Add a Judge", f, :judges, "btn btn-primary btn-small"
     .span6
       %h4.edit_header Additional Information
       = f.label :additional_info, "Competition Attachment"
@@ -46,4 +46,4 @@
   .row-fluid
     .span12
       %center
-        = f.submit "Save Competition & Judges", :class => "btn btn-danger btn-small btn-project"
+        = f.submit "Save Competition & Judges", :class => "btn btn-primary btn-small btn-project"

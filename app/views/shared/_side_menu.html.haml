@@ -48,10 +48,10 @@
           %center
           -unless @project.published #I had to format it like this because I couldn't figure out how to put a :method => :post in %a{href 
             %li
-              = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-danger minifont", :method => :post
+              = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-primary minifont", :method => :post
           -else
             %li
-              = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-danger minifont", :method => :post
+              = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-primary minifont", :method => :post
       -else
         %li.divider
         %li.nav-header
@@ -101,8 +101,8 @@
       %center
       -unless @project.published #I had to format it like this because I couldn't figure out how to put a :method => :post in %a{href 
         %li
-          = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-danger", :method => :post
+          = button_to "Publish Project", publish_project_path(@project), :class => "btn btn-primary", :method => :post
       -else
         %li
-          = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-danger", :method => :post
+          = button_to "Unpublish Project", unpublish_project_path(@project), :class => "btn btn-primary", :method => :post
 

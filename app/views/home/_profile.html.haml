@@ -18,7 +18,7 @@
     .row-fluid
       .span12{}
         %center
-          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, "data-toggle" => "modal", :class => "btn btn-danger btn-small"
+          = link_to "#{raw('<i class="icon-pencil"></i>')} Edit Profile".html_safe, edit_account_registration_path, "data-toggle" => "modal", :class => "btn btn-primary btn-small"
 
 -if current_account.profile_type == "Admin"
   -if upcoming_comps
@@ -39,7 +39,7 @@
   -if current_account.profile_type == "Contributor"
     %center
       .jumbobutton
-        = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-danger btn-large", :method => :get
+        = link_to "#{raw('<i class="icon-beaker icon-large"></i>')} Start A New Project!".html_safe, new_project_path, :class => "btn btn-primary btn-large", :method => :get
 
   -if users_projects.count > 0
     .well
