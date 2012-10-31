@@ -2,7 +2,7 @@
   .span12
     %center
       %h2 Sign in & Connect to:
-      %h2 The University of Georgia
+      %h2 Georgia State University
       %br
     = form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
       .fieldset
@@ -14,7 +14,7 @@
           Remember Me
           = f.check_box :remember_me
         %center
-          = f.submit "Sign In", :class => "btn btn-danger"
+          = f.submit "Sign In", :class => "btn btn-primary"
         
 .other{:style => "background-color: #e1e1e1; padding:5px;"}
   %center
