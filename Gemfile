@@ -7,6 +7,7 @@ gem 'rails', '3.2.6'
 
 gem 'pg'
 gem 'haml', '~> 3.1.6'
+gem 'thin'
 gem 'heroku'
 gem 'devise'
 gem 'dynamic_form'
@@ -32,7 +33,6 @@ end
 gem 'jquery-rails'
 
 group :development, :test do
-  gem 'thin'
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'shoulda'
